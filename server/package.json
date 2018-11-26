@@ -4,7 +4,8 @@
   "description": "server for the NGO app by bears-team-03",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\" --exit"
   },
   "author": "Layer",
   "license": "ISC",
@@ -13,6 +14,9 @@
     "mongoose": "^5.3.13"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.6"
   }
 }
