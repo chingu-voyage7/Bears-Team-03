@@ -11,7 +11,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon server.js --prefix server",
+    "dev": "concurrently \"npm run start\" \"npm run server\" "
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -22,7 +24,10 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+
+  "proxy": "http://localhost:5000",
   "devDependencies": {
-    "eslint-config-airbnb": "^17.1.0"
+  "concurrently": "^4.1.0",
+  "eslint-config-airbnb": "^17.1.0"
   }
 }
