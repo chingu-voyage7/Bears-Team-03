@@ -32,7 +32,7 @@ const addressSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
-    default: 'Jhon Smith',
+    required: true,
   },
   email: {
     type: String,
