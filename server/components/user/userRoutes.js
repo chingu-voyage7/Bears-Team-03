@@ -3,8 +3,8 @@ const express = require('express');
 // Middleware-like object that allow to 'pack' routes based on components
 const router = express.Router();
 
-const { usersTestRoute } = require('./usersControllers');
+const { userTestRoute } = require('./userControllers');
 
-router.get('/users-test-route', usersTestRoute);
+router.get('/users-test-route', userTestRoute);
 
 module.exports = router;
