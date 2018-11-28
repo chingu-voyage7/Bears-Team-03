@@ -16,6 +16,7 @@ before(() => {
     testDbUrl,
     (err) => {
       if (err) {
+        // eslint-disable-next-line
         console.log('Error connecting to test db', err);
       }
     },
