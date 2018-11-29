@@ -5,6 +5,32 @@ exports.userTestRoute = (req, res) => {
   res.status(200).json({ message: 'You reached the test route, gj!' });
 };
 
+exports.userCreateOne = (req, res) => {
+  User.findOne({ email: req.body.email })
+    .then((user) => {
+      if (user) {
+        res.status(409).json({ fail: { message: 'Email already exists' } });
+      } else {
+        const newUser = new User({
+          fullname: req.body.fullname,
+          email: req.body.email,
+          adult: req.body.adult,
+          gender: req.body.gender,
+          addressData: req.body.addressData,
+          phone: req.body.phone,
+          volunteerField: req.body.volunteerField,
+          timeAvailability: req.body.timeAvailability,
+        });
+        newUser.setPassword(req.body.password);
+        newUser
+          .save()
+          .then(userCreated => res.status(201).json(userCreated))
+          .catch(err => res.status(500).json({ fail: err }));
+      }
+    })
+    .catch(err => res.status(500).json({ fail: err }));
+};
+
 exports.userGetAll = (req, res) => {
   User.find({})
     .then(users => res.status(200).json(users))

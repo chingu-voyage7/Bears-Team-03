@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
+  userCreateOne,
   userTestRoute,
   userGetAll,
   userGetByID,
@@ -12,8 +13,9 @@ const {
 } = require('./userControllers');
 
 router.get('/users-test-route', userTestRoute);
-router.get('./user/get-all', userGetAll);
-router.get('./user/get-by-id', userGetByID);
-router.get('./user/update-by-id', userUpdateByID);
-router.get('./user/delete-by-id', userDeleteByID);
+router.get('/get-all', userGetAll);
+router.get('/get-by-id', userGetByID);
+router.post('/register', userCreateOne);
+router.patch('/update-by-id', userUpdateByID);
+router.delete('/delete-by-id', userDeleteByID);
 module.exports = router;
