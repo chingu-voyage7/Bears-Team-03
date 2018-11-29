@@ -1,7 +1,7 @@
-import { fetchUsers, logout, generalFailure } from '../types';
+import { fetchUsers, generalFailure } from '../types';
 
 // fetch data - asynchronous action creator
-export const fetchUsersAction = () => (dispatch) => {
+const fetchUsersAction = () => (dispatch) => {
   dispatch({ type: fetchUsers.REQUEST });
   fetch('/user/get-all')
     .then(res => res.json())
@@ -15,5 +15,4 @@ export const fetchUsersAction = () => (dispatch) => {
     .catch(err => dispatch({ type: generalFailure, payload: err }));
 };
 
-// logout - synchronous action creator
-export const logoutAction = () => ({ type: logout });
+export default fetchUsersAction;
