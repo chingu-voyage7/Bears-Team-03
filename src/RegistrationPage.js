@@ -1,5 +1,17 @@
 import React from 'react';
 
+function TextInput(props) {
+  const {
+    value, onChange, name, label,
+  } = props;
+  return (
+    <label htmlFor={name}>
+      {label}
+      <input type="text" value={value} name={name} onChange={onChange} />
+    </label>
+  );
+}
+
 class RegistrationPage extends React.Component {
   constructor(props) {
     super(props);
