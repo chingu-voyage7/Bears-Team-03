@@ -44,6 +44,54 @@ class RegistrationPage extends React.Component {
       <div>
         <h2>Register</h2>
         <form>
+          <TextInput
+            name="fullname"
+            label="Full name"
+            value={user.fullname}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="email"
+            label="Email"
+            value={user.email}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="streetAddress"
+            label="Address"
+            value={user.streetAddress}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="city"
+            label="City"
+            value={user.city}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="stateOrProvince"
+            label="State or Province"
+            value={user.stateOrProvince}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="zipCode"
+            label="Zip Code"
+            value={user.zipCode}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="country"
+            label="Country"
+            value={user.country}
+            onChange={this.handleChange}
+          />
+          <TextInput
+            name="phone"
+            label="Phone Number"
+            value={user.phone}
+            onChange={this.handleChange}
+          />
           <input type="submit" value="Register" />
         </form>
       </div>
