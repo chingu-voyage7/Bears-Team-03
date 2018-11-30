@@ -1,5 +1,6 @@
 module.exports = {
   MONGO_URI: 'mongodb://localhost/test_db',
+  JWT_SECRET: ']@do_N0T_say_A_word_#[',
   PORT: 5000,
 };
 
