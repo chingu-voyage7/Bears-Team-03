@@ -40,6 +40,7 @@ class RegistrationPage extends React.Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div>
         <h2>Register</h2>
