@@ -30,19 +30,15 @@ class RegistrationPage extends React.Component {
         password: '',
         adult: '',
         gender: '',
-        addressData: {
-          streetAddress: '',
-          city: '',
-          stateOrProvince: '',
-          zipCode: '',
-          country: '',
-        },
+        streetAddress: '',
+        city: '',
+        stateOrProvince: '',
+        zipCode: '',
+        country: '',
         phone: '',
         volunteerField: [''],
-        timeAvailability: {
-          days: [''],
-          hours: [''],
-        },
+        days: [''],
+        hours: [''],
       },
     };
   }
