@@ -93,6 +93,15 @@ class RegistrationPage extends React.Component {
             value={user.phone}
             onChange={this.handleChange}
           />
+          <label htmlFor="adult">
+            Adult
+            <input
+              type="checkbox"
+              name="adult"
+              value={user.adult}
+              onChange={this.handleChange}
+            />
+          </label>
           <input type="submit" value="Register" />
         </form>
       </div>
