@@ -1,7 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const configVars = require('../../../config/keys');
 const app = require('../../../app');
 
 mongoose.set('useNewUrlParser', true);
@@ -33,33 +34,32 @@ const fakeUser = {
   },
 };
 
-// const fakeToken = jwt.sign({ id: '123' }, 'no-secret');
-
-before(() => {
-  mongoose.connect(
-    testDbUrl,
-    (err) => {
-      if (err) {
-        // eslint-disable-next-line
-        console.log('Error connecting to test db', err);
-      }
-    },
-  );
-});
+const id = mongoose.Types.ObjectId();
+const fakeToken = jwt.sign({ id }, configVars.JWT_SECRET);
 
 describe(' - USER ROUTES - ', () => {
-  describe('GET /users-test-route', () => {
-    it('should reach the endpoint', (done) => {
-      chai
-        .request(app)
-        .get('/user/users-test-route')
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          done();
-        });
-    });
+  before((done) => {
+    mongoose.connect(
+      testDbUrl,
+      (err) => {
+        if (err) {
+          // eslint-disable-next-line
+          console.log('Error connecting to test db', err);
+        }
+        done();
+      },
+    );
   });
+
+  beforeEach('emptying database', (done) => {
+    mongoose.connection.collections.users.drop(() => done());
+  });
+
+  after((done) => {
+    mongoose.connection.close();
+    done();
+  });
+
   describe('GET /user/get-all', () => {
     it('should reach the endpoint', (done) => {
       chai
@@ -88,8 +88,8 @@ describe(' - USER ROUTES - ', () => {
         .send(fakeUser)
         .end((err, res) => {
           res.should.have.status(201);
+          done();
         });
-      mongoose.connection.db.dropDatabase(done);
     });
     it('should return an object', (done) => {
       chai
@@ -106,11 +106,129 @@ describe(' - USER ROUTES - ', () => {
         .request(app)
         .post('/user/register')
         .send(fakeUser)
-        .end((err, res) => {
-          res.should.have.status(409);
+        .then(() => {
+          chai
+            .request(app)
+            .post('/user/register')
+            .send(fakeUser)
+            .end((error, result) => {
+              result.should.have.status(409);
+              done();
+            });
         });
-
-      mongoose.connection.db.dropDatabase(done);
+    });
+  });
+  describe('GET /user/get-by-id', () => {
+    it('should reach the endpoint', (done) => {
+      chai
+        .request(app)
+        .get('/user/get-by-id')
+        .set('Authorization', fakeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('should return the user with the corresponded ID', (done) => {
+      chai
+        .request(app)
+        .post('/user/register')
+        .send(fakeUser)
+        .end((err, res) => {
+          /* eslint-disable-next-line */
+          const newToken = jwt.sign({ id: res.body._id }, configVars.JWT_SECRET);
+          chai
+            .request(app)
+            .get('/user/get-by-id')
+            .set('Authorization', newToken)
+            .end((getErr, getRes) => {
+              getRes.body.should.include({ fullname: 'tester test' });
+              done();
+            });
+        });
+    });
+  });
+  describe('PATCH /user/update-by-id', () => {
+    it('should reach the endpoint', (done) => {
+      chai
+        .request(app)
+        .patch('/user/update-by-id')
+        .set('Authorization', fakeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('should return the updated user', (done) => {
+      chai
+        .request(app)
+        .post('/user/register')
+        .send(fakeUser)
+        .end((err, res) => {
+          /* eslint-disable-next-line */
+          const newToken = jwt.sign({ id: res.body._id }, configVars.JWT_SECRET);
+          chai
+            .request(app)
+            .patch('/user/update-by-id')
+            .set('Authorization', newToken)
+            .send({ fullname: 'untester untest' })
+            .end((getErr, getRes) => {
+              getRes.body.should.include({ fullname: 'untester untest' });
+              done();
+            });
+        });
+    });
+  });
+  describe('DELETE /user/delete-by-id', () => {
+    it('should reach the endpoint', (done) => {
+      chai
+        .request(app)
+        .get('/user/delete-by-id')
+        .set('Authorization', fakeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('should delete the user and return nothing', (done) => {
+      chai
+        .request(app)
+        .post('/user/register')
+        .send(fakeUser)
+        .end((err, res) => {
+          /* eslint-disable-next-line */
+          const newToken = jwt.sign({ id: res.body._id }, configVars.JWT_SECRET);
+          chai
+            .request(app)
+            .get('/user/delete-by-id')
+            .set('Authorization', newToken)
+            .end((getErr, getRes) => {
+              /* eslint-disable-next-line */
+              getRes.body.should.be.an('object').that.is.empty;
+              done();
+            });
+        });
+    });
+  });
+  describe('MW authorization', () => {
+    it('should validate the token', (done) => {
+      chai
+        .request(app)
+        .get('/user/get-by-id') // Randomly chosen protected route
+        .set('Authorization', fakeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('should reject not authorized request', (done) => {
+      chai
+        .request(app)
+        .get('/user/get-by-id')
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
     });
   });
 });

@@ -38,7 +38,7 @@ exports.userGetAll = (req, res) => {
 };
 
 exports.userGetByID = (req, res) => {
-  User.find({ _id: req.userData.id })
+  User.findOne({ _id: req.userData.id })
     .then((user) => {
       if (user) {
         res.status(200).json(user);
@@ -46,7 +46,9 @@ exports.userGetByID = (req, res) => {
         res.status(404).json({ fail: { message: 'User not found!' } });
       }
     })
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch((err) => {
+      res.status(500).json({ fail: err });
+    });
 };
 
 exports.userUpdateByID = (req, res) => {
@@ -55,12 +57,24 @@ exports.userUpdateByID = (req, res) => {
     { $set: req.body },
     { new: true, runValidators: true },
   )
-    .then(updatedUser => res.status(200).json(updatedUser))
+    .then((updatedUser) => {
+      if (updatedUser) {
+        res.status(200).json(updatedUser);
+      } else {
+        res.status(404).json({ fail: { message: 'User not found!' } });
+      }
+    })
     .catch(err => res.status(500).json({ fail: err }));
 };
 
 exports.userDeleteByID = (req, res) => {
   User.findOneAndDelete({ _id: req.userData.id })
-    .then(() => res.status(204).end())
+    .then((userDeleted) => {
+      if (userDeleted) {
+        res.status(204).end();
+      } else {
+        res.status(404).json({ fail: { message: 'User not found!' } });
+      }
+    })
     .catch(err => res.status(500).json({ fail: err }));
 };

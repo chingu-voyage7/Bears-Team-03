@@ -32,7 +32,7 @@ beforeEach(() => {
   };
 });
 
-describe(' - USER MODEL -  ', () => {
+describe(' - USER MODEL - ', () => {
   it('should not be valid without email', (done) => {
     delete fakeUser.email;
     const user = new User(fakeUser);
@@ -56,6 +56,42 @@ describe(' - USER MODEL -  ', () => {
     const user = new User(fakeUser);
     user.validate((err) => {
       should.exist(err);
+      done();
+    });
+  });
+
+  it('should hash the received password', (done) => {
+    const user = new User(fakeUser);
+    user.setPassword(fakeUser.password);
+
+    /* eslint-disable-next-line */
+    (user.hash === fakeUser.password).should.be.false;
+    /* eslint-disable-next-line */
+    user.hash.should.exist;
+    /* eslint-disable-next-line */
+    user.salt.should.exist;
+    user.validate((err) => {
+      if (err) {
+        throw Error(err);
+      }
+      done();
+    });
+  });
+
+  it('should be able to recognize the correct password', (done) => {
+    const user = new User(fakeUser);
+    user.setPassword(fakeUser.password);
+
+    /* eslint-disable-next-line */
+    user.hash.should.exist;
+    /* eslint-disable-next-line */
+    user.validPassword(fakeUser.password).should.be.true;
+    /* eslint-disable-next-line */
+    user.validPassword('123').should.be.false;
+    user.validate((err) => {
+      if (err) {
+        throw Error(err);
+      }
       done();
     });
   });
