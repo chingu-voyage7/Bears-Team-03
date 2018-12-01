@@ -63,7 +63,7 @@ class RegistrationPage extends React.Component {
     return (
       <div>
         <h2>Register</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <TextInput
             name="fullname"
             label="Full name"
