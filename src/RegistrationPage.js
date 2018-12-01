@@ -39,6 +39,17 @@ class RegistrationPage extends React.Component {
     };
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { user } = this.state;
+    this.setState({
+      user: {
+        ...user,
+        [name]: value,
+      },
+    });
+  }
+
   render() {
     const { user } = this.state;
     return (
