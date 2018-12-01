@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { registrationAction } from './redux/actions/authActions';
+//import { registrationAction } from './redux/actions/authActions';
 
 function TextInput(props) {
   const {
@@ -62,7 +62,7 @@ class RegistrationPage extends React.Component {
     event.preventDefault();
     const { dispatch } = this.props;
     const { user } = this.state;
-    dispatch(registrationAction(user));
+    //dispatch(registrationAction(user));
   }
 
   render() {
