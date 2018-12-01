@@ -52,6 +52,10 @@ class RegistrationPage extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
     const { user } = this.state;
     return (
