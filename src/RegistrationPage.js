@@ -57,6 +57,15 @@ class RegistrationPage extends React.Component {
             value={user.email}
             onChange={this.handleChange}
           />
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={this.handleChange}
+            />
+          </label>
           <TextInput
             name="streetAddress"
             label="Address"
