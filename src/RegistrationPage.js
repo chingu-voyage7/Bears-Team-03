@@ -5,10 +5,12 @@ function TextInput(props) {
     value, onChange, name, label,
   } = props;
   return (
-    <label htmlFor={name}>
-      {label}
-      <input type="text" value={value} name={name} onChange={onChange} />
-    </label>
+    <div>
+      <label htmlFor={name}>
+        {label}
+        <input type="text" value={value} name={name} onChange={onChange} />
+      </label>
+    </div>
   );
 }
 
