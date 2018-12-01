@@ -17,6 +17,8 @@ class RegistrationPage extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {
       user: {
         fullname: '',
