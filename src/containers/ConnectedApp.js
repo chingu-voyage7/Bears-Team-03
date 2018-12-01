@@ -5,7 +5,7 @@ This new component is explicitly created to emphasize the
  */
 import { connect } from 'react-redux';
 import fetchUsersAction from '../redux/actions/userActions';
-import logoutAction from '../redux/actions/authActions';
+import { loginAction, logoutAction } from '../redux/actions/authActions';
 
 import App from '../App';
 
@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
  */
 const mapDispatchToProps = dispatch => ({
   fetchUsers: () => dispatch(fetchUsersAction()),
+  login: loginData => dispatch(loginAction(loginData)),
   logout: () => dispatch(logoutAction()),
 });
 
