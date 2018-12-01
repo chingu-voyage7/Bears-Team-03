@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { registrationAction } from './redux/actions/authActions';
 
 function TextInput(props) {
   const {
@@ -58,6 +60,9 @@ class RegistrationPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const { dispatch } = this.props;
+    const { user } = this.state;
+    dispatch(registrationAction(user));
   }
 
   render() {
@@ -139,4 +144,10 @@ class RegistrationPage extends React.Component {
   }
 }
 
-export default RegistrationPage;
+function mapStateToProps(state) {
+  return {
+    registering: state.registration,
+  };
+}
+
+export default connect(mapStateToProps)(RegistrationPage);
