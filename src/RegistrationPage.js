@@ -166,6 +166,24 @@ class RegistrationPage extends React.Component {
               <option value="sunday">Sunday</option>
             </select>
           </label>
+          <label htmlFor="hours">
+            Start Time
+            <input
+              type="time"
+              name="hours"
+              value={user.hours}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label htmlFor="hours">
+            End Time
+            <input
+              type="time"
+              name="hours"
+              value={user.hours}
+              onChange={this.handleChange}
+            />
+          </label>
           <label htmlFor="adult">
             Adult
             <input
