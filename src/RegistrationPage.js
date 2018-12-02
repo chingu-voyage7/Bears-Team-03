@@ -88,6 +88,14 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
           </label>
+          <label htmlFor="gender">
+            Gender
+            <select name="gender" value={user.gender} onChange={this.handleChange}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
           <TextInput
             name="streetAddress"
             label="Address"
