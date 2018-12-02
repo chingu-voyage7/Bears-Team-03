@@ -7,7 +7,7 @@ const app = require('./app');
 
 // Setting few options to remove warning on feature deprecations
 mongoose.set('useNewUrlParser', true);
-mongoose.set('useCreateIndexes', false);
+mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 const port = configVars.PORT;
