@@ -31,7 +31,7 @@
   }
 }
 
-input, label {
+input, select, label {
   display: block;
   margin: auto;
 }
