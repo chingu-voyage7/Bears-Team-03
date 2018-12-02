@@ -13,5 +13,11 @@ export const fetchUsers = {
   FAILURE: 'FETCH_USERS_FAILURE',
 };
 
+export const loginProcess = {
+  REQUEST: 'LOGIN_REQUEST',
+  SUCCESS: 'LOGIN_SUCCESS',
+  FAILURE: 'LOGIN_FAILURE',
+};
+
 export const GENERAL_FAILURE = 'GENERAL_FAILURE';
 export const LOGOUT = 'LOGOUT';
