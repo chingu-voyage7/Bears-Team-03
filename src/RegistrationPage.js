@@ -132,6 +132,40 @@ class RegistrationPage extends React.Component {
             value={user.phone}
             onChange={this.handleChange}
           />
+          <label htmlFor="volunteerField">
+            Global Goals
+            <select
+              name="volunteerField"
+              multiple
+              value={user.volunteerField}
+              onChange={this.handleChange}
+            >
+              <option value="1">1. No Poverty</option>
+              <option value="2">2. Zero Hunger</option>
+              <option value="3">3. Good Health and Well Being</option>
+              <option value="4">4. Quality Education</option>
+              <option value="5">5. Gender Equality</option>
+              <option value="6">6. Clean Water and Sanitation</option>
+              <option value="7">7. Affordable and Clean Energy</option>
+            </select>
+          </label>
+          <label htmlFor="days">
+            Days
+            <select
+              name="days"
+              multiple
+              value={user.days}
+              onChange={this.handleChange}
+            >
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+            </select>
+          </label>
           <label htmlFor="adult">
             Adult
             <input
