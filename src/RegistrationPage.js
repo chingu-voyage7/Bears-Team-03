@@ -155,7 +155,7 @@ class RegistrationPage extends React.Component {
               name="volunteerField"
               multiple
               value={user.volunteerField}
-              onChange={this.handleChange}
+              onChange={this.handleMultipleChange}
             >
               <option value="1">1. No Poverty</option>
               <option value="2">2. Zero Hunger</option>
@@ -172,7 +172,7 @@ class RegistrationPage extends React.Component {
               name="days"
               multiple
               value={user.days}
-              onChange={this.handleChange}
+              onChange={this.handleMultipleChange}
             >
               <option value="monday">Monday</option>
               <option value="tuesday">Tuesday</option>
