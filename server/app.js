@@ -2,7 +2,8 @@ const express = require('express');
 
 const app = express();
 
-const usersRoutes = require('./components/user/userRoutes');
+const userRoutes = require('./components/user/userRoutes');
+const businessRoutes = require('./components/business/businessRoutes');
 const authRoutes = require('./components/auth/authRoutes');
 
 // Standard middleware that convert incoming request data ( if formatted as json)
@@ -10,7 +11,8 @@ const authRoutes = require('./components/auth/authRoutes');
 app.use(express.json());
 
 // Appending user routes using a common identifier ( ... /users/...)
-app.use('/user', usersRoutes);
+app.use('/user', userRoutes);
+app.use('/business', businessRoutes);
 app.use(authRoutes);
 
 // Main route for testing purpose
