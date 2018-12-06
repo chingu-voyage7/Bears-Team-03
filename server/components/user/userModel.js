@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  hash: {
+  passwordHash: {
     type: String,
     required: true,
   },
@@ -61,15 +61,32 @@ const userSchema = new mongoose.Schema({
   addressData: [addressSchema],
 });
 
-userSchema.methods.setPassword = function setPwd(password) {
-  this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-};
+/*
+FROM A GeeksForGeeks article:https://www.geeksforgeeks.org/node-js-password-hashing-crypto-module/
 
-userSchema.methods.validPassword = function checkPwd(password) {
+PBKDF2 = Password-Based Key Derivation Function 2
+It requires:
+ - password to encrypt
+ - salt as unique and secret string used inside the encryption algorithm
+  - iterations as number of cycle executed by the encryption algorithm
+  - keylength as the length ( in byte ) of the returned key
+  - digest as the selected HMAC
+ */
+
+userSchema.pre('validate', function encryptPwd(next) {
+  /*   Generates cryptographically strong pseudo-random bytes;
+  the resultant buffer is transformed to a hexadecimal string and used as salt   */
+  this.salt = crypto.randomBytes(16).toString('hex');
+  this.passwordHash = crypto
+    .pbkdf2Sync(this.passwordHash, this.salt, 1000, 64, 'sha512')
+    .toString('hex');
+  next();
+});
+
+userSchema.methods.isValidPassword = function comparePwd(password) {
   const hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 
-  return this.hash === hash;
+  return this.passwordHash === hash;
 };
 
 module.exports = mongoose.model('User', userSchema);

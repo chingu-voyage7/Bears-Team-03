@@ -14,6 +14,7 @@ exports.userCreateOne = (req, res) => {
         const newUser = new User({
           fullname: req.body.fullname,
           email: req.body.email,
+          passwordHash: req.body.password,
           adult: req.body.adult,
           gender: req.body.gender,
           addressData: req.body.addressData,
@@ -21,7 +22,6 @@ exports.userCreateOne = (req, res) => {
           volunteerField: req.body.volunteerField,
           timeAvailability: req.body.timeAvailability,
         });
-        newUser.setPassword(req.body.password);
         newUser
           .save()
           .then(userCreated => res.status(201).json(userCreated))
