@@ -184,11 +184,16 @@ class RegistrationPage extends React.Component {
               <option value="5">5. Gender Equality</option>
               <option value="6">6. Clean Water and Sanitation</option>
               <option value="7">7. Affordable and Clean Energy</option>
-            </select>
-          </label>
-          <label htmlFor="days">
-            Days
-            <select
+              <option value="8">8. Decent Work and Economic Growth</option>
+              <option value="9">9. Industry, Innovation and Infrastructure</option>
+              <option value="10">10. Reduced Inequalities</option>
+              <option value="11">11. Sustainable Cities and Communities</option>
+              <option value="12">12. Responsible Consumption and Production</option>
+              <option value="13">13. Climate Action</option>
+              <option value="14">14. Life Below Water</option>
+              <option value="15">15. Life On Land</option>
+              <option value="16">16. Peace, Justice and Strong Institutions</option>
+              <option value="17">17. Partnerships for the Goals</option>
               name="days"
               multiple
               value={user.days}
