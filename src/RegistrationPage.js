@@ -8,20 +8,6 @@ import {
   from 'reactstrap';
 //import { registrationAction } from './redux/actions/authActions';
 
-function TextInput(props) {
-  const {
-    value, onChange, name, label,
-  } = props;
-  return (
-    <div>
-      <label htmlFor={name}>
-        {label}
-        <input type="text" value={value} name={name} onChange={onChange} />
-      </label>
-    </div>
-  );
-}
-
 class RegistrationPage extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +32,9 @@ class RegistrationPage extends React.Component {
         volunteerField: [''],
         days: [''],
         hours: [''],
+      },
+      validate: {
+        emailState: '',
       },
     };
   }
@@ -100,78 +89,167 @@ class RegistrationPage extends React.Component {
 
   render() {
     const { user } = this.state;
+    const { validate } = this.state;
     return (
-      <div>
-        <h2>Register</h2>
-        <form onSubmit={this.handleSubmit}>
-          <TextInput
-            name="fullname"
-            label="Full name"
-            value={user.fullname}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="email"
-            label="Email"
-            value={user.email}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">
-            Password
-            <input
+      <Container className="RegistrationPage">
+        <h2>Sign Up</h2>
+        <Form className="form" onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <Label>Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="myemail@email.com"
+              value={user.email}
+              valid={validate.emailState === 'has-success'}
+              invalid={validate.emailState === 'has-danger'}
+              onChange={(e) => {
+                this.validateEmail(e);
+                this.handleChange(e);
+              }}
+            />
+            <FormFeedback valid>
+              That's a tasty looking email you've got there.
+            </FormFeedback>
+            <FormFeedback>
+              Uh oh! Looks like there is an issue with your email. Please input a correct email.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label>Full name:</Label>
+            <Input
+              type="text"
+              name="fullname"
+              id="fullname"
+              placeholder="Example Joe"
+              value={user.fullName}
+              onChange={(e) => {
+                this.handleChange(e);
+              }}
+            />
+            <FormFeedback>
+              Please input your full name.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password:</Label>
+            <Input
               type="password"
               name="password"
+              id="examplePassword"
+              placeholder="********"
               value={user.password}
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
             />
-          </label>
-          <label htmlFor="gender">
-            Gender
-            <select name="gender" value={user.gender} onChange={this.handleChange}>
+            <FormFeedback>
+              Please input a password.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="gender">Gender:</Label>
+            <Input
+              type="select"
+              name="gender"
+              value={user.gender}
+              onChange={this.handleChange}
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
-            </select>
-          </label>
-          <TextInput
-            name="streetAddress"
-            label="Address"
-            value={user.streetAddress}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="city"
-            label="City"
-            value={user.city}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="stateOrProvince"
-            label="State or Province"
-            value={user.stateOrProvince}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="zipCode"
-            label="Zip Code"
-            value={user.zipCode}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="country"
-            label="Country"
-            value={user.country}
-            onChange={this.handleChange}
-          />
-          <TextInput
-            name="phone"
-            label="Phone Number"
-            value={user.phone}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="volunteerField">
-            Global Goals
-            <select
+            </Input>
+            <FormFeedback>
+              Please input your gender.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="streetAddress">Address:</Label>
+            <Input
+              type="name"
+              name="streetAddress"
+              label="Address"
+              placeholder="123 Main Street"
+              value={user.streetAddress}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your address.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="city">City:</Label>
+            <Input
+              type="text"
+              name="city"
+              label="City"
+              placeholder="ExampleCity"
+              value={user.city}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your city.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="stateOrProvince">State/Province/Region:</Label>
+            <Input
+              type="text"
+              name="stateOrProvince"
+              label="State or Province"
+              placeholder="exampleState"
+              value={user.stateOrProvince}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your state.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="zipCode">ZIP:</Label>
+            <Input
+              type="text"
+              name="zipCode"
+              label="Zip Code"
+              placeholder="exampleZIP"
+              value={user.zipCode}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your ZIP code.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="country">Country/Region:</Label>
+            <Input
+              type="text"
+              name="country"
+              label="Country"
+              placeholder="exampleCountry"
+              value={user.country}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your country.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="phone">Phone number:</Label>
+            <Input
+              type="text"
+              name="phone"
+              label="Phone Number"
+              placeholder="+36-20-233-7788"
+              value={user.phone}
+              onChange={this.handleChange}
+            />
+            <FormFeedback>
+              Please input your phone number.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="volunteerField">What Global Goals do you want to support?</Label>
+            <Input
+              type="select"
               name="volunteerField"
               multiple
               value={user.volunteerField}
@@ -194,6 +272,15 @@ class RegistrationPage extends React.Component {
               <option value="15">15. Life On Land</option>
               <option value="16">16. Peace, Justice and Strong Institutions</option>
               <option value="17">17. Partnerships for the Goals</option>
+            </Input>
+            <FormFeedback>
+              Please pick at least one goal.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label for="days">Select on what days are you available:</Label>
+            <Input
+              type="select"
               name="days"
               multiple
               value={user.days}
@@ -206,38 +293,72 @@ class RegistrationPage extends React.Component {
               <option value="friday">Friday</option>
               <option value="saturday">Saturday</option>
               <option value="sunday">Sunday</option>
-            </select>
-          </label>
-          <label htmlFor="hours">
-            Start Time
-            <input
-              type="time"
-              name="hours"
-              value={user.hours}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="hours">
-            End Time
-            <input
-              type="time"
-              name="hours"
-              value={user.hours}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="adult">
-            Adult
-            <input
-              type="checkbox"
-              name="adult"
-              value={user.adult}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Register" />
-        </form>
-      </div>
+            </Input>
+            <FormFeedback>
+              Please pick at least one day.
+            </FormFeedback>
+          </FormGroup>
+          <Row form>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="hours">Start Time:</Label>
+                <Input
+                  type="time"
+                  name="hours"
+                  value={user.hours}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormFeedback>
+                Please input a valid start time.
+              </FormFeedback>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="hours">End Time:</Label>
+                <Input
+                  type="time"
+                  name="hours"
+                  value={user.hours}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormFeedback>
+                Please input a valid end time.
+              </FormFeedback>
+            </Col>
+          </Row>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                value={user.adult}
+                onChange={this.handleChange}
+              />
+              {' '}
+              I am an adult
+            </Label>
+            <FormFeedback>
+              You need to be an adult to use our service.
+            </FormFeedback>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                value={user.adult}
+                onChange={this.handleChange}
+              />
+              {' '}
+              I agree to the Terms of Service
+            </Label>
+            <FormFeedback>
+              You need to accept our Terms of Service to use our service.
+            </FormFeedback>
+          </FormGroup>
+          <Button color="primary">Sign Up</Button>
+        </Form>
+      </Container>
     );
   }
 }
