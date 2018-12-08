@@ -78,6 +78,17 @@ class RegistrationPage extends React.Component {
     });
   }
 
+  validateEmail(event) {
+    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const { validate } = this.state;
+    if (emailRex.test(event.target.value)) {
+      validate.emailState = 'has-success';
+    } else {
+      validate.emailState = 'has-danger';
+    }
+    this.setState({ validate });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const { dispatch } = this.props;
