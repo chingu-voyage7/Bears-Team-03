@@ -1,5 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Button, Container, Col,
+  Row, Form, FormGroup,
+  Label, Input, FormFeedback,
+}
+  from 'reactstrap';
 //import { registrationAction } from './redux/actions/authActions';
 
 function TextInput(props) {
