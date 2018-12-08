@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   Button, Container, Col,
   Row, Form, FormGroup,
-  Label, Input, FormFeedback,
+  Label, Input, FormFeedback, FormText,
 }
   from 'reactstrap';
 //import { registrationAction } from './redux/actions/authActions';
@@ -35,6 +35,7 @@ class RegistrationPage extends React.Component {
       },
       validate: {
         emailState: '',
+        passwordState: '',
       },
     };
   }
@@ -76,6 +77,18 @@ class RegistrationPage extends React.Component {
       validate.emailState = 'has-success';
     } else {
       validate.emailState = 'has-danger';
+    }
+    this.setState({ validate });
+  }
+
+  // Only accept password that are at least 6 characters long
+  validatePassword(event) {
+    const pwdRex = /^.{6,}$/;
+    const { validate } = this.state;
+    if (pwdRex.test(event.target.value)) {
+      validate.passwordState = 'has-success';
+    } else {
+      validate.passwordState = 'has-danger';
     }
     this.setState({ validate });
   }
@@ -133,18 +146,29 @@ class RegistrationPage extends React.Component {
             </FormFeedback>
           </FormGroup>
           <FormGroup>
-            <Label for="examplePassword">Password:</Label>
+            <Label for="password">Password:</Label>
             <Input
               type="password"
               name="password"
-              id="examplePassword"
+              id="password"
               placeholder="********"
               value={user.password}
-              onChange={e => this.handleChange(e)}
+              valid={validate.passwordState === 'has-success'}
+              invalid={validate.passwordState === 'has-danger'}
+              onChange={(e) => {
+                this.validatePassword(e);
+                this.handleChange(e);
+              }}
             />
-            <FormFeedback>
-              Please input a password.
+            <FormFeedback valid>
+              That is a good password! :)
             </FormFeedback>
+            <FormFeedback>
+              Please input a password that is at least 6 characters long.
+            </FormFeedback>
+            <FormText>
+              At least 6 characters long
+            </FormText>
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>
