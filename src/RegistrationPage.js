@@ -78,6 +78,8 @@ class RegistrationPage extends React.Component {
     });
   }
 
+  // A lot of ideas and implementations came from here:
+  // https://alligator.io/react/fancy-forms-reactstrap/
   validateEmail(event) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
