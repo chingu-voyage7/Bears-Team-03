@@ -34,8 +34,20 @@ class RegistrationPage extends React.Component {
         hours: [''],
       },
       validate: {
-        emailState: '',
-        passwordState: '',
+        email: '',
+        password: '',
+        fullname: '',
+        adult: '',
+        gender: '',
+        streetAddress: '',
+        city: '',
+        stateOrProvince: '',
+        zipCode: '',
+        country: '',
+        phone: '',
+        volunteerField: '',
+        days: '',
+        hours: '',
       },
     };
   }
@@ -68,15 +80,26 @@ class RegistrationPage extends React.Component {
     });
   }
 
+  validateRequired(event) {
+    const { name } = event.target;
+    const { validate, user } = this.state;
+    if (user[name].length > 0) {
+      validate[name] = 'has-success';
+    } else {
+      validate[name] = 'has-danger';
+    }
+    this.setState({ validate });
+  }
+
   // A lot of ideas and implementations came from here:
   // https://alligator.io/react/fancy-forms-reactstrap/
   validateEmail(event) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
     if (emailRex.test(event.target.value)) {
-      validate.emailState = 'has-success';
+      validate.email = 'has-success';
     } else {
-      validate.emailState = 'has-danger';
+      validate.email = 'has-danger';
     }
     this.setState({ validate });
   }
@@ -86,9 +109,9 @@ class RegistrationPage extends React.Component {
     const pwdRex = /^.{6,}$/;
     const { validate } = this.state;
     if (pwdRex.test(event.target.value)) {
-      validate.passwordState = 'has-success';
+      validate.password = 'has-success';
     } else {
-      validate.passwordState = 'has-danger';
+      validate.password = 'has-danger';
     }
     this.setState({ validate });
   }
@@ -101,8 +124,7 @@ class RegistrationPage extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
-    const { validate } = this.state;
+    const { user, validate } = this.state;
     return (
       <Container className="RegistrationPage">
         <h2>Sign Up</h2>
@@ -115,8 +137,8 @@ class RegistrationPage extends React.Component {
               id="email"
               placeholder="myemail@email.com"
               value={user.email}
-              valid={validate.emailState === 'has-success'}
-              invalid={validate.emailState === 'has-danger'}
+              valid={validate.email === 'has-success'}
+              invalid={validate.email === 'has-danger'}
               onChange={(e) => {
                 this.validateEmail(e);
                 this.handleChange(e);
@@ -136,8 +158,10 @@ class RegistrationPage extends React.Component {
               name="fullname"
               id="fullname"
               placeholder="Example Joe"
-              value={user.fullName}
+              value={user.fullname}
+              invalid={validate.fullname === 'has-danger'}
               onChange={(e) => {
+                this.validateRequired(e);
                 this.handleChange(e);
               }}
             />
@@ -153,8 +177,8 @@ class RegistrationPage extends React.Component {
               id="password"
               placeholder="********"
               value={user.password}
-              valid={validate.passwordState === 'has-success'}
-              invalid={validate.passwordState === 'has-danger'}
+              valid={validate.password === 'has-success'}
+              invalid={validate.password === 'has-danger'}
               onChange={(e) => {
                 this.validatePassword(e);
                 this.handleChange(e);
@@ -194,7 +218,11 @@ class RegistrationPage extends React.Component {
               label="Address"
               placeholder="123 Main Street"
               value={user.streetAddress}
-              onChange={this.handleChange}
+              invalid={validate.streetAddress === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your address.
@@ -208,7 +236,11 @@ class RegistrationPage extends React.Component {
               label="City"
               placeholder="ExampleCity"
               value={user.city}
-              onChange={this.handleChange}
+              invalid={validate.city === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your city.
@@ -222,7 +254,11 @@ class RegistrationPage extends React.Component {
               label="State or Province"
               placeholder="exampleState"
               value={user.stateOrProvince}
-              onChange={this.handleChange}
+              invalid={validate.stateOrProvince === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your state.
@@ -236,7 +272,11 @@ class RegistrationPage extends React.Component {
               label="Zip Code"
               placeholder="exampleZIP"
               value={user.zipCode}
-              onChange={this.handleChange}
+              invalid={validate.zipCode === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your ZIP code.
@@ -250,7 +290,11 @@ class RegistrationPage extends React.Component {
               label="Country"
               placeholder="exampleCountry"
               value={user.country}
-              onChange={this.handleChange}
+              invalid={validate.country === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your country.
@@ -264,7 +308,11 @@ class RegistrationPage extends React.Component {
               label="Phone Number"
               placeholder="+36-20-233-7788"
               value={user.phone}
-              onChange={this.handleChange}
+              invalid={validate.phone === 'has-danger'}
+              onChange={(e) => {
+                this.validateRequired(e);
+                this.handleChange(e);
+              }}
             />
             <FormFeedback>
               Please input your phone number.
@@ -357,6 +405,11 @@ class RegistrationPage extends React.Component {
               <Input
                 type="checkbox"
                 value={user.adult}
+                invalid={validate.streetAddress === 'has-danger'}
+                onChange={(e) => {
+                  this.validateRequired(e);
+                  this.handleChange(e);
+                }}
                 onChange={this.handleChange}
               />
               {' '}
