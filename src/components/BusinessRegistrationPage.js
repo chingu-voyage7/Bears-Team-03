@@ -15,7 +15,7 @@ class BusinessRegistrationPage extends Component {
     }
     render() {
         return (
-      
+      <div/>
     );
     }
 }

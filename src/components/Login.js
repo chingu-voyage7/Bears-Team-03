@@ -23,7 +23,7 @@ class  Login extends Component{
     render(){
         return (
             
-         <div classNAme="block-content collapse in span6" style={{width: '50%', textAlign: 'center'}} >
+         <div className="block-content in span6" style={{width: '50%', textAlign: 'center'}} >
         
        <div className="control-group">
         <div className="controls">
