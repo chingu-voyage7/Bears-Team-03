@@ -1,0 +1,16 @@
+.form-frame {
+    margin-top: 1rem;
+}
+
+h2 {
+    text-align: center;
+    padding: 1rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-check label {
+    margin: 0 1rem;
+}
