@@ -35,8 +35,9 @@ class BusinessRegistrationPage extends Component {
           </FormGroup>
         </Form>
       </Container>
+
     );
-  }
+    }
 }
 
 export default BusinessRegistrationPage;
