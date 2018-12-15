@@ -21,6 +21,20 @@ class BusinessRegistrationPage extends Component {
     return (
       <Container className="BusinessRegistrationPage">
         <Form className="form">
+          {/* COMPANY NAME */}
+          <FormGroup>
+            <Label for="companyName">Company Name:</Label>
+            <Input
+              type="text"
+              name="companyName"
+              label="companyName"
+            >
+            </Input>
+            <FormFeedback>
+              Please enter your city.
+            </FormFeedback>
+          </FormGroup>
+          {/* city */}
           <FormGroup>
             <Label for="city">City:</Label>
             <Input
@@ -37,7 +51,7 @@ class BusinessRegistrationPage extends Component {
       </Container>
 
     );
-    }
+  }
 }
 
 export default BusinessRegistrationPage;
