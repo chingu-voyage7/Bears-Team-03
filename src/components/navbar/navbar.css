@@ -1,0 +1,13 @@
+nav {
+    background-color: lawngreen;
+    padding: 0.5rem;
+}
+
+ul {
+    margin: 0;
+}
+
+li {
+    display: inline;
+    padding: 0 1rem;
+}

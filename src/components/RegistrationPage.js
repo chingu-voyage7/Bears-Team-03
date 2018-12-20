@@ -118,8 +118,8 @@ class RegistrationPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    const { user } = this.state;
+   // const { dispatch } = this.props;
+   // const { user } = this.state;
     //dispatch(registrationAction(user));
   }
 
@@ -410,7 +410,6 @@ class RegistrationPage extends React.Component {
                   this.validateRequired(e);
                   this.handleChange(e);
                 }}
-                onChange={this.handleChange}
               />
               {' '}
               I am an adult

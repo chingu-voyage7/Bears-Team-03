@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import fetchUsersAction from '../redux/actions/userActions';
 import { loginAction, logoutAction } from '../redux/actions/authActions';
 
-import App from '../App';
+import App from '../components/App';
 
 /*
  This method is used to make the reducers' state available to the component - Named by convenction
