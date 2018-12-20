@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import "./navbar.css";
+import './navbar.css';
 
 class Navbar extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Navbar extends Component {
     const { children } = this.props;
     return (
       <nav>
-        <ul>{React.Children.map(children, (child) => <li>{child}</li>)}</ul>
+        <ul>{React.Children.map(children, child => <li>{child}</li>)}</ul>
       </nav>
     );
   }
@@ -22,9 +22,9 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   children: PropTypes.oneOfType([
-  PropTypes.element,
-  PropTypes.array
-  ]).isRequired
+    PropTypes.element,
+    PropTypes.array,
+  ]).isRequired,
 };
 
 export default Navbar;
