@@ -9,7 +9,7 @@ import Login from './Login';
 import Navbar from './navbar/Navbar';
 import './App.css';
 
-const App = () => (
+const App = ({registerUser, loginUser, logoutUser, createProject}) => (
   <Router>
     <>
       <Navbar>
@@ -18,9 +18,7 @@ const App = () => (
         <NavLink to="/create-project">Create Project</NavLink>
       </Navbar>
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={RegistrationPage} />
-        <Route path="/create-project" component={ProjectPage} />
+        <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
       </Switch>
     </>
   </Router>

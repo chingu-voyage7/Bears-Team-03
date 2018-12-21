@@ -13,6 +13,12 @@ export const fetchUsers = {
   FAILURE: 'FETCH_USERS_FAILURE',
 };
 
+export const registerUser = {
+  REQUEST: 'REGISTER_USER_REQUEST',
+  SUCCESS: 'REGISTER_USER_SUCCESS',
+  FAILURE: 'REGISTER_USER_FAILURE',
+};
+
 export const loginProcess = {
   REQUEST: 'LOGIN_REQUEST',
   SUCCESS: 'LOGIN_SUCCESS',

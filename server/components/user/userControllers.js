@@ -17,24 +17,30 @@ exports.userCreateOne = (req, res) => {
           passwordHash: req.body.password,
           adult: req.body.adult,
           gender: req.body.gender,
-          addressData: req.body.addressData,
-          phone: req.body.phone,
-          volunteerField: req.body.volunteerField,
-          timeAvailability: req.body.timeAvailability,
+          //addressData: req.body.addressData,
+          address: req.body.address,
+          city: req.body.city,
+          country: req.body.country,
+          stateOrProvince: req.body.stateOrProvince,
+          zipCode: req.body.zipCode,
+         // timeAvailability: req.body.timeAvailability,
+         timeAvailability: req.body.hours,
+         phone: req.body.phone,
+         volunteerField: req.body.volunteerField,
         });
         newUser
           .save()
           .then(userCreated => res.status(201).json(userCreated))
-          .catch(err => res.status(500).json({ fail: err }));
+          .catch(err => res.status(500).json({ fail: err.message }));
       }
     })
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch(err => res.status(500).json({ fail: err.message }));
 };
 
 exports.userGetAll = (req, res) => {
   User.find({})
     .then(users => res.status(200).json(users))
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch(err => res.status(500).json({ fail: err.message }));
 };
 
 exports.userGetByID = (req, res) => {
@@ -46,7 +52,7 @@ exports.userGetByID = (req, res) => {
         res.status(404).json({ fail: { message: 'User not found!' } });
       }
     })
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch(err => res.status(500).json({ fail: err.message }));
 };
 
 exports.userUpdateByID = (req, res) => {
@@ -56,11 +62,11 @@ exports.userUpdateByID = (req, res) => {
     { new: true, runValidators: true },
   )
     .then(updatedUser => res.status(200).json(updatedUser))
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch(err => res.status(500).json({ fail: err.message }));
 };
 
 exports.userDeleteByID = (req, res) => {
   User.findOneAndDelete({ _id: req.userData.id })
     .then(() => res.status(204).end())
-    .catch(err => res.status(500).json({ fail: err }));
+    .catch(err => res.status(500).json({ fail: err.message }));
 };
