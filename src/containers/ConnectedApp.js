@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import {fetchUsersAction, registerUserAction} from '../redux/actions/userActions';
 import { loginAction, logoutAction } from '../redux/actions/authActions';
 
+import { createProjectAction } from '../redux/actions/projectActions';
+
 import App from '../components/App';
 
 /*
@@ -27,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
   fetchUsers: () => dispatch(fetchUsersAction()),
   loginUser: loginData => dispatch(loginAction(loginData)),
   logoutUser: () => dispatch(logoutAction()),
+  createProject: projectData => dispatch(createProjectAction(projectData))
 });
 
 /*

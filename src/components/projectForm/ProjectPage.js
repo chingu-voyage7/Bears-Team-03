@@ -27,7 +27,7 @@ export default class Example extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    console.log(this.state);
+    this.props.publish(this.state);
   }
 
   handleChange = (e) => {

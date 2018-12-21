@@ -12,7 +12,7 @@ const projectSchema = new mongoose.Schema({
   },
   applicationRequirements: {
     type: String,
-    required: true,
+   // required: true,
   },
   projectLocationAddress: {
     type: String,
@@ -33,7 +33,7 @@ const projectSchema = new mongoose.Schema({
     required: true,
   },
   workingHours: {
-    type: [Number],
+    type: [String],
     required: true,
   },
   startDate: {

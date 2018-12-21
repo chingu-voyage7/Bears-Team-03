@@ -11,7 +11,7 @@ exports.projectCreateOne = (req, res) => {
         });
       } else {
         const newProject = new Project({
-          projectName: req.body.projectName,
+          /* projectName: req.body.projectName,
           projectDescription: req.body.projectDescription,
           applicationRequirements: req.body.applicationRequirements,
           projectLocationAddress: req.body.projectLocationAddress,
@@ -22,8 +22,23 @@ exports.projectCreateOne = (req, res) => {
           workingHours: req.body.workingHours,
           startDate: req.body.startDate,
           endDate: req.body.endDate,
-          ownerId: req.businessData.id,
+          ownerId: req.businessData.id, */
+          // ---
+          projectName: req.body.name,
+          projectDescription: req.body.description,
+         // applicationRequirements: req.body.applicationRequirements,
+          projectLocationAddress: req.body.address,
+          projectLocationCountry: req.body.country,
+          email: req.body.email,
+          phoneContact: req.body.phone,
+          workFields: req.body.involvedFields,
+          workingHours: [req.body.from, req.body.to],
+         //startDate: req.body.startDate,
+         // endDate: req.body.endDate,
+         // ownerId: req.businessData.id,
         });
+
+      console.log('project',newProject)
         newProject
           .save()
           .then(projectCreated => res.status(201).json(projectCreated))

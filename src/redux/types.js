@@ -25,5 +25,11 @@ export const loginProcess = {
   FAILURE: 'LOGIN_FAILURE',
 };
 
+export const createProject = {
+  REQUEST: 'CREATE_PROJECT_REQUEST',
+  SUCCESS: 'CREATE_PROJECT_SUCCESS',
+  FAILURE: 'CREATE_PROJECT_FAILURE',
+};
+
 export const GENERAL_FAILURE = 'GENERAL_FAILURE';
 export const LOGOUT = 'LOGOUT';
