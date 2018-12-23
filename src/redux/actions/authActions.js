@@ -4,16 +4,17 @@ export const loginAction = loginData => (dispatch) => {
   dispatch({ type: loginProcess.REQUEST });
   const fetchOptions = {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(loginData),
   };
 
   fetch('/login', fetchOptions)
     .then(res => res.json())
-    .then((token) => {
-      if (token.fail) {
-        dispatch({ type: loginProcess.FAILURE, payload: token.fail });
+    .then((authData) => {
+      if (authData.fail) {
+        dispatch({ type: loginProcess.FAILURE, payload: authData.fail });
       } else {
-        localStorage.setItem('accessToken', token);
+        localStorage.setItem('accessToken', authData.token);
         dispatch({ type: loginProcess.SUCCESS, payload: { isLoggedIn: true } });
       }
     })

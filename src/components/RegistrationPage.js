@@ -1,12 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+
+
 import {
-  Button, Container, Col,
-  Row, Form, FormGroup,
-  Label, Input, FormFeedback, FormText,
-}
-  from 'reactstrap';
-//import { registrationAction } from './redux/actions/authActions';
+  Button,
+  Container,
+  Col,
+  Row,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback,
+  FormText,
+} from 'reactstrap';
 
 class RegistrationPage extends React.Component {
   constructor(props) {
@@ -118,9 +126,7 @@ class RegistrationPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-   // const { dispatch } = this.props;
-   // const { user } = this.state;
-    //dispatch(registrationAction(user));
+    this.props.register(this.state.user);
   }
 
   render() {
@@ -144,9 +150,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback valid>
-              That's a tasty looking email you've got there.
-            </FormFeedback>
+            <FormFeedback valid>That's a tasty looking email you've got there.</FormFeedback>
             <FormFeedback>
               Uh oh! Looks like there is an issue with your email. Please input a correct email.
             </FormFeedback>
@@ -165,9 +169,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your full name.
-            </FormFeedback>
+            <FormFeedback>Please input your full name.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="password">Password:</Label>
@@ -184,31 +186,18 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback valid>
-              That is a good password! :)
-            </FormFeedback>
-            <FormFeedback>
-              Please input a password that is at least 6 characters long.
-            </FormFeedback>
-            <FormText>
-              At least 6 characters long
-            </FormText>
+            <FormFeedback valid>That is a good password! :)</FormFeedback>
+            <FormFeedback>Please input a password that is at least 6 characters long.</FormFeedback>
+            <FormText>At least 6 characters long</FormText>
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>
-            <Input
-              type="select"
-              name="gender"
-              value={user.gender}
-              onChange={this.handleChange}
-            >
+            <Input type="select" name="gender" value={user.gender} onChange={this.handleChange}>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </Input>
-            <FormFeedback>
-              Please input your gender.
-            </FormFeedback>
+            <FormFeedback>Please input your gender.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="streetAddress">Address:</Label>
@@ -224,9 +213,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your address.
-            </FormFeedback>
+            <FormFeedback>Please input your address.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="city">City:</Label>
@@ -242,9 +229,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your city.
-            </FormFeedback>
+            <FormFeedback>Please input your city.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="stateOrProvince">State/Province/Region:</Label>
@@ -260,9 +245,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your state.
-            </FormFeedback>
+            <FormFeedback>Please input your state.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="zipCode">ZIP:</Label>
@@ -278,9 +261,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your ZIP code.
-            </FormFeedback>
+            <FormFeedback>Please input your ZIP code.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="country">Country/Region:</Label>
@@ -296,9 +277,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your country.
-            </FormFeedback>
+            <FormFeedback>Please input your country.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="phone">Phone number:</Label>
@@ -314,9 +293,7 @@ class RegistrationPage extends React.Component {
                 this.handleChange(e);
               }}
             />
-            <FormFeedback>
-              Please input your phone number.
-            </FormFeedback>
+            <FormFeedback>Please input your phone number.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="volunteerField">What Global Goals do you want to support?</Label>
@@ -345,9 +322,7 @@ class RegistrationPage extends React.Component {
               <option value="16">16. Peace, Justice and Strong Institutions</option>
               <option value="17">17. Partnerships for the Goals</option>
             </Input>
-            <FormFeedback>
-              Please pick at least one goal.
-            </FormFeedback>
+            <FormFeedback>Please pick at least one goal.</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="days">Select on what days are you available:</Label>
@@ -366,38 +341,22 @@ class RegistrationPage extends React.Component {
               <option value="saturday">Saturday</option>
               <option value="sunday">Sunday</option>
             </Input>
-            <FormFeedback>
-              Please pick at least one day.
-            </FormFeedback>
+            <FormFeedback>Please pick at least one day.</FormFeedback>
           </FormGroup>
           <Row form>
             <Col md={6}>
               <FormGroup>
                 <Label for="hours">Start Time:</Label>
-                <Input
-                  type="time"
-                  name="hours"
-                  value={user.hours}
-                  onChange={this.handleChange}
-                />
+                <Input type="time" name="hours" value={user.hours} onChange={this.handleChange} />
               </FormGroup>
-              <FormFeedback>
-                Please input a valid start time.
-              </FormFeedback>
+              <FormFeedback>Please input a valid start time.</FormFeedback>
             </Col>
             <Col md={6}>
               <FormGroup>
                 <Label for="hours">End Time:</Label>
-                <Input
-                  type="time"
-                  name="hours"
-                  value={user.hours}
-                  onChange={this.handleChange}
-                />
+                <Input type="time" name="hours" value={user.hours} onChange={this.handleChange} />
               </FormGroup>
-              <FormFeedback>
-                Please input a valid end time.
-              </FormFeedback>
+              <FormFeedback>Please input a valid end time.</FormFeedback>
             </Col>
           </Row>
           <FormGroup check>
@@ -411,26 +370,19 @@ class RegistrationPage extends React.Component {
                   this.handleChange(e);
                 }}
               />
-              {' '}
+{' '}
               I am an adult
             </Label>
-            <FormFeedback>
-              You need to be an adult to use our service.
-            </FormFeedback>
+            <FormFeedback>You need to be an adult to use our service.</FormFeedback>
           </FormGroup>
           <FormGroup check>
             <Label check>
-              <Input
-                type="checkbox"
-                value={user.adult}
-                onChange={this.handleChange}
-              />
-              {' '}
-              I agree to the Terms of Service
-            </Label>
-            <FormFeedback>
-              You need to accept our Terms of Service to use our service.
-            </FormFeedback>
+              <Input type="checkbox" value={user.adult} onChange={this.handleChange} />
+{' '}
+I agree to
+              the Terms of Service
+</Label>
+            <FormFeedback>You need to accept our Terms of Service to use our service.</FormFeedback>
           </FormGroup>
           <Button color="primary">Sign Up</Button>
         </Form>

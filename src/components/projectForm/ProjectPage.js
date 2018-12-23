@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Container, Col, Row, Button, Form, FormGroup, Label, Input,
+  Container, Col, Row, Button, Form, FormGroup, Label, Input, FormText
 } from 'reactstrap';
 
 import './projectPage.css';
@@ -16,7 +16,10 @@ export default class Example extends React.Component {
       to: '',
       description: '',
       involvedFields: [],
-      placeOfWork: '',
+      address: '',
+      country: '',
+      email: '',
+      phone:'',
       workDays: [],
     };
   }
@@ -24,7 +27,7 @@ export default class Example extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    console.log(this.state);
+    this.props.publish(this.state);
   }
 
   handleChange = (e) => {
@@ -62,7 +65,7 @@ export default class Example extends React.Component {
 
   render() {
     const {
-      name, customer, dueDate, from, to, description, involvedFields, placeOfWork, workDays,
+      name, customer, dueDate, from, to, description, involvedFields, address, country, email, phone,workDays,
     } = this.state;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
@@ -147,16 +150,30 @@ export default class Example extends React.Component {
                 </Col>
               </Row>
             </FormGroup>
-            <FormGroup>
-              <Label for="placeOfWork">Place of work</Label>
-              <Input
-                type="text"
-                name="placeOfWork"
-                id="placeOfWork"
-                value={placeOfWork}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
+            <Row form>
+              <Col md={8}>
+                <FormGroup>
+                  <Label for="address">Address / area</Label>
+                  <Input
+                    type="text"
+                    id="address"
+                    value={address}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={4}>
+                <FormGroup>
+                  <Label for="country">Country</Label>
+                  <Input
+                    type="text"
+                    id="country"
+                    value={country}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
             <Label for="workDays">Weekly work time</Label>
             <Row>
               <Col md={6} onChange={this.handleTest}>
@@ -253,6 +270,36 @@ export default class Example extends React.Component {
                     value={to}
                     onChange={this.handleChange}
                   />
+                </FormGroup>
+              </Col>
+            </Row>
+            <hr />
+            <h6>CONTACTS</h6>
+            <Row form>
+              <Col md={8}>
+                <FormGroup>
+                  <Label for="email">Email</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={4}>
+                <FormGroup>
+                  <Label for="phone">Phone</Label>
+                  <Input
+                    type="text"
+                    id="phone"
+                    pattern="\d+"
+                    value={phone}
+                    onChange={this.handleChange}
+                  />
+                  <FormText color="muted">
+                  Insert number only
+                  </FormText>
                 </FormGroup>
               </Col>
             </Row>
