@@ -9,7 +9,7 @@ const authReducer = (state = { isLoggedIn: false, error: null }, action) => {
     case loginProcess.REQUEST:
       return state;
     case loginProcess.SUCCESS:
-      return { ...state, ...action.payload };
+      return { ...state, error: null, ...action.payload };
     case loginProcess.FAILURE:
       return { ...state, ...action.payload };
     case LOGOUT:
