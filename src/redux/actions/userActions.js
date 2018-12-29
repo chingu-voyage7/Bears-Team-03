@@ -1,10 +1,10 @@
-import { fetchUsers, GENERAL_FAILURE } from '../types';
+import { fetchUsers, registerUser, GENERAL_FAILURE } from '../types';
 /*
  fetch data - asynchronous action creator
  The 'dispatch' method is disposable thanks to redux thunk.
  That way you can dispatch different sync action inside one single  async action
   */
-const fetchUsersAction = () => (dispatch) => {
+export const fetchUsersAction = () => (dispatch) => {
   dispatch({ type: fetchUsers.REQUEST });
   fetch('/user/get-all')
     .then(res => res.json())
@@ -18,4 +18,23 @@ const fetchUsersAction = () => (dispatch) => {
     .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
 };
 
-export default fetchUsersAction;
+export const registerUserAction = registerData => (dispatch) => {
+  dispatch({ type: registerUser.REQUEST });
+
+  const fetchOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(registerData),
+  };
+  fetch('/user/register', fetchOptions)
+    .then(res => res.json())
+    .then((user) => {
+      if (user.fail) {
+        dispatch({ type: registerUser.FAILURE, payload: user.fail });
+      } else {
+        console.log('testSuccess', user);
+        dispatch({ type: registerUser.SUCCESS, payload: user });
+      }
+    })
+    .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+};

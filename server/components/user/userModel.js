@@ -54,11 +54,30 @@ const userSchema = new mongoose.Schema({
   volunteerField: {
     type: [String],
   },
-  timeAvailability: {
+  /* timeAvailability: {
     type: [timespanSchema],
     required: true,
+  }, */
+  timeAvailability: {
+    type: String,
+    required: true,
   },
-  addressData: [addressSchema],
+ // addressData: [addressSchema],
+ address: {
+  type: String,
+},
+ city: {
+  type: String,
+},
+ country: {
+  type: String,
+},
+ stateOrProvince: {
+  type: String,
+},
+ zipCode: {
+  type: String,
+},
 });
 
 /*

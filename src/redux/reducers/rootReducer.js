@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
-import { fetchUsersReducer } from './userReducers';
+import { fetchUsersReducer, registerUserReducer } from './userReducers';
 
 /*
 This is the root reducer - it combine the others reducers into
@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   authState: authReducer,
   errorState: errorReducer,
   users: fetchUsersReducer,
+  registrationStatus: registerUserReducer
 });
 
 export default rootReducer;

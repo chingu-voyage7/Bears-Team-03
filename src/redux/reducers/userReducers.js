@@ -1,4 +1,4 @@
-import { fetchUsers } from '../types';
+import { fetchUsers, registerUser } from '../types';
 
 /*
 This is a reducer - Based on the different actions it
@@ -18,4 +18,15 @@ export const fetchUsersReducer = (state = [], action) => {
   }
 };
 
-export const registerUserReducer = () => {};
+export const registerUserReducer = (state = {error:null, isPending: false}, action) => {
+  switch (action.type) {
+    case registerUser.REQUEST:
+      return {...state, isPending: true};
+    case registerUser.SUCCESS:
+    return {...state, isPending: false, newUser: action.payload};
+    case registerUser.FAILURE:
+    return {...state, isPending: false, error: action.payload};
+    default:
+      return state;
+  }
+};
