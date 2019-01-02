@@ -1,0 +1,53 @@
+.card-item {
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+.card-title {
+    font:  400 1.5rem Arial, Helvetica, sans-serif;
+}
+
+.card-title-details {
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-container.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag {
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    padding: 0 1rem;
+    margin: 0 0.5rem;
+}
+
+.tag.water {
+    background-color: steelblue;
+}
+.tag.poor {
+    background-color: #c0a1c0;
+}
+
+.link-button {
+    background-color: transparent;
+    color: #0366d6;
+    border: none;
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .link-button:hover,
+  .link-button:focus {
+  text-decoration: none;
+  }
