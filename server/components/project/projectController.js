@@ -26,7 +26,7 @@ exports.projectCreateOne = (req, res) => {
           // ---
           projectName: req.body.name,
           projectDescription: req.body.description,
-         // applicationRequirements: req.body.applicationRequirements,
+          applicationRequirements: req.body.applicationRequirements,
           projectLocationAddress: req.body.address,
           projectLocationCountry: req.body.country,
           email: req.body.email,

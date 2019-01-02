@@ -12,3 +12,18 @@ exports.loginUser = (req, res) => {
     }
   });
 };
+
+exports.verifyToken = (req, res) => {
+  try {
+    let userData = jwt.verify(req.body.token, configVars.JWT_SECRET);
+    User.findById(userData.id).then((user) => {
+      if(user) {
+        res.status(200).json(req.body.token);
+      } else {
+        res.status(401).json({ fail: { message: 'Unauthorized' } });
+      }
+    })
+  } catch(error) {
+    res.status(401).json({ fail: { message: 'Unauthorized' } });
+  }
+};

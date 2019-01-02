@@ -4,7 +4,6 @@ import {
 } from 'reactstrap';
 
 import './projectPage.css';
-
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +11,8 @@ export default class Example extends React.Component {
       name: '',
       customer: '',
       dueDate: '',
+      startDate: '',
+      endDate: '',
       from: '',
       to: '',
       description: '',
@@ -21,13 +22,17 @@ export default class Example extends React.Component {
       email: '',
       phone:'',
       workDays: [],
+      projectTimespan: [],
+      applicationRequirements: ''
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    this.props.publish(this.state);
+    const projectData = {...this.state};
+    delete projectData.projectTimespan;
+    this.props.publish(projectData);
   }
 
   handleChange = (e) => {
@@ -50,22 +55,22 @@ export default class Example extends React.Component {
     });
   }
 
-  handleCheckboxGroup = (e) => {
-    const { workDays } = this.state;
-    const tempWorkDays = [...workDays];
-    const elPos = tempWorkDays.indexOf(e.target.value);
+  handleCheckboxes = (e) => {
+    const values = this.state[e.target.name];
+    const tempValues = [...values];
+    const elPos = tempValues.indexOf(e.target.value);
     // eslint-disable-next-line no-unused-expressions
     elPos === -1
-      ? tempWorkDays.push(e.target.value)
-      : tempWorkDays.splice(elPos, 1);
+      ? tempValues.push(e.target.value)
+      : tempValues.splice(elPos, 1);
     this.setState({
-      workDays: [...tempWorkDays],
+      [e.target.name]: [...tempValues],
     });
   }
 
   render() {
     const {
-      name, customer, dueDate, from, to, description, involvedFields, address, country, email, phone,workDays,
+      name, customer, dueDate, from, to, description, involvedFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
@@ -75,7 +80,7 @@ export default class Example extends React.Component {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="name">Due date ( announce )</Label>
+                  <Label for="dueDate">Due date ( announce )</Label>
                   <Input
                     type="date"
                     id="dueDate"
@@ -96,6 +101,55 @@ export default class Example extends React.Component {
                   >
                     <option>myCompany</option>
                     <option>myOtherCompany</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                <FormGroup check>
+                  <Label for="start" check>
+                  <Input
+                  type="checkbox"
+                  id="start"
+                  name="projectTimespan"
+                  value="start"
+                  checked={projectTimespan.includes('start')}
+                  onChange={this.handleCheckboxes}
+                  /> Start date
+                  </Label>
+                  </FormGroup>
+                  <Input
+                    type="date"
+                    id="startDate"
+                    value={startDate}
+                    disabled={!projectTimespan.includes('start')}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                <FormGroup check>
+                  <Label  for="end" check>
+                  <Input
+                  type="checkbox"
+                  id="end"
+                  name="projectTimespan"
+                  value="end"
+                  checked={projectTimespan.includes('end')}
+                  onChange={this.handleCheckboxes}
+                  /> End date
+                  </Label>
+                  </FormGroup>
+                  <Input
+                    type="date"
+                    id="endDate"
+                    value={endDate}
+                    disabled={!projectTimespan.includes('end')}
+                    onChange={this.handleChange}
+                  >
                   </Input>
                 </FormGroup>
               </Col>
@@ -181,70 +235,70 @@ export default class Example extends React.Component {
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="mon"
                       checked={workDays.includes('mon')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 monday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="tue"
                       checked={workDays.includes('tue')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 tuesday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="wed"
                       checked={workDays.includes('wed')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 wednesday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="thu"
                       checked={workDays.includes('thu')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 thursday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="fri"
                       checked={workDays.includes('fri')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 friday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="sat"
                       checked={workDays.includes('sat')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 saturday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="sun"
-                      checked={workDays.includes('tue')}
-                      onChange={this.handleCheckboxGroup}
+                      checked={workDays.includes('sun')}
+                      onChange={this.handleCheckboxes}
                     />
                 sunday
                   </Label>
@@ -273,6 +327,16 @@ export default class Example extends React.Component {
                 </FormGroup>
               </Col>
             </Row>
+            <FormGroup>
+              <Label for="applicationRequirements">Additional requirements</Label>
+              <Input
+                type="text"
+                id="applicationRequirements"
+                placeholder="Specific requirements, warnings, ..."
+                value={applicationRequirements}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
             <hr />
             <h6>CONTACTS</h6>
             <Row form>
