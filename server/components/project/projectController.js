@@ -33,12 +33,14 @@ exports.projectCreateOne = (req, res) => {
           phoneContact: req.body.phone,
           workFields: req.body.involvedFields,
           workingHours: [req.body.from, req.body.to],
+          // ---
+          dueDate: req.body.dueDate,
+          ownerId: req.body.customer
          //startDate: req.body.startDate,
          // endDate: req.body.endDate,
          // ownerId: req.businessData.id,
         });
-
-      console.log('project',newProject)
+        
         newProject
           .save()
           .then(projectCreated => res.status(201).json(projectCreated))

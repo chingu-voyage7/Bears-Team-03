@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
+  dueDate: {
+    type: String
+  },
   projectName: {
     type: String,
     required: true,
@@ -45,8 +48,8 @@ const projectSchema = new mongoose.Schema({
     default: Date.now,
   },
   ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Business',
+    type: String//mongoose.Schema.Types.ObjectId,
+    //ref: 'Business',
   },
 });
 
