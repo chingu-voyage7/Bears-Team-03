@@ -7,9 +7,11 @@ import RegistrationPage from './RegistrationPage';
 import ProjectPage from './projectForm/ProjectPage';
 import Login from './Login';
 import Navbar from './navbar/Navbar';
+import ProtectedRoute from './ProtectedRoute';
+
 import './App.css';
 
-const App = ({registerUser, loginUser, logoutUser, createProject}) => (
+const App = ({registerUser, loginUser, logoutUser, createProject, auth}) => (
   <Router>
     <>
       <Navbar>
@@ -21,7 +23,7 @@ const App = ({registerUser, loginUser, logoutUser, createProject}) => (
       <Switch>
         <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
-        <Route path="/create-project" render={props => <ProjectPage {...props} publish={createProject} />} />
+        <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
       </Switch>
     </>
   </Router>
