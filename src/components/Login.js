@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import {
+  Button, FormGroup, Label, Input, Col
+} from 'reactstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -16,35 +18,26 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="block-content in span6" style={{ width: '50%', textAlign: 'center' }}>
-        <div className="control-group">
-          <div className="controls">
-            <label>EMAIL</label>
-            <input
-              className="form-control"
-              type="email"
-              style={{ marginRight: '5px' }}
-              placeholder="email"
-              onChange={event => this.setState({ email: event.target.value })}
-            />
-          </div>
-        </div>
-        <br />
-        <div className="controls">
-          <label>PASSWORD</label>
-          <input
-            className="form-control"
+      <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
+        <h2>LOG IN</h2>
+        <FormGroup>
+          <Label>Email</Label>
+          <Input
+            type="email"
+            placeholder="email"
+            onChange={event => this.setState({ email: event.target.value })}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Password</Label>
+          <Input
             type="password"
-            style={{ marginRight: '5px' }}
             placeholder="password"
             onChange={event => this.setState({ password: event.target.value })}
           />
-        </div>
-        <br />
-        <button className="btn btn-primary" type="button" onClick={() => this.signUP()}>
-          SIGN UP
-        </button>
-      </div>
+        </FormGroup>
+        <Button color="primary" block type="button" onClick={() => this.signUP()}>Login</Button>
+      </Col>
     );
   }
 }
