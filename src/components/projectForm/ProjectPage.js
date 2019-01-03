@@ -190,16 +190,21 @@ export default class Example extends React.Component {
                     onChange={this.handleMultipleChange}
                     multiple
                   >
-                    <option>Field one</option>
-                    <option>Field two</option>
-                    <option>Field three</option>
-                    <option>Field four</option>
-                    <option>Field five</option>
-                    <option>Field six</option>
-                    <option>Field seven</option>
-                    <option>Field eight</option>
-                    <option>Field nine</option>
-                    <option>Field ten</option>
+                    <option>poverty</option>
+                    <option>hunger</option>
+                    <option>health</option>
+                    <option>gender</option>
+                    <option>water</option>
+                    <option>energy</option>
+                    <option>work</option>
+                    <option>innovation</option>
+                    <option>inequality</option>
+                    <option>sustainability</option>
+                    <option>climate</option>
+                    <option>oceans</option>
+                    <option>earth</option>
+                    <option>justice</option>
+                    <option>partnership</option>
                   </Input>
                 </Col>
               </Row>

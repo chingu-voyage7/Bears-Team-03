@@ -8,7 +8,8 @@ import ProjectPage from './projectForm/ProjectPage';
 import Login from './Login';
 import Navbar from './navbar/Navbar';
 import ProtectedRoute from './ProtectedRoute';
-import ListItem from './projectListItem/ListItem';
+//import ListItem from './projectListItem/ListItem';
+import Home from './homePage/Home';
 
 import './App.css';
 
@@ -26,11 +27,12 @@ class App extends  React.Component {
           <>
           { auth.isLoggedIn ?
             <Navbar>
+              <NavLink to="/">Home</NavLink>
               <NavLink to="/create-project">Create Project</NavLink>
-              <NavLink to="/list-item">Card</NavLink>
               <button onClick={logoutUser}>Logout</button>
             </Navbar> :
             <Navbar>
+              <NavLink to="/">Home</NavLink>
               <NavLink to="/login">Login</NavLink>
               <NavLink to="/register">Register</NavLink>
             </Navbar>
@@ -39,7 +41,7 @@ class App extends  React.Component {
               <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
               <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
               <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
-              <Route path="/list-item" render={props => <ListItem {...props} />} />
+              <Route exact path="/" render={props => <Home {...props} />} />
             </Switch>
           </>
         </Router>
