@@ -30,12 +30,6 @@
     margin: 0 0.5rem;
 }
 
-.tag.water {
-    background-color: steelblue;
-}
-.tag.poor {
-    background-color: #c0a1c0;
-}
 
 .link-button {
     background-color: transparent;
@@ -45,9 +39,54 @@
     display: inline;
     margin: 0;
     padding: 0;
-  }
-  
-  .link-button:hover,
-  .link-button:focus {
-  text-decoration: none;
-  }
+}
+
+.link-button:hover,
+.link-button:focus {
+    text-decoration: none;
+}
+.tag.poverty {
+    background-color: #c0a1c0;
+}
+.tag.hunger {
+    background-color: #e4d26c;
+}
+.tag.health {
+    background-color: #24b46c;
+}
+.tag.gender {
+    background-color: #c139d3;
+}
+.tag.water {
+    background-color: steelblue;
+}
+.tag.energy {
+    background-color: #1b37d8;
+}
+.tag.work {
+    background-color: #eb675e;
+}
+.tag.innovation {
+    background-color: #348667;
+}
+.tag.inequality {
+    background-color: #e45d1e;
+}
+.tag.sustainability {
+    background-color: #728616;
+}
+.tag.climate {
+    background-color: #40a58f;
+}
+.tag.oceans {
+    background-color: #174cc0;
+}
+.tag.earth {
+    background-color: #7e3105;
+}
+.tag.justice {
+    background-color: #161515;
+}
+.tag.partnership {
+    background-color: #7913a1;
+}

@@ -1,36 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, CardText, CardBody, CardFooter } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import './listItem.css';
-class ListItem extends Component {
-  render() {
-    return (
+//class ListItem extends Component {
+//  render() {
+//    return (
+  const ListItem = ({prj}) => (
         <Card className="card-item" >
         <CardBody>
           <div className="flex-container">
-            <span className="card-title" >MY SUPER PROJECT</span>
-            <span className="card-title-details">Birmingham, Midlands - UK -</span>
+            <span className="card-title" >{prj.projectName}</span>
+            <span className="card-title-details">
+            {`${prj.projectLocationAddress} - ${prj.projectLocationCountry} - `}
+            </span>
           </div>
           <hr/>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-          </CardText>
+          <CardText>{prj.projectDescription}</CardText>
         </CardBody>
         <CardFooter className="flex-container footer">
         <div className="flex-container">
-            <button className="link-button">BigBawsCompany</button>
+            <button className="link-button">{prj.ownerId}</button>
             </div>
             <div className="flex-container">
-              <div className="tag poor">Poor</div>
-              <div className="tag water">Water</div>
+              {prj.workFields.map((tag, i) => <div key={i} className={`tag ${tag}`}>{tag}</div>)}
             </div>
             <div className="flex-container">
-              <time>03/05/2018</time>
+              <time>{prj.dueDate}</time>
             </div>
         </CardFooter>
       </Card>
     )
-  }
+//  }
+//}
+
+ListItem.propTypes = {
+  prj: PropTypes.shape({
+    projectName: PropTypes.string.isRequired,
+    projectDescription: PropTypes.string.isRequired,
+    projectLocationAddress: PropTypes.string,
+    projectLocationCountry: PropTypes.string,
+    dueDate: PropTypes.instanceOf(Date),
+    workFields: PropTypes.arrayOf(String),
+    ownerId: PropTypes.string
+  })
 }
 
 export default ListItem;
