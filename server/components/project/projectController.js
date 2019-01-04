@@ -11,19 +11,6 @@ exports.projectCreateOne = (req, res) => {
         });
       } else {
         const newProject = new Project({
-          /* projectName: req.body.projectName,
-          projectDescription: req.body.projectDescription,
-          applicationRequirements: req.body.applicationRequirements,
-          projectLocationAddress: req.body.projectLocationAddress,
-          projectLocationCountry: req.body.projectLocationCountry,
-          email: req.body.email,
-          phoneContact: req.body.phoneContact,
-          workFields: req.body.workFields,
-          workingHours: req.body.workingHours,
-          startDate: req.body.startDate,
-          endDate: req.body.endDate,
-          ownerId: req.businessData.id, */
-          // ---
           projectName: req.body.name,
           projectDescription: req.body.description,
           applicationRequirements: req.body.applicationRequirements,
@@ -33,12 +20,9 @@ exports.projectCreateOne = (req, res) => {
           phoneContact: req.body.phone,
           workFields: req.body.involvedFields,
           workingHours: [req.body.from, req.body.to],
-          // ---
-          dueDate: req.body.dueDate,
+          startDate: req.body.startDate,
+          endDate: req.body.endDate,
           ownerId: req.body.customer
-         //startDate: req.body.startDate,
-         // endDate: req.body.endDate,
-         // ownerId: req.businessData.id,
         });
         
         newProject

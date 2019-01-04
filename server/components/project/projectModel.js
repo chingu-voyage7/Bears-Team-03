@@ -14,8 +14,7 @@ const projectSchema = new mongoose.Schema({
     required: true,
   },
   applicationRequirements: {
-    type: String,
-   // required: true,
+    type: String
   },
   projectLocationAddress: {
     type: String,
@@ -48,8 +47,7 @@ const projectSchema = new mongoose.Schema({
     default: Date.now,
   },
   ownerId: {
-    type: String//mongoose.Schema.Types.ObjectId,
-    //ref: 'Business',
+    type: String
   },
 });
 
