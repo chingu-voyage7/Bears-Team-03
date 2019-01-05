@@ -25,43 +25,41 @@ class Navigation extends Component {
   render() {
     let { isLoggedIn } = this.props.auth;
     return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Volunteer Manager App</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/projects">Search</NavLink>
-              </NavItem>
-              {
-                isLoggedIn ? (
+      <Navbar color="light" light expand="md" className="fixed-top">
+        <NavbarBrand href="/">Volunteer Manager App</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink to="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/projects">Search</NavLink>
+            </NavItem>
+            {
+              isLoggedIn ? (
+                <>
+                  <NavItem>
+                    <Button color="primary" tag={Link} to="/create-project">Create project</Button>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink>Logout</NavLink>
+                  </NavItem>
+                </>
+              ) : (
                   <>
                     <NavItem>
-                      <Button color="primary" tag={Link} to="/create-project">Create project</Button>
+                      <NavLink activeClassName='active' tag={RRNavLink} to="/register">Register</NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink>Logout</NavLink>
+                      <Button color="primary" tag={Link} to="/login">Login</Button>
                     </NavItem>
                   </>
-                ) : (
-                    <>
-                      <NavItem>
-                        <NavLink activeClassName='active' tag={RRNavLink} to="/register">Register</NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <Button color="primary" tag={Link} to="/login">Login</Button>
-                      </NavItem>
-                    </>
-                  )
-              }
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+                )
+            }
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }
