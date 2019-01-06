@@ -8,6 +8,7 @@ import ProjectPage from './projectForm/ProjectPage';
 import Login from './Login';
 import Navigation from './navbar/Navbar';
 import ProtectedRoute from './ProtectedRoute';
+import Home from './Home';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ const App = ({ registerUser, loginUser, logoutUser, createProject, auth }) => (
     <>
       <Navigation auth={auth} />
       <Switch>
+        <Route exact path="/" component={Home} />
         <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
         <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
