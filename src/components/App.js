@@ -20,6 +20,7 @@ const App = ({ registerUser, loginUser, logoutUser, createProject, auth }) => (
         <Route exact path="/" component={Home} />
         <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
+        {/* <Route path="/projects" render={props => <ProjectsPage {...props} search={searchByName} />} /> */}
         <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
       </Switch>
     </>
