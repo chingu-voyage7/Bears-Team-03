@@ -15,32 +15,18 @@ class Home extends Component {
     }
 
     fetchProjects = () => {
-      this.props.fetchPrjs()
+      this.props.fetchProjects()
       .then(() => this.setState({
         prjs: this.props.prjs.projects
       }))
       .catch(err => console.log(err));
     }
 
-    editProject = prj => {
-      this.props.history.push({
-        pathname:'/edit-project',
-        prj
-      });
-    }
-
-    deleteProject = prjId => {
-      this.props.erase(prjId)
-        .then(() => {
-          console.log(this.props.deleteStatus)
-        })
-    }
-
   render() {
     return (
       <div>
         <ul>
-          {this.state.prjs.map(prj => <ListItem key={prj._id} prj={prj} />
+          {this.state.prjs.map(prj => <ListItem key={prj._id} prj={prj} editPrj={this.props.editProject} deletePrj={this.props.deleteProject} />
           )}
         </ul>
       </div>

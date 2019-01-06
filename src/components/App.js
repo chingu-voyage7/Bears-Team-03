@@ -13,8 +13,20 @@ import Search from './Search';
 
 import './App.css';
 
-const App = ({registerUser, loginUser, logoutUser, createProject, auth}) => (
-  <Router>
+  class App extends React.Component {
+
+
+  componentDidMount() {
+    const token = localStorage.getItem('accessToken');
+    if(token) {
+      this.props.verifyUser(token);
+    }
+  }
+
+  render() {
+    
+    const {registerUser, loginUser, logoutUser, auth, fetchProjects, createProject, editProject, deleteProject, projects} = this.props;
+    return (<Router>
     <>
       <Navbar>
         <NavLink to="/login">Login</NavLink>
@@ -25,13 +37,15 @@ const App = ({registerUser, loginUser, logoutUser, createProject, auth}) => (
       </Navbar>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
+        <Route path="/login" render={props => <Login {...props} login={loginUser} auth={auth}/>} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
-        <Route exact path="/search" component={Search} />
+        <Route exact path="/search" render={props => <Search {...props} fetchProjects={fetchProjects} editProject={editProject} deleteProject={deleteProject} prjs={projects} />} />
         <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
       </Switch>
     </>
   </Router>
-);
+  )
+    }
+};
 
 export default App;

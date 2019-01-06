@@ -37,6 +37,7 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
   };
   
   export const editProjectAction = (projectData, history) => (dispatch) => {
+    console.log('editing');
     dispatch({ type: createProject.REQUEST });
     const fetchOptions = {
       method: 'PATCH',
