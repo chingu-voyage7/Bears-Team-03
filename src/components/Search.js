@@ -14,6 +14,12 @@ class Home extends Component {
         this.fetchProjects();
     }
 
+    componentDidUpdate(prevProps) {
+      if(this.props.deleteStatus !== prevProps.deleteStatus) {
+        this.fetchProjects();   // should be enough to slice the state^^
+      }
+    }
+
     fetchProjects = () => {
       this.props.fetchProjects()
       .then(() => this.setState({
@@ -22,11 +28,15 @@ class Home extends Component {
       .catch(err => console.log(err));
     }
 
+    editProject = (prj) => {
+      this.props.history.push('/edit-project', { prj });
+    }
+
   render() {
     return (
       <div>
         <ul>
-          {this.state.prjs.map(prj => <ListItem key={prj._id} prj={prj} editPrj={this.props.editProject} deletePrj={this.props.deleteProject} />
+          {this.state.prjs.map(prj => <ListItem key={prj._id} prj={prj} editPrj={this.editProject} deletePrj={this.props.deleteProject} />
           )}
         </ul>
       </div>

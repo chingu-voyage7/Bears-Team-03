@@ -25,7 +25,7 @@ import './App.css';
 
   render() {
     
-    const {registerUser, loginUser, logoutUser, auth, fetchProjects, createProject, editProject, deleteProject, projects} = this.props;
+    const {registerUser, loginUser, logoutUser, auth, fetchProjects, createProject, editProject, deleteProject, deleteStatus, projects} = this.props;
     return (<Router>
     <>
       <Navbar>
@@ -39,8 +39,9 @@ import './App.css';
         <Route exact path="/" component={Home} />
         <Route path="/login" render={props => <Login {...props} login={loginUser} auth={auth}/>} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
-        <Route exact path="/search" render={props => <Search {...props} fetchProjects={fetchProjects} editProject={editProject} deleteProject={deleteProject} prjs={projects} />} />
+        <Route exact path="/search" render={props => <Search {...props} fetchProjects={fetchProjects} editProject={editProject} deleteProject={deleteProject} prjs={projects} deleteStatus={deleteStatus} />} />
         <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
+        <ProtectedRoute path="/edit-project" component={ProjectPage} edit={editProject} auth={auth} />
       </Switch>
     </>
   </Router>

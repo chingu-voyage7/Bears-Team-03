@@ -29,8 +29,8 @@ export default class Example extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.location.prj) {
-      const {prj} = this.props.location;
+    if (this.props.location.state && this.props.location.state.prj) {
+      const {prj} = this.props.location.state;
 
       let prjTimeSpan = [];
       let startDate, endDate;

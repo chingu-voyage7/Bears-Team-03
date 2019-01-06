@@ -52,7 +52,7 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
           dispatch({ type: createProject.FAILURE, payload: project.fail });
         } else {
           dispatch({ type: createProject.SUCCESS, payload: project });
-          history.push('/');
+          history.push('/search');
         }
       })
       .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
