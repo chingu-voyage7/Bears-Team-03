@@ -38,13 +38,14 @@ const projectSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  workDays: {
+    type: [String]
+  },
   startDate: {
     type: Date,
-    default: Date.now,
   },
   endDate: {
     type: Date,
-    default: Date.now,
   },
   ownerId: {
     type: String

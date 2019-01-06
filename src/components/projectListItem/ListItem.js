@@ -6,7 +6,7 @@ import './listItem.css';
 //class ListItem extends Component {
 //  render() {
 //    return (
-  const ListItem = ({prj}) => (
+  const ListItem = ({prj, editPrj, deletePrj}) => (
         <Card className="card-item" >
         <CardBody>
           <div className="flex-container">
@@ -14,6 +14,8 @@ import './listItem.css';
             <span className="card-title-details">
             {`${prj.projectLocationAddress} - ${prj.projectLocationCountry} - `}
             </span>
+            <button onClick={() => editPrj(prj)}>edit</button>
+            <button onClick={() => deletePrj(prj._id)}>delete</button>
           </div>
           <hr/>
           <CardText>{prj.projectDescription}</CardText>
@@ -40,10 +42,11 @@ ListItem.propTypes = {
     projectDescription: PropTypes.string.isRequired,
     projectLocationAddress: PropTypes.string,
     projectLocationCountry: PropTypes.string,
-    dueDate: PropTypes.instanceOf(Date),
+    dueDate: PropTypes.string,
     workFields: PropTypes.arrayOf(String),
     ownerId: PropTypes.string
-  })
+  }),
+  editPrj: PropTypes.func.isRequired
 }
 
 export default ListItem;

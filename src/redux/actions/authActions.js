@@ -8,7 +8,7 @@ export const loginAction = loginData => (dispatch) => {
     body: JSON.stringify(loginData),
   };
 
-  fetch('/login', fetchOptions)
+  return fetch('/login', fetchOptions)
     .then(res => res.json())
     .then((authData) => {
       if (authData.fail) {
@@ -29,7 +29,7 @@ export const verifyAction = token => (dispatch) => {
     body: JSON.stringify({token}),
   };
 
-  fetch('/verify-token', fetchOptions)
+  return fetch('/verify-token', fetchOptions)
     .then(res => res.json())
     .then((authData) => {
       if (authData.fail) {

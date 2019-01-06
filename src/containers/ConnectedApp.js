@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {fetchUsersAction, registerUserAction} from '../redux/actions/userActions';
 import { loginAction, verifyAction, logoutAction } from '../redux/actions/authActions';
 
-import { createProjectAction } from '../redux/actions/projectActions';
+import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction } from '../redux/actions/projectActions';
 
 import App from '../components/App';
 
@@ -17,8 +17,10 @@ import App from '../components/App';
 
 const mapStateToProps = state => ({
   users: state.users,
+  projects: state.projects,
   errors: state.errorState,
   auth: state.authState,
+  deleteStatus: state.deleteProjectStatus
 });
 /*
   This method is used to link the action creators to specific
@@ -30,7 +32,10 @@ const mapDispatchToProps = dispatch => ({
   loginUser: loginData => dispatch(loginAction(loginData)),
   verifyUser: token => dispatch(verifyAction(token)),
   logoutUser: () => dispatch(logoutAction()),
-  createProject: projectData => dispatch(createProjectAction(projectData))
+  fetchProjects: () => dispatch(fetchProjectsAction()),
+  createProject: (projectData, history) => dispatch(createProjectAction(projectData, history)),
+  editProject: (projectData, history) => dispatch(editProjectAction(projectData, history)),
+  deleteProject: prjId =>  dispatch(deleteProjectAction(prjId))
 });
 
 /*

@@ -9,7 +9,7 @@ export default class Example extends React.Component {
     super(props);
     this.state = {
       name: '',
-      customer: '',
+      ownerId: 'myCompany', // The first option of ownerId select
       dueDate: '',
       startDate: '',
       endDate: '',
@@ -23,8 +23,46 @@ export default class Example extends React.Component {
       phone:'',
       workDays: [],
       projectTimespan: [],
-      applicationRequirements: ''
+      applicationRequirements: '',
+      id: null
     };
+  }
+
+  componentDidMount() {
+    if (this.props.location.prj) {
+      const {prj} = this.props.location;
+
+      let prjTimeSpan = [];
+      let startDate, endDate;
+      if (prj.startDate) {
+        prjTimeSpan.push('start');
+        startDate = prj.startDate.split('T')[0]
+      }
+      if (prj.endDate) {
+        prjTimeSpan.push('end');
+        endDate = prj.endDate.split('T')[0]
+      }
+      
+      this.setState({
+        name: prj.projectName || '',
+        ownerId: prj.ownerId || '',
+        dueDate: prj.dueDate || '',
+        projectTimespan: prjTimeSpan || '',
+        startDate: startDate || '',
+        endDate: endDate || '',
+        from: prj.workingHours[0] || '',
+        to: prj.workingHours[1] || '',
+        description: prj.projectDescription || '',
+        workFields: prj.workFields || '',
+        address: prj.projectLocationAddress || '',
+        country: prj.projectLocationCountry || '',
+        email: prj.email || '',
+        phone:prj.phoneContact || '',
+        workDays: prj.workDays || '',
+        applicationRequirements: prj.applicationRequirements || '',
+        id: prj._id || ''
+      });
+    }
   }
 
   handleSubmit = (e) => {
@@ -32,7 +70,10 @@ export default class Example extends React.Component {
     // eslint-disable-next-line no-console
     const projectData = {...this.state};
     delete projectData.projectTimespan;
-    this.props.publish(projectData);
+    
+    this.state.id ?
+    this.props.edit(projectData, this.props.history) :
+    this.props.publish(projectData, this.props.history) ;
   }
 
   handleChange = (e) => {
@@ -70,7 +111,7 @@ export default class Example extends React.Component {
 
   render() {
     const {
-      name, customer, dueDate, from, to, description, involvedFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
+      name, ownerId, dueDate, from, to, description, workFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
@@ -83,6 +124,7 @@ export default class Example extends React.Component {
                   <Label for="dueDate">Due date ( announce )</Label>
                   <Input
                     type="date"
+                    name="dueDate"
                     id="dueDate"
                     value={dueDate}
                     onChange={this.handleChange}
@@ -91,12 +133,12 @@ export default class Example extends React.Component {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="customer">Customer</Label>
+                  <Label for="ownerId">ownerId</Label>
                   <Input
                     type="select"
-                    name="customer"
-                    id="customer"
-                    value={customer}
+                    name="ownerId"
+                    id="ownerId"
+                    value={ownerId}
                     onChange={this.handleChange}
                   >
                     <option>myCompany</option>
@@ -181,12 +223,12 @@ export default class Example extends React.Component {
                   />
                 </Col>
                 <Col md={6}>
-                  <Label for="involvedFields">Involved Fields</Label>
+                  <Label for="workFields">Involved Fields</Label>
                   <Input
                     type="select"
-                    name="involvedFields"
-                    id="involvedFields"
-                    value={involvedFields}
+                    name="workFields"
+                    id="workFields"
+                    value={workFields}
                     onChange={this.handleMultipleChange}
                     multiple
                   >
@@ -377,7 +419,7 @@ export default class Example extends React.Component {
               type="submit"
               block
             >
-              Publish the announce
+              {this.state.id ? 'Edit the announce' : 'Publish the announce'}
             </Button>
           </Form>
         </Container>
