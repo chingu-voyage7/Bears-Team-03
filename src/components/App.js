@@ -15,7 +15,7 @@ import './App.css';
 const App = ({ registerUser, loginUser, logoutUser, createProject, auth }) => (
   <Router>
     <>
-      <Navigation auth={auth} />
+      <Navigation auth={auth} logout={logoutUser} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" render={props => <Login {...props} login={loginUser} />} />

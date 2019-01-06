@@ -26,15 +26,15 @@ class Navigation extends Component {
     let { isLoggedIn } = this.props.auth;
     return (
       <Navbar color="light" light expand="md" className="fixed-top">
-        <NavbarBrand href="/">Volunteer Manager App</NavbarBrand>
+        <NavbarBrand tag={RRNavLink} to="/">Volunteer Manager App</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink to="/">Home</NavLink>
+              <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/projects">Search</NavLink>
+              <NavLink href="#">Search</NavLink>
             </NavItem>
             {
               isLoggedIn ? (
@@ -43,13 +43,13 @@ class Navigation extends Component {
                     <Button color="primary" tag={Link} to="/create-project">Create project</Button>
                   </NavItem>
                   <NavItem>
-                    <NavLink>Logout</NavLink>
+                    <NavLink onClick={this.props.logout}>Logout</NavLink>
                   </NavItem>
                 </>
               ) : (
                   <>
                     <NavItem>
-                      <NavLink activeClassName='active' tag={RRNavLink} to="/register">Register</NavLink>
+                      <NavLink activeClassName='active' tag={Link} to="/register">Register</NavLink>
                     </NavItem>
                     <NavItem>
                       <Button color="primary" tag={Link} to="/login">Login</Button>
