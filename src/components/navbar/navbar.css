@@ -1,13 +1,11 @@
-nav {
-    background-color: lawngreen;
-    padding: 0.5rem;
+.active {
+    /* background-color: rgba(0, 0,0,0.1);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 1px #2b2b2b; */
 }
 
-ul {
-    margin: 0;
-}
-
-li {
-    display: inline;
-    padding: 0 1rem;
+.nav-link {
+    margin-right: 30px;
 }
