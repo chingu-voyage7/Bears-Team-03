@@ -1,8 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-
-
 import {
   Button,
   Container,
@@ -29,7 +25,6 @@ class RegistrationPage extends React.Component {
         fullname: '',
         email: '',
         password: '',
-        adult: '',
         gender: '',
         streetAddress: '',
         city: '',
@@ -44,18 +39,6 @@ class RegistrationPage extends React.Component {
       validate: {
         email: '',
         password: '',
-        fullname: '',
-        adult: '',
-        gender: '',
-        streetAddress: '',
-        city: '',
-        stateOrProvince: '',
-        zipCode: '',
-        country: '',
-        phone: '',
-        volunteerField: '',
-        days: '',
-        hours: '',
       },
     };
   }
@@ -86,17 +69,6 @@ class RegistrationPage extends React.Component {
         [name]: value,
       },
     });
-  }
-
-  validateRequired(event) {
-    const { name } = event.target;
-    const { validate, user } = this.state;
-    if (user[name].length > 0) {
-      validate[name] = 'has-success';
-    } else {
-      validate[name] = 'has-danger';
-    }
-    this.setState({ validate });
   }
 
   // A lot of ideas and implementations came from here:
@@ -163,11 +135,7 @@ class RegistrationPage extends React.Component {
               id="fullname"
               placeholder="Example Joe"
               value={user.fullname}
-              invalid={validate.fullname === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your full name.</FormFeedback>
           </FormGroup>
@@ -192,7 +160,12 @@ class RegistrationPage extends React.Component {
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>
-            <Input type="select" name="gender" value={user.gender} onChange={this.handleChange}>
+            <Input
+              type="select"
+              name="gender"
+              value={user.gender}
+              onChange={this.handleChange}
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -207,11 +180,7 @@ class RegistrationPage extends React.Component {
               label="Address"
               placeholder="123 Main Street"
               value={user.streetAddress}
-              invalid={validate.streetAddress === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your address.</FormFeedback>
           </FormGroup>
@@ -223,11 +192,7 @@ class RegistrationPage extends React.Component {
               label="City"
               placeholder="ExampleCity"
               value={user.city}
-              invalid={validate.city === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your city.</FormFeedback>
           </FormGroup>
@@ -239,11 +204,7 @@ class RegistrationPage extends React.Component {
               label="State or Province"
               placeholder="exampleState"
               value={user.stateOrProvince}
-              invalid={validate.stateOrProvince === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your state.</FormFeedback>
           </FormGroup>
@@ -255,11 +216,7 @@ class RegistrationPage extends React.Component {
               label="Zip Code"
               placeholder="exampleZIP"
               value={user.zipCode}
-              invalid={validate.zipCode === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your ZIP code.</FormFeedback>
           </FormGroup>
@@ -271,11 +228,7 @@ class RegistrationPage extends React.Component {
               label="Country"
               placeholder="exampleCountry"
               value={user.country}
-              invalid={validate.country === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your country.</FormFeedback>
           </FormGroup>
@@ -287,11 +240,7 @@ class RegistrationPage extends React.Component {
               label="Phone Number"
               placeholder="+36-20-233-7788"
               value={user.phone}
-              invalid={validate.phone === 'has-danger'}
-              onChange={(e) => {
-                this.validateRequired(e);
-                this.handleChange(e);
-              }}
+              onChange={this.handleChange}
             />
             <FormFeedback>Please input your phone number.</FormFeedback>
           </FormGroup>
@@ -347,14 +296,24 @@ class RegistrationPage extends React.Component {
             <Col md={6}>
               <FormGroup>
                 <Label for="hours">Start Time:</Label>
-                <Input type="time" name="hours" value={user.hours} onChange={this.handleChange} />
+                <Input
+                  type="time"
+                  name="hours"
+                  value={user.hours}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
               <FormFeedback>Please input a valid start time.</FormFeedback>
             </Col>
             <Col md={6}>
               <FormGroup>
                 <Label for="hours">End Time:</Label>
-                <Input type="time" name="hours" value={user.hours} onChange={this.handleChange} />
+                <Input
+                  type="time"
+                  name="hours"
+                  value={user.hours}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
               <FormFeedback>Please input a valid end time.</FormFeedback>
             </Col>
@@ -364,24 +323,21 @@ class RegistrationPage extends React.Component {
               <Input
                 type="checkbox"
                 value={user.adult}
-                invalid={validate.streetAddress === 'has-danger'}
-                onChange={(e) => {
-                  this.validateRequired(e);
-                  this.handleChange(e);
-                }}
               />
-{' '}
+              {' '}
               I am an adult
             </Label>
             <FormFeedback>You need to be an adult to use our service.</FormFeedback>
           </FormGroup>
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" value={user.adult} onChange={this.handleChange} />
-{' '}
-I agree to
-              the Terms of Service
-</Label>
+              <Input
+                type="checkbox"
+                value={user.adult}
+              />
+              {' '}
+              I agree to the Terms of Service
+            </Label>
             <FormFeedback>You need to accept our Terms of Service to use our service.</FormFeedback>
           </FormGroup>
           <Button color="primary">Sign Up</Button>
@@ -391,10 +347,4 @@ I agree to
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    registering: state.registration,
-  };
-}
-
-export default connect(mapStateToProps)(RegistrationPage);
+export default RegistrationPage;
