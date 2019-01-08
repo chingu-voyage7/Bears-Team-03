@@ -13,7 +13,13 @@ class Login extends Component {
   }
 
   signUP() {
-    this.props.login(this.state);
+    this.props.login(this.state)
+      .then(() => {
+        if(this.props.auth.isLoggedIn) {
+          this.props.history.push('/')
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
