@@ -18,7 +18,7 @@ app.use('/business', businessRoutes);
 app.use('/project', projectRoutes);
 app.use(authRoutes);
 // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // // Main route for testing purpose
 // app.get('/', (req, res) => {
@@ -26,8 +26,8 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 // });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('/', function (request, response) {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 module.exports = app;
