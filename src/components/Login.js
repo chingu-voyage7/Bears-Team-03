@@ -11,7 +11,7 @@ class Login extends Component {
       password: '',
     };
   }
-
+  
   handleChange = e => {
     this.setState({
       [e.target.id]:e.target.value
@@ -19,8 +19,15 @@ class Login extends Component {
   };
 
   signIn = () => {
-    this.props.login(this.state);
+    this.props.login(this.state)
+    .then(() => {
+        if(this.props.auth.isLoggedIn) {
+          this.props.history.push('/')
+        }
+      })
+      .catch(err => console.log(err));
   };
+
 
   render() {
     const {email, password } = this.state;
