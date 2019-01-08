@@ -1,3 +1,4 @@
+
 import { fetchProjects, createProject, deleteProject } from '../types';
 
 /*
@@ -18,14 +19,14 @@ export const fetchProjectsReducer = (state ={error: null, isPending: false, proj
   }
 };
 
-export const createProjectReducer = (state = {error:null, isPending: false}, action) => {
+export const createProjectReducer = (state = {isPending: false}, action) => {
   switch (action.type) {
     case createProject.REQUEST:
       return {...state, error: null, isPending: true};
     case createProject.SUCCESS:
         return {...state, isPending: false, newProject: action.payload};
     case createProject.FAILURE:
-        return {...state, isPending: false, error: action.payload};
+        return {...state, isPending: false, action.payload};
     default:
       return state;
   }

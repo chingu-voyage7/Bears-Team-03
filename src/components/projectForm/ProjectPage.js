@@ -4,7 +4,8 @@ import {
 } from 'reactstrap';
 
 import './projectPage.css';
-export default class Example extends React.Component {
+
+export default class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,6 +75,7 @@ export default class Example extends React.Component {
     this.state.id ?
     this.props.edit(projectData, this.props.history) :
     this.props.publish(projectData, this.props.history) ;
+
   }
 
   handleChange = (e) => {
@@ -110,9 +112,11 @@ export default class Example extends React.Component {
   }
 
   render() {
+    const {validationErrors } = this.props.prjStatus;
     const {
       name, ownerId, dueDate, from, to, description, workFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
+    
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
         <h2>CREATE A NEW PROJECT</h2>
@@ -129,6 +133,8 @@ export default class Example extends React.Component {
                     value={dueDate}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.dueDate &&
+          <FormText color="danger">{validationErrors.dueDate.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -144,6 +150,8 @@ export default class Example extends React.Component {
                     <option>myCompany</option>
                     <option>myOtherCompany</option>
                   </Input>
+                  {validationErrors && validationErrors.customer &&
+          <FormText color="danger">{validationErrors.customer.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
             </Row>
@@ -205,6 +213,8 @@ export default class Example extends React.Component {
                 value={name}
                 onChange={this.handleChange}
               />
+              {validationErrors && validationErrors.name &&
+          <FormText color="danger">{validationErrors.name.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
             </FormGroup>
             <FormGroup>
               <Row>
@@ -221,6 +231,8 @@ export default class Example extends React.Component {
                     value={description}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.description &&
+          <FormText color="danger">{validationErrors.description.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </Col>
                 <Col md={6}>
                   <Label for="workFields">Involved Fields</Label>
@@ -248,6 +260,8 @@ export default class Example extends React.Component {
                     <option>justice</option>
                     <option>partnership</option>
                   </Input>
+                  {validationErrors && validationErrors.involvedFields &&
+          <FormText color="danger">{validationErrors.involvedFields.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </Col>
               </Row>
             </FormGroup>
@@ -261,6 +275,8 @@ export default class Example extends React.Component {
                     value={address}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.address &&
+          <FormText color="danger">{validationErrors.address.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
               <Col md={4}>
@@ -272,6 +288,8 @@ export default class Example extends React.Component {
                     value={country}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.country &&
+                    <FormText color="danger">{validationErrors.country.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
             </Row>
@@ -349,6 +367,8 @@ export default class Example extends React.Component {
                     />
                 sunday
                   </Label>
+                  {validationErrors && validationErrors.workDays &&
+          <FormText color="danger">{validationErrors.workDays.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
               <Col md={3} sm={6}>
@@ -360,6 +380,8 @@ export default class Example extends React.Component {
                     value={from}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.from &&
+          <FormText color="danger">{validationErrors.from.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
               <Col md={3} sm={6}>
@@ -371,6 +393,8 @@ export default class Example extends React.Component {
                     value={to}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.to &&
+          <FormText color="danger">{validationErrors.to.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
             </Row>
@@ -396,6 +420,8 @@ export default class Example extends React.Component {
                     value={email}
                     onChange={this.handleChange}
                   />
+                  {validationErrors && validationErrors.email &&
+          <FormText color="danger">{validationErrors.email.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
               <Col md={4}>
@@ -411,6 +437,8 @@ export default class Example extends React.Component {
                   <FormText color="muted">
                   Insert number only
                   </FormText>
+                  {validationErrors && validationErrors.phone &&
+          <FormText color="danger">{validationErrors.phone.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                 </FormGroup>
               </Col>
             </Row>
