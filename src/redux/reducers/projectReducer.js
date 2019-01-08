@@ -26,7 +26,7 @@ export const createProjectReducer = (state = {isPending: false}, action) => {
     case createProject.SUCCESS:
         return {...state, isPending: false, newProject: action.payload};
     case createProject.FAILURE:
-        return {...state, isPending: false, action.payload};
+        return {...state, isPending: false, ...action.payload};
     default:
       return state;
   }

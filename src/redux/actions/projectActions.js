@@ -16,7 +16,7 @@ export const fetchProjectsAction = () => (dispatch) => {
 
 export const createProjectAction = (projectData, history) => (dispatch) => {
     dispatch({ type: createProject.REQUEST });
-  
+    console.log(projectData);
     const fetchOptions = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
@@ -30,14 +30,13 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
           dispatch({ type: createProject.FAILURE, payload: project.fail });
         } else {
           dispatch({ type: createProject.SUCCESS, payload: project });
-          history.push('/');
+          history.push('/search');
         }
       })
       .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
   };
   
   export const editProjectAction = (projectData, history) => (dispatch) => {
-    console.log('editing');
     dispatch({ type: createProject.REQUEST });
     const fetchOptions = {
       method: 'PATCH',

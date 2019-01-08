@@ -17,7 +17,7 @@ export default class ProjectPage extends React.Component {
       from: '',
       to: '',
       description: '',
-      involvedFields: [],
+      workFields: [],
       address: '',
       country: '',
       email: '',
@@ -61,7 +61,7 @@ export default class ProjectPage extends React.Component {
         phone:prj.phoneContact || '',
         workDays: prj.workDays || '',
         applicationRequirements: prj.applicationRequirements || '',
-        id: prj._id || ''
+        id: prj._id || null
       });
     }
   }

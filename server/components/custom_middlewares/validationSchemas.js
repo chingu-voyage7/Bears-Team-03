@@ -55,16 +55,16 @@ exports.registerSchema = Joi.object({
                         )
                         .required(),
   days: Joi.array().min(1).items(
-                          Joi.string().valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' )
+                          Joi.string().valid('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' )
                         ),
   //hours: Joi.array().min(1).items(Joi.string().regex(/[:\d]+/) )
-  hours:Joi.string().regex(/[:\d]+/) 
+  hours:Joi.string().regex(/[:\d]+/)
 });
 
 exports.createProjectSchema = Joi.object({
   dueDate: Joi.string()
               .trim(),
-  customer: Joi.string()
+  ownerId: Joi.string()
                   .trim(),
   name: Joi.string()
               .trim()
@@ -73,7 +73,7 @@ exports.createProjectSchema = Joi.object({
   description: Joi.string()
                     .trim()
                     .max(200),
-  involvedFields: Joi.array().min(1).items(Joi.string()),
+  workFields: Joi.array().min(1).items(Joi.string()),
   address: Joi.string()
                 .trim()
                 .allow('')
@@ -83,7 +83,7 @@ exports.createProjectSchema = Joi.object({
                 .allow('')
                 .min(2),
   workDays: Joi.array().min(1).items(
-                  Joi.string().valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' )
+    Joi.string().valid('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun' )
                 ),
   from: Joi.string()
             .trim()
@@ -99,4 +99,8 @@ exports.createProjectSchema = Joi.object({
           .trim()
           .email()
           .required(),
+  startDate:Joi.string().trim().allow(''),
+  endDate:Joi.string().trim().allow(''),
+  applicationRequirements:Joi.string().trim(),
+  id:Joi.string().trim().allow(null).optional()
 })

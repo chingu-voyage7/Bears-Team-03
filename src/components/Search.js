@@ -41,7 +41,7 @@ class Search extends Component {
     }
 
   render() {
-    const { editProject, deleteProject} = this.props;
+    const { deleteProject} = this.props;
     const { prjFilter, prjs} = this.state;
     let pattern = new RegExp(prjFilter, 'i');
     let visibleProjects = prjs.filter(prj => pattern.test(prj.projectName));
@@ -59,7 +59,7 @@ class Search extends Component {
                             onChange={this.filterProjects}
                         />
                 <hr/>
-                <List editProject={editProject} deleteProject={deleteProject} prjs={visibleProjects} />
+                <List editProject={this.editProject} deleteProject={deleteProject} prjs={visibleProjects} />
                 </Col>
             </Row>
         </Container>

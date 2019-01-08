@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
 import { fetchUsersReducer, registerUserReducer } from './userReducers';
-import { createProjectReducer } from './projectReducer';
 import { fetchProjectsReducer, createProjectReducer, deleteProjectReducer } from './projectReducer';
 
 

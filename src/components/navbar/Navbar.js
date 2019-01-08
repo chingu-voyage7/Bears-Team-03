@@ -34,8 +34,7 @@ class Navigation extends Component {
               <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Search</NavLink>
-              {/* <NavLink tag={Link} to="/projects">Search</NavLink> */}
+              <NavLink tag={Link} to="/search">Search</NavLink>
             </NavItem>
             {
               isLoggedIn ? (
@@ -50,7 +49,6 @@ class Navigation extends Component {
               ) : (
                   <>
                     <NavItem>
-                      {/* <NavLink activeClassName='active' tag={Link} to="/register">Register</NavLink> */}
                       <NavLink tag={Link} to="/register">Register</NavLink>
                     </NavItem>
                     <NavItem>
