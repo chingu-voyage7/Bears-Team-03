@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, NavLink
+  BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 
 import RegistrationPage from './RegistrationPage';
 import ProjectPage from './projectForm/ProjectPage';
 import Login from './Login';
-import Navbar from './navbar/Navbar';
+import Navigation from './navbar/Navbar';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import Search from './Search';
 
 import './App.css';
 
-  class App extends React.Component {
+ class App extends React.Component {
 
 
   componentDidMount() {
@@ -28,18 +28,15 @@ import './App.css';
     const {registerUser, loginUser, logoutUser, auth, fetchProjects, createProject, editProject, deleteProject, deleteStatus, projects} = this.props;
     return (<Router>
     <>
-      <Navbar>
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/register">Register</NavLink>
-        <NavLink to="/create-project">Create Project</NavLink>
-        <NavLink to="/search">Search</NavLink>
-        <button onClick={logoutUser}>Logout</button>
-      </Navbar>
+      <Navigation auth={auth} logout={logoutUser} />
+
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" render={props => <Login {...props} login={loginUser} auth={auth}/>} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
+
         <Route exact path="/search" render={props => <Search {...props} fetchProjects={fetchProjects} editProject={editProject} deleteProject={deleteProject} prjs={projects} deleteStatus={deleteStatus} />} />
+
         <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
         <ProtectedRoute path="/edit-project" component={ProjectPage} edit={editProject} auth={auth} />
       </Switch>
