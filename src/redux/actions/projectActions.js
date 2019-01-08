@@ -8,7 +8,7 @@ export const createProjectAction = projectData => (dispatch) => {
       headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
       body: JSON.stringify(projectData),
     };
-console.log('projectdata',projectData)
+    
     fetch('/project/create-one', fetchOptions)
       .then(res => res.json())
       .then((project) => {

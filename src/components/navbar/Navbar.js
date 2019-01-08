@@ -5,7 +5,7 @@ import {
   Nav, NavItem, NavLink,
 } from 'reactstrap';
 import { NavLink as RRNavLink, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
 
 import './navbar.css';
 
@@ -50,7 +50,8 @@ class Navigation extends Component {
               ) : (
                   <>
                     <NavItem>
-                      <NavLink activeClassName='active' tag={Link} to="/register">Register</NavLink>
+                      {/* <NavLink activeClassName='active' tag={Link} to="/register">Register</NavLink> */}
+                      <NavLink tag={Link} to="/register">Register</NavLink>
                     </NavItem>
                     <NavItem>
                       <Button color="primary" tag={Link} to="/login">Login</Button>

@@ -19,6 +19,8 @@ const mapStateToProps = state => ({
   users: state.users,
   errors: state.errorState,
   auth: state.authState,
+  regStatus: state.registrationStatus,
+  projectCreationStatus: state.projectCreationStatus
 });
 /*
   This method is used to link the action creators to specific
