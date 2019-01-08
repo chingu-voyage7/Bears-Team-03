@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ListItem from './projectListItem/ListItem';
+import { withRouter } from 'react-router-dom';
 
 class ProjectList extends Component {
 
@@ -18,4 +19,4 @@ class ProjectList extends Component {
   }
 }
 
-export default ProjectList
+export default withRouter(ProjectList);
