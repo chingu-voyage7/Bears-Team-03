@@ -4,14 +4,15 @@ import {
 } from 'reactstrap';
 
 import './projectPage.css';
-
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      customer: '',
+      ownerId: 'myCompany', // The first option of ownerId select
       dueDate: '',
+      startDate: '',
+      endDate: '',
       from: '',
       to: '',
       description: '',
@@ -21,13 +22,58 @@ export default class Example extends React.Component {
       email: '',
       phone:'',
       workDays: [],
+      projectTimespan: [],
+      applicationRequirements: '',
+      id: null
     };
+  }
+
+  componentDidMount() {
+    if (this.props.location.state && this.props.location.state.prj) {
+      const {prj} = this.props.location.state;
+
+      let prjTimeSpan = [];
+      let startDate, endDate;
+      if (prj.startDate) {
+        prjTimeSpan.push('start');
+        startDate = prj.startDate.split('T')[0]
+      }
+      if (prj.endDate) {
+        prjTimeSpan.push('end');
+        endDate = prj.endDate.split('T')[0]
+      }
+      
+      this.setState({
+        name: prj.projectName || '',
+        ownerId: prj.ownerId || '',
+        dueDate: prj.dueDate || '',
+        projectTimespan: prjTimeSpan || '',
+        startDate: startDate || '',
+        endDate: endDate || '',
+        from: prj.workingHours[0] || '',
+        to: prj.workingHours[1] || '',
+        description: prj.projectDescription || '',
+        workFields: prj.workFields || '',
+        address: prj.projectLocationAddress || '',
+        country: prj.projectLocationCountry || '',
+        email: prj.email || '',
+        phone:prj.phoneContact || '',
+        workDays: prj.workDays || '',
+        applicationRequirements: prj.applicationRequirements || '',
+        id: prj._id || ''
+      });
+    }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    this.props.publish(this.state);
+    const projectData = {...this.state};
+    delete projectData.projectTimespan;
+    
+    this.state.id ?
+    this.props.edit(projectData, this.props.history) :
+    this.props.publish(projectData, this.props.history) ;
   }
 
   handleChange = (e) => {
@@ -50,22 +96,22 @@ export default class Example extends React.Component {
     });
   }
 
-  handleCheckboxGroup = (e) => {
-    const { workDays } = this.state;
-    const tempWorkDays = [...workDays];
-    const elPos = tempWorkDays.indexOf(e.target.value);
+  handleCheckboxes = (e) => {
+    const values = this.state[e.target.name];
+    const tempValues = [...values];
+    const elPos = tempValues.indexOf(e.target.value);
     // eslint-disable-next-line no-unused-expressions
     elPos === -1
-      ? tempWorkDays.push(e.target.value)
-      : tempWorkDays.splice(elPos, 1);
+      ? tempValues.push(e.target.value)
+      : tempValues.splice(elPos, 1);
     this.setState({
-      workDays: [...tempWorkDays],
+      [e.target.name]: [...tempValues],
     });
   }
 
   render() {
     const {
-      name, customer, dueDate, from, to, description, involvedFields, address, country, email, phone,workDays,
+      name, ownerId, dueDate, from, to, description, workFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
@@ -75,9 +121,10 @@ export default class Example extends React.Component {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="name">Due date ( announce )</Label>
+                  <Label for="dueDate">Due date ( announce )</Label>
                   <Input
                     type="date"
+                    name="dueDate"
                     id="dueDate"
                     value={dueDate}
                     onChange={this.handleChange}
@@ -86,16 +133,65 @@ export default class Example extends React.Component {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="customer">Customer</Label>
+                  <Label for="ownerId">ownerId</Label>
                   <Input
                     type="select"
-                    name="customer"
-                    id="customer"
-                    value={customer}
+                    name="ownerId"
+                    id="ownerId"
+                    value={ownerId}
                     onChange={this.handleChange}
                   >
                     <option>myCompany</option>
                     <option>myOtherCompany</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                <FormGroup check>
+                  <Label for="start" check>
+                  <Input
+                  type="checkbox"
+                  id="start"
+                  name="projectTimespan"
+                  value="start"
+                  checked={projectTimespan.includes('start')}
+                  onChange={this.handleCheckboxes}
+                  /> Start date
+                  </Label>
+                  </FormGroup>
+                  <Input
+                    type="date"
+                    id="startDate"
+                    value={startDate}
+                    disabled={!projectTimespan.includes('start')}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                <FormGroup check>
+                  <Label  for="end" check>
+                  <Input
+                  type="checkbox"
+                  id="end"
+                  name="projectTimespan"
+                  value="end"
+                  checked={projectTimespan.includes('end')}
+                  onChange={this.handleCheckboxes}
+                  /> End date
+                  </Label>
+                  </FormGroup>
+                  <Input
+                    type="date"
+                    id="endDate"
+                    value={endDate}
+                    disabled={!projectTimespan.includes('end')}
+                    onChange={this.handleChange}
+                  >
                   </Input>
                 </FormGroup>
               </Col>
@@ -127,25 +223,30 @@ export default class Example extends React.Component {
                   />
                 </Col>
                 <Col md={6}>
-                  <Label for="involvedFields">Involved Fields</Label>
+                  <Label for="workFields">Involved Fields</Label>
                   <Input
                     type="select"
-                    name="involvedFields"
-                    id="involvedFields"
-                    value={involvedFields}
+                    name="workFields"
+                    id="workFields"
+                    value={workFields}
                     onChange={this.handleMultipleChange}
                     multiple
                   >
-                    <option>Field one</option>
-                    <option>Field two</option>
-                    <option>Field three</option>
-                    <option>Field four</option>
-                    <option>Field five</option>
-                    <option>Field six</option>
-                    <option>Field seven</option>
-                    <option>Field eight</option>
-                    <option>Field nine</option>
-                    <option>Field ten</option>
+                    <option>poverty</option>
+                    <option>hunger</option>
+                    <option>health</option>
+                    <option>gender</option>
+                    <option>water</option>
+                    <option>energy</option>
+                    <option>work</option>
+                    <option>innovation</option>
+                    <option>inequality</option>
+                    <option>sustainability</option>
+                    <option>climate</option>
+                    <option>oceans</option>
+                    <option>earth</option>
+                    <option>justice</option>
+                    <option>partnership</option>
                   </Input>
                 </Col>
               </Row>
@@ -181,70 +282,70 @@ export default class Example extends React.Component {
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="mon"
                       checked={workDays.includes('mon')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 monday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="tue"
                       checked={workDays.includes('tue')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 tuesday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="wed"
                       checked={workDays.includes('wed')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 wednesday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="thu"
                       checked={workDays.includes('thu')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 thursday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="fri"
                       checked={workDays.includes('fri')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 friday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="sat"
                       checked={workDays.includes('sat')}
-                      onChange={this.handleCheckboxGroup}
+                      onChange={this.handleCheckboxes}
                     />
                 saturday
                   </Label>
                   <Label check>
                     <Input
                       type="checkbox"
-                      id="workDays"
+                      name="workDays"
                       value="sun"
-                      checked={workDays.includes('tue')}
-                      onChange={this.handleCheckboxGroup}
+                      checked={workDays.includes('sun')}
+                      onChange={this.handleCheckboxes}
                     />
                 sunday
                   </Label>
@@ -273,6 +374,16 @@ export default class Example extends React.Component {
                 </FormGroup>
               </Col>
             </Row>
+            <FormGroup>
+              <Label for="applicationRequirements">Additional requirements</Label>
+              <Input
+                type="text"
+                id="applicationRequirements"
+                placeholder="Specific requirements, warnings, ..."
+                value={applicationRequirements}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
             <hr />
             <h6>CONTACTS</h6>
             <Row form>
@@ -308,7 +419,7 @@ export default class Example extends React.Component {
               type="submit"
               block
             >
-              Publish the announce
+              {this.state.id ? 'Edit the announce' : 'Publish the announce'}
             </Button>
           </Form>
         </Container>

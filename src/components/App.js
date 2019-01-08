@@ -10,23 +10,41 @@ import Navigation from './navbar/Navbar';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import ProfilePage from './profilePage/ProfilePage';
+import Search from './Search';
 
 import './App.css';
 
-const App = ({ registerUser, loginUser, logoutUser, createProject, auth }) => (
-  <Router>
-    <>
-      <Navigation auth={auth} logout={logoutUser} />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
-        <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
-        {/* <Route path="/projects" render={props => <ProjectsPage {...props} search={searchByName} />} /> */}
-        <ProtectedRoute path="/create-project" component={ProjectPage} auth={auth} />
-        <ProtectedRoute path="/profile" component={ProfilePage} publish={createProject} auth={auth} />
-      </Switch>
-    </>
-  </Router>
-);
+class App extends React.Component {
+
+
+  componentDidMount() {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      this.props.verifyUser(token);
+    }
+  }
+
+  render() {
+
+    const { registerUser, loginUser, logoutUser, auth, fetchProjects, createProject, editProject, deleteProject, deleteStatus, projects } = this.props;
+    return (<Router>
+      <>
+        <Navigation auth={auth} logout={logoutUser} />
+
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" render={props => <Login {...props} login={loginUser} auth={auth} />} />
+          <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
+          <ProtectedRoute path="/profile" component={ProfilePage} publish={createProject} auth={auth} />
+          <Route exact path="/search" render={props => <Search {...props} fetchProjects={fetchProjects} editProject={editProject} deleteProject={deleteProject} prjs={projects} deleteStatus={deleteStatus} />} />
+
+          <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
+          <ProtectedRoute path="/edit-project" component={ProjectPage} edit={editProject} auth={auth} />
+        </Switch>
+      </>
+    </Router>
+    )
+  }
+};
 
 export default App;
