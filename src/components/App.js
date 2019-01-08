@@ -9,6 +9,7 @@ import Login from './Login';
 import Navigation from './navbar/Navbar';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
+import ProfilePage from './profilePage/ProfilePage';
 
 import './App.css';
 
@@ -21,7 +22,8 @@ const App = ({ registerUser, loginUser, logoutUser, createProject, auth }) => (
         <Route path="/login" render={props => <Login {...props} login={loginUser} />} />
         <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} />} />
         {/* <Route path="/projects" render={props => <ProjectsPage {...props} search={searchByName} />} /> */}
-        <ProtectedRoute path="/create-project" component={ProjectPage} publish={createProject} auth={auth} />
+        <ProtectedRoute path="/create-project" component={ProjectPage} auth={auth} />
+        <ProtectedRoute path="/profile" component={ProfilePage} publish={createProject} auth={auth} />
       </Switch>
     </>
   </Router>

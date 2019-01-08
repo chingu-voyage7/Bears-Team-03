@@ -41,6 +41,9 @@ class Navigation extends Component {
               isLoggedIn ? (
                 <>
                   <NavItem>
+                    <NavLink tag={Link} to="/profile">My profile</NavLink>
+                  </NavItem>
+                  <NavItem>
                     <Button color="primary" tag={Link} to="/create-project">Create project</Button>
                   </NavItem>
                   <NavItem>
