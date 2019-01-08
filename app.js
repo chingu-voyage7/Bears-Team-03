@@ -8,9 +8,6 @@ const businessRoutes = require('./components/business/businessRoutes');
 const projectRoutes = require('./components/project/projectRoutes');
 const authRoutes = require('./components/auth/authRoutes');
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-
 // Standard middleware that convert incoming request data ( if formatted as json)
 // and put it into the req.body property
 app.use(express.json());
@@ -20,6 +17,8 @@ app.use('/user', userRoutes);
 app.use('/business', businessRoutes);
 app.use('/project', projectRoutes);
 app.use(authRoutes);
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // Main route for testing purpose
 app.get('/', (req, res) => {
