@@ -12,7 +12,7 @@ class YouTube extends React.Component {
       this.props.modest;
     return (
       <div className="video">
-        <iframe className="player" type="text/html" width="100%" height="100%"
+        <iframe className="player" type="text/html" width="100%" height="100%" title="Make the world a better place"
           src={videoSrc}
         />
       </div>
@@ -115,12 +115,12 @@ class Home extends React.Component {
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a href="#">
+                      <a href="/">
                         <i className="fa fa-envelope"></i>
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a href="#">
+                      <a href="/">
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </li>
@@ -163,12 +163,12 @@ class Home extends React.Component {
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a href="#">
+                      <a href="/">
                         <i className="fa fa-envelope"></i>
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a href="#">
+                      <a href="/">
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </li>
@@ -198,12 +198,12 @@ class Home extends React.Component {
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a href="#">
+                    <a href="/">
                       <i className="fab fa-facebook-f"></i>
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a href="#">
+                    <a href="/">
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </li>
@@ -212,10 +212,10 @@ class Home extends React.Component {
               <Col md="4">
                 <ul className="list-inline quicklinks">
                   <li className="list-inline-item">
-                    <a href="#">Privacy Policy</a>
+                    <a href="/">Privacy Policy</a>
                   </li>
                   <li className="list-inline-item">
-                    <a href="#">Terms of Use</a>
+                    <a href="/">Terms of Use</a>
                   </li>
                 </ul>
               </Col>

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
+  dueDate: {
+    type: String
+  },
   projectName: {
     type: String,
     required: true,
@@ -11,8 +14,7 @@ const projectSchema = new mongoose.Schema({
     required: true,
   },
   applicationRequirements: {
-    type: String,
-   // required: true,
+    type: String
   },
   projectLocationAddress: {
     type: String,
@@ -36,17 +38,17 @@ const projectSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  workDays: {
+    type: [String]
+  },
   startDate: {
     type: Date,
-    default: Date.now,
   },
   endDate: {
     type: Date,
-    default: Date.now,
   },
   ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Business',
+    type: String
   },
 });
 

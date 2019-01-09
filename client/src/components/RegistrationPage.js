@@ -32,9 +32,9 @@ class RegistrationPage extends React.Component {
         zipCode: '',
         country: '',
         phone: '',
-        volunteerField: [''],
-        days: [''],
-        hours: [''],
+        volunteerField: [],
+        days: [],
+        hours: [],
       },
       validate: {
         email: '',
@@ -103,6 +103,7 @@ class RegistrationPage extends React.Component {
 
   render() {
     const { user, validate } = this.state;
+    const { validationErrors } = this.props.regStatus;
     return (
       <Container className="RegistrationPage">
         <h2>Sign Up</h2>
@@ -126,6 +127,8 @@ class RegistrationPage extends React.Component {
             <FormFeedback>
               Uh oh! Looks like there is an issue with your email. Please input a correct email.
             </FormFeedback>
+            {validationErrors && validationErrors.email &&
+          <FormText color="danger">{validationErrors.email.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label>Full name:</Label>
@@ -138,6 +141,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your full name.</FormFeedback>
+            {validationErrors && validationErrors.fullname &&
+          <FormText color="danger">{validationErrors.fullname.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="password">Password:</Label>
@@ -157,6 +162,8 @@ class RegistrationPage extends React.Component {
             <FormFeedback valid>That is a good password! :)</FormFeedback>
             <FormFeedback>Please input a password that is at least 6 characters long.</FormFeedback>
             <FormText>At least 6 characters long</FormText>
+            {validationErrors && validationErrors.password &&
+          <FormText color="danger">{validationErrors.password.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>
@@ -171,6 +178,8 @@ class RegistrationPage extends React.Component {
               <option value="other">Other</option>
             </Input>
             <FormFeedback>Please input your gender.</FormFeedback>
+            {validationErrors && validationErrors.gender &&
+          <FormText color="danger">{validationErrors.gender.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="streetAddress">Address:</Label>
@@ -183,6 +192,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your address.</FormFeedback>
+            {validationErrors && validationErrors.streetAddress &&
+          <FormText color="danger">{validationErrors.streetAddress.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="city">City:</Label>
@@ -195,6 +206,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your city.</FormFeedback>
+            {validationErrors && validationErrors.city &&
+          <FormText color="danger">{validationErrors.city.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="stateOrProvince">State/Province/Region:</Label>
@@ -207,6 +220,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your state.</FormFeedback>
+            {validationErrors && validationErrors.stateOrProvince &&
+          <FormText color="danger">{validationErrors.stateOrProvince.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="zipCode">ZIP:</Label>
@@ -219,6 +234,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your ZIP code.</FormFeedback>
+            {validationErrors && validationErrors.zipCode &&
+          <FormText color="danger">{validationErrors.zipCode.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="country">Country/Region:</Label>
@@ -231,6 +248,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your country.</FormFeedback>
+            {validationErrors && validationErrors.country &&
+          <FormText color="danger">{validationErrors.country.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="phone">Phone number:</Label>
@@ -243,6 +262,8 @@ class RegistrationPage extends React.Component {
               onChange={this.handleChange}
             />
             <FormFeedback>Please input your phone number.</FormFeedback>
+            {validationErrors && validationErrors.phone &&
+          <FormText color="danger">{validationErrors.phone.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="volunteerField">What Global Goals do you want to support?</Label>
@@ -272,6 +293,8 @@ class RegistrationPage extends React.Component {
               <option value="17">17. Partnerships for the Goals</option>
             </Input>
             <FormFeedback>Please pick at least one goal.</FormFeedback>
+            {validationErrors && validationErrors.volunteerField &&
+          <FormText color="danger">{validationErrors.volunteerField.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="days">Select on what days are you available:</Label>
@@ -291,6 +314,8 @@ class RegistrationPage extends React.Component {
               <option value="sunday">Sunday</option>
             </Input>
             <FormFeedback>Please pick at least one day.</FormFeedback>
+            {validationErrors && validationErrors.days &&
+          <FormText color="danger">{validationErrors.days.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <Row form>
             <Col md={6}>
@@ -302,6 +327,8 @@ class RegistrationPage extends React.Component {
                   value={user.hours}
                   onChange={this.handleChange}
                 />
+                {validationErrors && validationErrors.hours &&
+                  <FormText color="danger">{validationErrors.hours.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
               </FormGroup>
               <FormFeedback>Please input a valid start time.</FormFeedback>
             </Col>
@@ -314,6 +341,8 @@ class RegistrationPage extends React.Component {
                   value={user.hours}
                   onChange={this.handleChange}
                 />
+                {validationErrors && validationErrors.hours &&
+          <FormText color="danger">{validationErrors.hours.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
               </FormGroup>
               <FormFeedback>Please input a valid end time.</FormFeedback>
             </Col>
