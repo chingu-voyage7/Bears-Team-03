@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import List from './ProjectList';
+
 import { Container, Row, Col, Input } from 'reactstrap';
+
+import List from './ProjectList';
 
 class Search extends Component {
 
@@ -25,7 +27,7 @@ class Search extends Component {
     fetchProjects = () => {
         this.props.fetchProjects()
         .then(() => this.setState({
-            prjs: this.props.prjs.projects
+            prjs: this.props.projects.projects
         }))
         .catch(err => console.log(err));
     }

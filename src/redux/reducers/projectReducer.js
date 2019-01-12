@@ -19,14 +19,16 @@ export const fetchProjectsReducer = (state ={error: null, isPending: false, proj
   }
 };
 
-export const createProjectReducer = (state = {isPending: false}, action) => {
+export const createProjectReducer = (state = {error: {}, newProject: null, isPending: false}, action) => {
   switch (action.type) {
     case createProject.REQUEST:
-      return {...state, error: null, isPending: true};
+      return {...state, error: {}, isPending: true};
     case createProject.SUCCESS:
-        return {...state, isPending: false, newProject: action.payload};
+        return {isPending: false, error: {}, newProject: action.payload};
     case createProject.FAILURE:
-        return {...state, isPending: false, ...action.payload};
+        return {isPending: false, error: action.payload, newProject: null};
+    case createProject.RESET_ERR:
+        return {isPending: false, error: {}, newProject: null};
     default:
       return state;
   }

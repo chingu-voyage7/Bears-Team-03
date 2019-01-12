@@ -50,3 +50,6 @@ export const logoutAction = () => {
   localStorage.removeItem('accessToken');
   return { type: LOGOUT };
 };
+
+export const resetLoginErrorAction = () => {
+  return {type: loginProcess.RESET_ERR}};

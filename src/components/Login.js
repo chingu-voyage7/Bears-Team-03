@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Button, FormGroup, FormText, Label, Input, Col
 } from 'reactstrap';
+import Error from './ErrorNotification';
 
 class Login extends Component {
   constructor(props) {
@@ -25,13 +26,18 @@ class Login extends Component {
           this.props.history.push('/')
         }
       })
-      .catch(err => console.log(err));
+     .catch(err => console.log(err));
   };
 
+  componentWillUnmount () {
+    if(this.props.auth.error.validationErrors) {
+      this.props.resetErr();
+    }
+  }
 
   render() {
     const {email, password } = this.state;
-    const {validationErrors} = this.props.auth;
+    const {validationErrors} = this.props.auth.error;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
         <h2>LOG IN</h2>
@@ -60,6 +66,9 @@ class Login extends Component {
           <FormText color="danger">{validationErrors.password.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
         </FormGroup>
         <Button color="primary" block type="button" onClick={this.signIn}>Login</Button>
+        {this.props.auth.error.message && 
+        <Error message={this.props.auth.error.message} />
+        }
       </Col>
     );
   }

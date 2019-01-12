@@ -11,6 +11,7 @@ const validator = (req, res, next) => {
       schemaToCheckAgainst = validationSchemas.registerSchema;
       break;
     case "/create-one":
+    case "/update-by-id":
       schemaToCheckAgainst = validationSchemas.createProjectSchema;
       break;
     default:
