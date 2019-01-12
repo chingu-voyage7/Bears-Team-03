@@ -1,15 +1,20 @@
 {
-<<<<<<< HEAD
-    "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended"],
-"rules": {
-  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-},
-"plugins": ["jsx-a11y"]
-=======
-  "extends": ["airbnb", "plugin:jsx-a11y/recommended"],
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ]
   },
-  "plugins": ["jsx-a11y"]
->>>>>>> master
+  "plugins": [
+    "jsx-a11y"
+  ]
 }
