@@ -26,7 +26,7 @@ export const registerUserAction = registerData => (dispatch) => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(registerData),
   };
-  fetch('/user/register', fetchOptions)
+  return fetch('/user/register', fetchOptions)
     .then(res => res.json())
     .then((user) => {
       if (user.fail) {

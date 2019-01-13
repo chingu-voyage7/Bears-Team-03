@@ -96,9 +96,16 @@ class RegistrationPage extends React.Component {
     this.setState({ validate });
   }
 
-  handleSubmit(event) {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.register(this.state.user);
+    try {
+      await this.props.register(this.state.user);
+      if (!this.props.regStatus.isPending && !this.props.regStatus.message && this.props.regStatus.newUser) {
+        this.props.history.push('/login');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
