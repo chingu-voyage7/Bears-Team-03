@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Container, Col, Row, Button, Form, FormGroup, Label, Input, FormText
 } from 'reactstrap';
+import Error from '../ErrorNotification';
 
 import './projectPage.css';
 
@@ -66,6 +67,12 @@ export default class ProjectPage extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    if(this.props.prjStatus.error.validationErrors) {
+      this.props.resetErr();
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
@@ -112,7 +119,8 @@ export default class ProjectPage extends React.Component {
   }
 
   render() {
-    const {validationErrors } = this.props.prjStatus;
+    const { validationErrors } = this.props.prjStatus.error;
+
     const {
       name, ownerId, dueDate, from, to, description, workFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
@@ -450,6 +458,9 @@ export default class ProjectPage extends React.Component {
               {this.state.id ? 'Edit the announce' : 'Publish the announce'}
             </Button>
           </Form>
+          {this.props.prjStatus.error.message && 
+        <Error message={this.props.prjStatus.error.message} />
+        }
         </Container>
       </Col>
     );

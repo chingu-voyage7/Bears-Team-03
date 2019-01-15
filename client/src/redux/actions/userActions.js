@@ -38,3 +38,6 @@ export const registerUserAction = registerData => (dispatch) => {
     })
     .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
 };
+
+export const resetRegistrationErrorAction = () => {
+  return {type: registerUser.RESET_ERR}};

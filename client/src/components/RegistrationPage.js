@@ -11,6 +11,7 @@ import {
   FormFeedback,
   FormText,
 } from 'reactstrap';
+import Error from './ErrorNotification';
 
 class RegistrationPage extends React.Component {
   constructor(props) {
@@ -100,10 +101,16 @@ class RegistrationPage extends React.Component {
     event.preventDefault();
     this.props.register(this.state.user);
   }
+  
+  componentWillUnmount () {
+    if(this.props.regStatus.error.validationErrors) {
+      this.props.resetErr();
+    }
+  }
 
   render() {
     const { user, validate } = this.state;
-    const { validationErrors } = this.props.regStatus;
+    const { validationErrors } = this.props.regStatus.error;
     return (
       <Container className="RegistrationPage">
         <h2>Sign Up</h2>
@@ -371,6 +378,9 @@ class RegistrationPage extends React.Component {
           </FormGroup>
           <Button color="primary">Sign Up</Button>
         </Form>
+        {this.props.regStatus.error.message && 
+        <Error message={this.props.regStatus.error.message} />
+        }
       </Container>
     );
   }

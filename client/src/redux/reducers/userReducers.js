@@ -18,14 +18,16 @@ export const fetchUsersReducer = (state = [], action) => {
   }
 };
 
-export const registerUserReducer = (state = {isPending: false}, action) => {
+export const registerUserReducer = (state = {isPending: false, error: {}}, action) => {
   switch (action.type) {
     case registerUser.REQUEST:
       return {...state, isPending: true};
     case registerUser.SUCCESS:
-    return {...state, isPending: false, newUser: action.payload};
+      return { isPending: false, newUser: action.payload, error: {}};
     case registerUser.FAILURE:
-    return {...state, isPending: false, ...action.payload};
+      return {isPending: false, error: action.payload, newUser: {}};
+    case registerUser.RESET_ERR:
+      return {isPending: false, error: {}, newProject: {}};
     default:
       return state;
   }
