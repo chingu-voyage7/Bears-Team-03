@@ -17,12 +17,14 @@ export const registerUser = {
   REQUEST: 'REGISTER_USER_REQUEST',
   SUCCESS: 'REGISTER_USER_SUCCESS',
   FAILURE: 'REGISTER_USER_FAILURE',
+  RESET_ERR: 'REGISTER_RESET_ERR'
 };
 
 export const loginProcess = {
   REQUEST: 'LOGIN_REQUEST',
   SUCCESS: 'LOGIN_SUCCESS',
   FAILURE: 'LOGIN_FAILURE',
+  RESET_ERR: 'LOGIN_RESET_ERR'
 };
 
 export const fetchProjects = {
@@ -35,6 +37,7 @@ export const createProject = {
   REQUEST: 'CREATE_PROJECT_REQUEST',
   SUCCESS: 'CREATE_PROJECT_SUCCESS',
   FAILURE: 'CREATE_PROJECT_FAILURE',
+  RESET_ERR: 'CREATE_PROJECT_RESET_ERR'
 };
 
 export const deleteProject = {

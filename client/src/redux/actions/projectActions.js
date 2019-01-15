@@ -16,7 +16,6 @@ export const fetchProjectsAction = () => (dispatch) => {
 
 export const createProjectAction = (projectData, history) => (dispatch) => {
     dispatch({ type: createProject.REQUEST });
-    console.log(projectData);
     const fetchOptions = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
@@ -75,3 +74,6 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
       })
       .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
   };
+
+  export const resetProjectErrorAction = () => {
+    return {type: createProject.RESET_ERR}};

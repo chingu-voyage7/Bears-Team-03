@@ -4,10 +4,10 @@ This new component is explicitly created to emphasize the
  function
  */
 import { connect } from 'react-redux';
-import {fetchUsersAction, registerUserAction} from '../redux/actions/userActions';
-import { loginAction, verifyAction, logoutAction } from '../redux/actions/authActions';
+import {fetchUsersAction, registerUserAction, resetRegistrationErrorAction} from '../redux/actions/userActions';
+import { loginAction, verifyAction, logoutAction, resetLoginErrorAction } from '../redux/actions/authActions';
 
-import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction } from '../redux/actions/projectActions';
+import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction, resetProjectErrorAction } from '../redux/actions/projectActions';
 
 import App from '../components/App';
 
@@ -38,7 +38,10 @@ const mapDispatchToProps = dispatch => ({
   fetchProjects: () => dispatch(fetchProjectsAction()),
   createProject: (projectData, history) => dispatch(createProjectAction(projectData, history)),
   editProject: (projectData, history) => dispatch(editProjectAction(projectData, history)),
-  deleteProject: prjId =>  dispatch(deleteProjectAction(prjId))
+  deleteProject: prjId =>  dispatch(deleteProjectAction(prjId)),
+  resetProjectError: () => dispatch(resetProjectErrorAction()),
+  resetLoginError: () => dispatch(resetLoginErrorAction()),
+  resetRegistrationError: () => dispatch(resetRegistrationErrorAction()),
 });
 
 /*
