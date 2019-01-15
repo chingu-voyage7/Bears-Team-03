@@ -22,8 +22,8 @@ class Login extends Component {
   signIn = () => {
     this.props.login(this.state)
     .then(() => {
-        if(this.props.auth.isLoggedIn) {
-          this.props.history.push('/')
+        if (this.props.auth.isLoggedIn) {
+          this.props.history.push('/search');
         }
       })
      .catch(err => console.log(err));
