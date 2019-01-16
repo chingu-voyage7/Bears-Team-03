@@ -103,4 +103,4 @@ exports.createProjectSchema = Joi.object({
   endDate:Joi.string().trim().allow(''),
   applicationRequirements:Joi.string().trim(),
   id:Joi.string().trim().allow(null).optional()
-})
+});

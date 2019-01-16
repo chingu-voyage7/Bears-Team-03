@@ -6,7 +6,7 @@ import './listItem.css';
 //class ListItem extends Component {
 //  render() {
 //    return (
-  const ListItem = ({prj, editPrj, deletePrj}) => (
+  const ListItem = ({prj, detailsPrj, editPrj, deletePrj}) => (
         <Card className="card-item" >
         <CardBody>
           <div className="flex-container">
@@ -14,6 +14,7 @@ import './listItem.css';
             <span className="card-title-details">
             {`${prj.projectLocationAddress} - ${prj.projectLocationCountry} - `}
             </span>
+            <button onClick={() => detailsPrj(prj)}>details</button>
             <button onClick={() => editPrj(prj)}>edit</button>
             <button onClick={() => deletePrj(prj._id)}>delete</button>
           </div>
