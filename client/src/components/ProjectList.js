@@ -9,10 +9,19 @@ class ProjectList extends Component {
       this.props.history.push('/edit-project', { prj });
     }
 
+    detailsProject = (prj) => {
+      this.props.history.push('/details-project', { prj });
+  }
+
   render() {
     return (
         <ul>
-          {this.props.prjs.map(prj => <ListItem key={prj._id} prj={prj} editPrj={this.editProject} deletePrj={this.props.deleteProject} />
+          {this.props.prjs.map(prj => <ListItem 
+          key={prj._id} 
+          prj={prj} 
+          detailsPrj={this.detailsProject}
+          editPrj={this.editProject} 
+          deletePrj={this.props.deleteProject} />
           )}
         </ul>
     )

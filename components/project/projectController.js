@@ -37,12 +37,14 @@ exports.projectCreateOne = (req, res) => {
 
 exports.projectGetAll = (req, res) => {
   Project.find({})
+    .populate('applicants', '_id fullname email phone')
     .then(projects => res.status(200).json(projects))
     .catch(err => res.status(500).json({ fail: err }));
 };
 
 exports.projectGetByName = (req, res) => {
   Project.find({ projectName: req.query.name })
+    .populate('applicants', '_id fullname email phone')
     .then((projects) => {
       if (projects.length > 0) {
         res.status(200).json(projects);
@@ -102,4 +104,19 @@ exports.projectDeleteById = (req, res) => {
       }
     })
     .catch(err => res.status(500).json({ fail: err }));
+};
+
+exports.projectToggleSubscription = async (req, res) => {
+  try {
+    let projectToUpdate = await Project.findById(req.query.projectId);
+
+    let upToDatePrj = await projectToUpdate.toggleSubscription(req.userData.id)
+    await upToDatePrj
+              .populate({path: 'applicants', select: 'fullname _id'})
+              .execPopulate();
+
+    return res.json({response: upToDatePrj});
+  } catch (error) {
+    res.status(500).json({fail:error});
+  }
 };

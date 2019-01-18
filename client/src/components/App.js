@@ -5,6 +5,7 @@ import {
 
 import RegistrationPage from './RegistrationPage';
 import ProjectPage from './projectForm/ProjectPage';
+import ProjectDetails from './ProjectDetails';
 import Login from './Login';
 import Navigation from './navbar/Navbar';
 import FakeList from './FakeProjList';
@@ -27,7 +28,7 @@ import './App.css';
   }
 
   render() {    
-    const {registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, projectCreationStatus, resetProjectError, resetLoginError, resetRegistrationError} = this.props;
+    const {registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription} = this.props;
     return (
       <ErrorBoundary>
           <Router>
@@ -38,6 +39,7 @@ import './App.css';
                   <Route path="/login" render={props => <Login {...props} login={loginUser}  resetErr={resetLoginError} auth={auth}/>} />
                   <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} regStatus={regStatus}  resetErr={resetRegistrationError}/>} />
                   <Route path="/search" render={props => <ConnectedSearch {...props} />} />
+                  <Route path="/details-project" render={props => <ProjectDetails {...props} prjStatus={prjStatus} auth={auth} toggleSubscription={toggleSubscription}/>} />
                   <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} publish={createProject} prjStatus={projectCreationStatus} resetErr={resetProjectError} />)}  auth={auth} />
                   <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} edit={editProject} prjStatus={projectCreationStatus} resetErr={resetProjectError} />)} auth={auth} />
                   <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} />)}  auth={auth} />
