@@ -4,7 +4,7 @@ import {
   Navbar, NavbarToggler, NavbarBrand,
   Nav, NavItem, NavLink,
 } from 'reactstrap';
-import { NavLink as RRNavLink, Link } from 'react-router-dom';
+import { NavLink as RRNavLink, Link, withRouter } from 'react-router-dom';
 
 
 import './navbar.css';
@@ -13,6 +13,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.state = {
       isOpen: false
     };
@@ -21,6 +22,12 @@ class Navigation extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+  handleLogout = async () => {
+    await this.props.logout();
+    if (!this.props.auth.isLoggedIn) {
+      this.props.history.push('/login');
+    }
   }
   render() {
     let { isLoggedIn } = this.props.auth;
@@ -43,7 +50,7 @@ class Navigation extends Component {
                     <Button color="primary" tag={Link} to="/create-project">Create project</Button>
                   </NavItem>
                   <NavItem>
-                    <NavLink onClick={this.props.logout}>Logout</NavLink>
+                    <NavLink onClick={this.handleLogout}>Logout</NavLink>
                   </NavItem>
                 </>
               ) : (
@@ -71,4 +78,4 @@ class Navigation extends Component {
 //   ]).isRequired,
 // };
 
-export default Navigation;
+export default withRouter(Navigation);

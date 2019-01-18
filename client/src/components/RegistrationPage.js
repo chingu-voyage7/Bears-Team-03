@@ -107,16 +107,24 @@ class RegistrationPage extends React.Component {
     this.setState({ validate });
   }
 
-  handleSubmit(event) {
+  handleSubmit = async (event) => {
     event.preventDefault();
     if (this.state.adult && this.state.terms) {
-      this.props.register(this.state.user);
+      try {
+        await this.props.register(this.state.user);
+        if (!this.props.regStatus.isPending && Object.keys(this.props.regStatus.newUser).length !== 0) {
+          this.props.history.push('/login');
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      this.setState({ submitted: true });
     }
-    this.setState({ submitted: true });
   }
-  
-  componentWillUnmount () {
-    if(this.props.regStatus.error.validationErrors) {
+
+  componentWillUnmount() {
+    if (this.props.regStatus.error.validationErrors) {
       this.props.resetErr();
     }
   }
@@ -395,8 +403,8 @@ class RegistrationPage extends React.Component {
           </FormGroup>
           <Button color="primary" disabled={!adult || !terms}>Sign Up</Button>
         </Form>
-        {this.props.regStatus.error.message && 
-        <Error message={this.props.regStatus.error.message} />
+        {this.props.regStatus.error.message &&
+          <Error message={this.props.regStatus.error.message} />
         }
       </Container>
     );
