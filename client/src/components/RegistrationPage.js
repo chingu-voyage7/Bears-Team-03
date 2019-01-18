@@ -20,6 +20,7 @@ class RegistrationPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleMultipleChange = this.handleMultipleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
 
     this.state = {
       user: {
@@ -41,6 +42,9 @@ class RegistrationPage extends React.Component {
         email: '',
         password: '',
       },
+      adult: false,
+      terms: false,
+      submitted: false,
     };
   }
 
@@ -72,6 +76,12 @@ class RegistrationPage extends React.Component {
     });
   }
 
+  handleCheckboxChange(event) {
+    const { name } = event.target;
+    const prev = this.state[name];
+    this.setState({ [name]: !prev });
+  };
+
   // A lot of ideas and implementations came from here:
   // https://alligator.io/react/fancy-forms-reactstrap/
   validateEmail(event) {
@@ -99,24 +109,28 @@ class RegistrationPage extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      await this.props.register(this.state.user);
-      if (!this.props.regStatus.isPending && !this.props.regStatus.message && this.props.regStatus.newUser) {
-        this.props.history.push('/login');
+    if (this.state.adult && this.state.terms) {
+      try {
+        await this.props.register(this.state.user);
+        if (!this.props.regStatus.isPending && Object.keys(this.props.regStatus.newUser).length !== 0) {
+          this.props.history.push('/login');
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      this.setState({ submitted: true });
     }
   }
-  
-  componentWillUnmount () {
-    if(this.props.regStatus.error.validationErrors) {
+
+  componentWillUnmount() {
+    if (this.props.regStatus.error.validationErrors) {
       this.props.resetErr();
     }
   }
 
   render() {
-    const { user, validate } = this.state;
+    const { user, validate, adult, terms, submitted } = this.state;
     const { validationErrors } = this.props.regStatus.error;
     return (
       <Container className="RegistrationPage">
@@ -142,7 +156,7 @@ class RegistrationPage extends React.Component {
               Uh oh! Looks like there is an issue with your email. Please input a correct email.
             </FormFeedback>
             {validationErrors && validationErrors.email &&
-          <FormText color="danger">{validationErrors.email.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.email.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label>Full name:</Label>
@@ -156,7 +170,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your full name.</FormFeedback>
             {validationErrors && validationErrors.fullname &&
-          <FormText color="danger">{validationErrors.fullname.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.fullname.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="password">Password:</Label>
@@ -177,7 +191,7 @@ class RegistrationPage extends React.Component {
             <FormFeedback>Please input a password that is at least 6 characters long.</FormFeedback>
             <FormText>At least 6 characters long</FormText>
             {validationErrors && validationErrors.password &&
-          <FormText color="danger">{validationErrors.password.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.password.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>
@@ -193,7 +207,7 @@ class RegistrationPage extends React.Component {
             </Input>
             <FormFeedback>Please input your gender.</FormFeedback>
             {validationErrors && validationErrors.gender &&
-          <FormText color="danger">{validationErrors.gender.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.gender.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="streetAddress">Address:</Label>
@@ -207,7 +221,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your address.</FormFeedback>
             {validationErrors && validationErrors.streetAddress &&
-          <FormText color="danger">{validationErrors.streetAddress.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.streetAddress.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="city">City:</Label>
@@ -221,7 +235,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your city.</FormFeedback>
             {validationErrors && validationErrors.city &&
-          <FormText color="danger">{validationErrors.city.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.city.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="stateOrProvince">State/Province/Region:</Label>
@@ -235,7 +249,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your state.</FormFeedback>
             {validationErrors && validationErrors.stateOrProvince &&
-          <FormText color="danger">{validationErrors.stateOrProvince.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.stateOrProvince.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="zipCode">ZIP:</Label>
@@ -249,7 +263,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your ZIP code.</FormFeedback>
             {validationErrors && validationErrors.zipCode &&
-          <FormText color="danger">{validationErrors.zipCode.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.zipCode.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="country">Country/Region:</Label>
@@ -263,7 +277,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your country.</FormFeedback>
             {validationErrors && validationErrors.country &&
-          <FormText color="danger">{validationErrors.country.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.country.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="phone">Phone number:</Label>
@@ -277,7 +291,7 @@ class RegistrationPage extends React.Component {
             />
             <FormFeedback>Please input your phone number.</FormFeedback>
             {validationErrors && validationErrors.phone &&
-          <FormText color="danger">{validationErrors.phone.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.phone.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="volunteerField">What Global Goals do you want to support?</Label>
@@ -308,7 +322,7 @@ class RegistrationPage extends React.Component {
             </Input>
             <FormFeedback>Please pick at least one goal.</FormFeedback>
             {validationErrors && validationErrors.volunteerField &&
-          <FormText color="danger">{validationErrors.volunteerField.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.volunteerField.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="days">Select on what days are you available:</Label>
@@ -329,7 +343,7 @@ class RegistrationPage extends React.Component {
             </Input>
             <FormFeedback>Please pick at least one day.</FormFeedback>
             {validationErrors && validationErrors.days &&
-          <FormText color="danger">{validationErrors.days.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+              <FormText color="danger">{validationErrors.days.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <Row form>
             <Col md={6}>
@@ -356,37 +370,41 @@ class RegistrationPage extends React.Component {
                   onChange={this.handleChange}
                 />
                 {validationErrors && validationErrors.hours &&
-          <FormText color="danger">{validationErrors.hours.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+                  <FormText color="danger">{validationErrors.hours.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
               </FormGroup>
               <FormFeedback>Please input a valid end time.</FormFeedback>
             </Col>
           </Row>
           <FormGroup check>
-            <Label check>
-              <Input
-                type="checkbox"
-                value={user.adult}
-              />
-              {' '}
-              I am an adult
-            </Label>
+            <Input
+              type="checkbox"
+              id="adult"
+              name="adult"
+              value={adult}
+              invalid={submitted && !adult}
+              onChange={this.handleCheckboxChange}
+            />
+            {' '}
+            <Label for="adult" check>I am an adult *required</Label>
             <FormFeedback>You need to be an adult to use our service.</FormFeedback>
           </FormGroup>
           <FormGroup check>
-            <Label check>
-              <Input
-                type="checkbox"
-                value={user.adult}
-              />
-              {' '}
-              I agree to the Terms of Service
-            </Label>
+            <Input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              value={terms}
+              invalid={submitted && !terms}
+              onChange={this.handleCheckboxChange}
+            />
+            {' '}
+            <Label for="terms" check>I agree to the Terms of Service *required</Label>
             <FormFeedback>You need to accept our Terms of Service to use our service.</FormFeedback>
           </FormGroup>
-          <Button color="primary">Sign Up</Button>
+          <Button color="primary" disabled={!adult || !terms}>Sign Up</Button>
         </Form>
-        {this.props.regStatus.error.message && 
-        <Error message={this.props.regStatus.error.message} />
+        {this.props.regStatus.error.message &&
+          <Error message={this.props.regStatus.error.message} />
         }
       </Container>
     );
