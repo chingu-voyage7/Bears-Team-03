@@ -28,7 +28,7 @@ import './App.css';
   }
 
   render() {    
-    const {registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription} = this.props;
+    const {registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription, setApplicantStatus} = this.props;
     return (
       <ErrorBoundary>
           <Router>
@@ -40,9 +40,9 @@ import './App.css';
                   <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} regStatus={regStatus}  resetErr={resetRegistrationError}/>} />
                   <Route path="/search" render={props => <ConnectedSearch {...props} />} />
                   <Route path="/details-project" render={props => <ProjectDetails {...props} prjStatus={prjStatus} auth={auth} toggleSubscription={toggleSubscription}/>} />
-                  <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} publish={createProject} prjStatus={projectCreationStatus} resetErr={resetProjectError} />)}  auth={auth} />
-                  <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} edit={editProject} prjStatus={projectCreationStatus} resetErr={resetProjectError} />)} auth={auth} />
-                  <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} />)}  auth={auth} />
+                  <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} publish={createProject} prjStatus={prjStatus} resetErr={resetProjectError} />)}  auth={auth} />
+                  <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} edit={editProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
+                  <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} setApplicantStatus={setApplicantStatus} />)}  auth={auth} />
                   <Route component={Page404} /> 
                 </Switch>
               </>

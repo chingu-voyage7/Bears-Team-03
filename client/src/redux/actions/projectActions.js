@@ -82,7 +82,27 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
       headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken}
     };
 
-    return fetch(`/project/subscription?projectId=${prjId}`, fetchOptions)
+    return fetch(`/project/applicant/subscription?projectId=${prjId}`, fetchOptions)
+      .then(res => res.json())
+      .then((project) => {
+        if (project.fail) {
+          dispatch({ type: createProject.FAILURE, payload: project.fail });
+        } else {
+          dispatch({ type: createProject.SUCCESS, payload: project.response });
+        }
+      })
+      .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+  }
+
+  export const setStatusAction = (data) => dispatch => {
+    dispatch({ type: createProject.REQUEST });
+    const fetchOptions = {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
+      body: JSON.stringify(data)
+    };
+
+    return fetch(`/project/applicant/set-status`, fetchOptions)
       .then(res => res.json())
       .then((project) => {
         if (project.fail) {

@@ -37,7 +37,11 @@ exports.projectCreateOne = (req, res) => {
 
 exports.projectGetAll = (req, res) => {
   Project.find({})
-    .populate('applicants', '_id fullname email phone')
+    .populate({
+      path:'applicants.applicantInfo',
+      model: 'User',
+      select:'_id fullname email phone'
+    })
     .then(projects => res.status(200).json(projects))
     .catch(err => res.status(500).json({ fail: err }));
 };
@@ -110,12 +114,34 @@ exports.projectToggleSubscription = async (req, res) => {
   try {
     let projectToUpdate = await Project.findById(req.query.projectId);
 
-    let upToDatePrj = await projectToUpdate.toggleSubscription(req.userData.id)
-    await upToDatePrj
-              .populate({path: 'applicants', select: 'fullname _id'})
+    await projectToUpdate.toggleSubscription(req.userData.id);
+    await projectToUpdate.populate({
+                path: 'applicants.applicantInfo',
+                select: 'fullname _id'})
               .execPopulate();
+    return res.json({response: projectToUpdate});
+  } catch (error) {
+    res.status(500).json({fail:error});
+  }
+};
 
-    return res.json({response: upToDatePrj});
+exports.projectSetApplicantState = async (req, res) => {
+  const {projectId, applicantId, status} = req.body;
+  try {
+    let projectToUpdate = await Project.findById(projectId);
+    // CHECK TO ACTIVATE ONCE THE PROJECT OWNER IS DEFINED
+    /* if(req.userData && req.userData.id === projectToUpdate._id) {
+
+    } else {
+      res.status(401).json({message:'unauthorized'});
+    } */
+
+    await projectToUpdate.setApplicantState(applicantId, status);
+    await projectToUpdate.populate({
+                path: 'applicants.applicantInfo',
+                select: 'fullname _id'})
+              .execPopulate();
+    return res.json({response: projectToUpdate});
   } catch (error) {
     res.status(500).json({fail:error});
   }

@@ -5,7 +5,9 @@ class ProjectDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prj : {}
+      prj : {
+        applicants: [] // to reduce boilerplate ( check against applicanst existence no needed anymore)
+      }
     }
   }
 
@@ -20,7 +22,6 @@ class ProjectDetails extends React.Component {
     } else {
       this.setState({prj: prj_id}); // fetch prj
     }
-
   }
 
   formatDate = (ISODate) => {
@@ -31,12 +32,17 @@ class ProjectDetails extends React.Component {
   handleApplication = () => {
     this.props.toggleSubscription(this.state.prj._id)
       .then(() => {
-        let applicants = this.props.prjStatus.newProject ? this.props.prjStatus.newProject.applicants : [];
-        this.setState({
-          prj: {
-            applicants: applicants
-          }
-        })
+        const {newProject} = this.props.prjStatus;
+        if (newProject) {
+          newProject.startDate = this.formatDate(newProject.startDate);
+          newProject.endDate = this.formatDate(newProject.endDate);
+          newProject.dueDate = this.formatDate(newProject.dueDate);
+          this.setState({
+            prj: newProject
+          })
+        } else {
+          console.log('something went wrong');
+        }
       });    
   }
 
@@ -71,15 +77,11 @@ class ProjectDetails extends React.Component {
         <p>{ownerId}</p>
         <p><span>{phoneContact}</span> <span>{email}</span> </p>
         <button onClick={this.handleApplication} >Apply for the role!</button>
-        <h6>Already applying: {applicants && applicants.length}</h6>
+        <h6>Already applying: {applicants.length}</h6>
         <ul>
-          {applicants &&applicants.map((guy) => {
-            if(guy) {
-              return <li key={guy._id}>{guy.fullname}</li>
-            } else {
-              return <li>Unknown</li>
-            }
-          })}
+          {
+            applicants.map((guy) => <li key={guy._id}>{guy.applicantInfo.fullname}</li>)
+          }
         </ul>
       </div>
     );

@@ -51,24 +51,58 @@ const projectSchema = new mongoose.Schema({
     type: String
   },
   applicants: {
-    type: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+   type: [{
+      applicantInfo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      state: {
+        type: String,
+        default: 'pending'
+      }
     }],
     default: []
   }
 });
 
-projectSchema.methods.toggleSubscription = async function toggleSubscription(id) {
-  const subscriberIndex = this.applicants.indexOf(id);
-
-  if (subscriberIndex === -1) {
-    this.applicants.push(id);
+projectSchema.methods.toggleSubscription = async function toggleSubscription(userId) {
+  
+  let subscriberIndex = this.applicants.findIndex(userInfo => userInfo.applicantInfo.toString() == userId)
+  
+  if (subscriberIndex === -1){
+    let mongoID = mongoose.Types.ObjectId(userId);
+    this.applicants.push({applicantInfo: mongoID, state: 'pending'});
   } else {
     this.applicants.splice(subscriberIndex, 1);
+  };
+  
+  try {
+    await this.save();
+  } catch(error) {
+    throw new Error('Something went wrong during subscription');
   }
-  await this.save();
+
   return this;
+}
+
+projectSchema.methods.setApplicantState = async function setApplicantState(applicantId, state) {
+  
+  let subscriberIndex = this.applicants.findIndex(applicant => applicant.applicantInfo.toString() == applicantId)
+  
+  if (subscriberIndex === -1){
+    throw new Error('Applicant not found');
+  } else {
+    this.applicants[subscriberIndex].state = state;
+  };
+
+  try {
+    await this.save();
+  } catch(error) {
+    throw new Error('Something went wrong during subscription');
+  }
+  return {doc:this, 
+          applicantId,
+          state};
 }
 
 module.exports = mongoose.model('Project', projectSchema);
