@@ -32,10 +32,6 @@ class Search extends Component {
         .catch(err => console.log(err));
     }
 
-    editProject = (prj) => {
-        this.props.history.push('/edit-project', { prj });
-    }
-
     filterProjects = e => {
         this.setState({
             [e.target.id]: e.target.value
@@ -61,7 +57,9 @@ class Search extends Component {
                             onChange={this.filterProjects}
                         />
                 <hr/>
-                <List editProject={this.editProject} deleteProject={deleteProject} prjs={visibleProjects} />
+                <List 
+                    deleteProject={deleteProject}
+                    prjs={visibleProjects} />
                 </Col>
             </Row>
         </Container>

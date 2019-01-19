@@ -50,6 +50,25 @@ const projectSchema = new mongoose.Schema({
   ownerId: {
     type: String
   },
+  applicants: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    default: []
+  }
 });
+
+projectSchema.methods.toggleSubscription = async function toggleSubscription(id) {
+  const subscriberIndex = this.applicants.indexOf(id);
+
+  if (subscriberIndex === -1) {
+    this.applicants.push(id);
+  } else {
+    this.applicants.splice(subscriberIndex, 1);
+  }
+  await this.save();
+  return this;
+}
 
 module.exports = mongoose.model('Project', projectSchema);

@@ -75,5 +75,24 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
       .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
   };
 
+  export const toggleSubscriptionAction = (prjId) => dispatch => {
+    dispatch({ type: createProject.REQUEST });
+    const fetchOptions = {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken}
+    };
+
+    return fetch(`/project/subscription?projectId=${prjId}`, fetchOptions)
+      .then(res => res.json())
+      .then((project) => {
+        if (project.fail) {
+          dispatch({ type: createProject.FAILURE, payload: project.fail });
+        } else {
+          dispatch({ type: createProject.SUCCESS, payload: project.response });
+        }
+      })
+      .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+  }
+
   export const resetProjectErrorAction = () => {
     return {type: createProject.RESET_ERR}};
