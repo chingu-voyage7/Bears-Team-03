@@ -1,0 +1,21 @@
+.card-body .card-subtitle {
+    margin-bottom: 1.5rem;
+}
+
+small {
+    font-weight: 600;
+    font-style: italic;
+}
+
+ p.card-text:last-child {
+    font-style: italic;
+}
+
+.tag-stripe {
+    display: flex;
+    justify-content: center;
+}
+
+.tag-stripe .badge {
+    margin: 0 0.5rem 1rem 0.5rem;
+}

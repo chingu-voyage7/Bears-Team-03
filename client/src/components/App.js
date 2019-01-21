@@ -5,7 +5,7 @@ import {
 
 import RegistrationPage from './RegistrationPage';
 import ProjectPage from './projectForm/ProjectPage';
-import ProjectDetails from './ProjectDetails';
+import ProjectDetails from './projectDetails/ProjectDetails';
 import Login from './Login';
 import Navigation from './navbar/Navbar';
 import FakeList from './FakeProjList';
