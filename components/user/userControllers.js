@@ -23,10 +23,10 @@ exports.userCreateOne = (req, res) => {
           country: req.body.country,
           stateOrProvince: req.body.stateOrProvince,
           zipCode: req.body.zipCode,
-         // timeAvailability: req.body.timeAvailability,
-         timeAvailability: req.body.hours,
-         phone: req.body.phone,
-         volunteerField: req.body.volunteerField,
+          // timeAvailability: req.body.timeAvailability,
+          timeAvailability: req.body.hours,
+          phone: req.body.phone,
+          volunteerField: req.body.volunteerField,
         });
         newUser
           .save()
@@ -44,10 +44,10 @@ exports.userGetAll = (req, res) => {
 };
 
 exports.userGetByID = (req, res) => {
-  User.find({ _id: req.userData.id })
-    .then((user) => {
-      if (user) {
-        res.status(200).json(user);
+  User.findOne({ _id: req.userData.id })
+    .then((currentUser) => {
+      if (currentUser) {
+        res.status(200).send({ currentUser });
       } else {
         res.status(404).json({ fail: { message: 'User not found!' } });
       }
