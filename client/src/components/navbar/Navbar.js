@@ -47,6 +47,9 @@ class Navigation extends Component {
               isLoggedIn ? (
                 <>
                   <NavItem>
+                    <Button color="primary" tag={Link} to="/prlist">List Prjs</Button>
+                  </NavItem>
+                  <NavItem>
                     <Button color="primary" tag={Link} to="/create-project">Create project</Button>
                   </NavItem>
                   <NavItem>
