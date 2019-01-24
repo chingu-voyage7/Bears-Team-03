@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {fetchUsersAction, registerUserAction, resetRegistrationErrorAction} from '../redux/actions/userActions';
 import { loginAction, verifyAction, logoutAction, resetLoginErrorAction } from '../redux/actions/authActions';
 
-import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction, resetProjectErrorAction, toggleSubscriptionAction } from '../redux/actions/projectActions';
+import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction, resetProjectErrorAction, toggleSubscriptionAction, setStatusAction } from '../redux/actions/projectActions';
 
 import App from '../components/App';
 
@@ -42,7 +42,8 @@ const mapDispatchToProps = dispatch => ({
   resetProjectError: () => dispatch(resetProjectErrorAction()),
   resetLoginError: () => dispatch(resetLoginErrorAction()),
   resetRegistrationError: () => dispatch(resetRegistrationErrorAction()),
-  toggleSubscription: prjId => dispatch(toggleSubscriptionAction(prjId))
+  toggleSubscription: prjId => dispatch(toggleSubscriptionAction(prjId)),
+  setApplicantStatus: data => dispatch(setStatusAction(data))
 });
 
 /*
