@@ -4,7 +4,7 @@ export const loginAction = loginData => (dispatch) => {
   dispatch({ type: loginProcess.REQUEST });
   const fetchOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(loginData),
   };
 
@@ -25,8 +25,8 @@ export const verifyAction = token => (dispatch) => {
   dispatch({ type: loginProcess.REQUEST });
   const fetchOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({token}),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
   };
 
   return fetch('/verify-token', fetchOptions)
@@ -52,4 +52,24 @@ export const logoutAction = () => {
 };
 
 export const resetLoginErrorAction = () => {
-  return {type: loginProcess.RESET_ERR}};
+  return { type: loginProcess.RESET_ERR }
+};
+
+export const fetchUserAction = () => (dispatch) => {
+  dispatch({ type: loginProcess.REQUEST });
+  const fetchOptions = {
+    method: 'GET',
+    headers: { 'Authorization': localStorage.accessToken },
+  };
+
+  return fetch('/user/get-by-id', fetchOptions)
+    .then(res => res.json())
+    .then((currentUser) => {
+      if (currentUser.fail) {
+        dispatch({ type: loginProcess.FAILURE, payload: currentUser.fail });
+      } else {
+        dispatch({ type: loginProcess.SUCCESS, payload: currentUser });
+      }
+    })
+    .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+};
