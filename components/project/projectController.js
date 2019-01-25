@@ -63,6 +63,13 @@ exports.projectGetByName = (req, res) => {
     .catch(err => res.status(500).json({ fail: err }));
 };
 
+exports.projectGetByOwner = (req, res) => {
+  Project.find({ ownerId: req.userData.id })
+    .populate('applicants.applicantInfo', '_id fullname email phone')
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({ fail: err }));
+};
+
 /* NEED REFACTOR (pre-hook?) - FIND OPS TWICE [layer] NEEDED TO RETURN THE UPD DOC */
 exports.projectUpdateById = (req, res) => {
   Project.findById(req.body.id)
@@ -141,8 +148,10 @@ exports.projectSetApplicantState = async (req, res) => {
                 path: 'applicants.applicantInfo',
                 select: 'fullname _id'})
               .execPopulate();
+    console.log('test', projectToUpdate);
     return res.json({response: projectToUpdate});
   } catch (error) {
+    console.log('testerr', error);
     res.status(500).json({fail:error});
   }
 };

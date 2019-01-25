@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
               <Card>
                 <CardBody className="bg-primary text-center rounded-top">
                   <div className="user-box">
-                    <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile image" />
+                    <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile" />
                   </div>
                   <h5 className="mb-1 text-white">{this.state.fullname}</h5>
                   <h6 className="text-light">Volunteer</h6>

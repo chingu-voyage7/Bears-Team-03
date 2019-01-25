@@ -14,9 +14,9 @@ import './listItem.css';
             <span className="card-title-details">
             {`${prj.projectLocationAddress} - ${prj.projectLocationCountry} - `}
             </span>
-            <button onClick={() => detailsPrj(prj)}>details</button>
-            <button onClick={() => editPrj(prj)}>edit</button>
-            <button onClick={() => deletePrj(prj._id)}>delete</button>
+            {detailsPrj && <button onClick={() => detailsPrj(prj)}>details</button>}
+            {editPrj && <button onClick={() => editPrj(prj)}>edit</button>}
+            {deletePrj && <button onClick={() => deletePrj(prj._id)}>delete</button>}
           </div>
           <hr/>
           <CardText>{prj.projectDescription}</CardText>
@@ -47,7 +47,8 @@ ListItem.propTypes = {
     workFields: PropTypes.arrayOf(String),
     ownerId: PropTypes.string
   }),
-  editPrj: PropTypes.func.isRequired
+  editPrj: PropTypes.func,
+  deletePrj: PropTypes.func
 }
 
 export default ListItem;
