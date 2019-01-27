@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+const helmet = require('helmet');
 const app = express();
 
 const userRoutes = require('./components/user/userRoutes');
@@ -11,7 +12,7 @@ const {prepopulate} = require('./components/dummy-data');
 // Standard middleware that convert incoming request data ( if formatted as json)
 // and put it into the req.body property
 app.use(express.json());
-
+app.use(helmet());
 // Appending user routes using a common identifier ( ... /users/...)
 app.use('/user', userRoutes);
 app.use('/business', businessRoutes);
