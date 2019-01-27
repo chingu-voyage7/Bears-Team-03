@@ -40,25 +40,37 @@ class ProtectedListItem extends React.Component {
       });
     }
 
-    clickHandler = async (e) => {
-      //let projectId = e.target.closest('div').id;
+
+    clickHandler = (e) => {
       let projectId = this.props.prj._id;
       let applicantId = e.target.closest('li').id;
-      let status = e.target.id;
-      await this.props.setApplicantStatus({projectId ,applicantId, status});
+      let status = e.target.closest('span').id;
+      this.props.setApplicantStatus({projectId ,applicantId, status}); // TODO: The update cause a memory leak, must be solved
+    }
+
+    deleteHandler = () => {
+      let beSure = window.confirm("This will erase your project from our database! Do you want to continue?");
+      if(beSure) {
+        this.props.deletePrj(this.props.prj._id)
+      }
     }
 
     render() {
-      const {prj, editPrj, deletePrj} = this.props;
+      const {prj, editPrj} = this.props;
       const {pending, accepted, rejected} = this.state;
         return (
           <Card className="card-item" >
           <CardBody>
             <div className="flex-container">
               <span className="card-title" >{prj.projectName} - {prj.projectDescription}</span>
-              <button onClick={() => editPrj(prj)}>edit</button>
-               <button onClick={() => deletePrj(prj._id)}>delete</button>
+              <div className="list-icon info">
+                <i className={'fa fa-pen'} onClick={() => editPrj(prj)}></i>      
+              </div>
+              <div className="list-icon danger">
+                <i className={'fa fa-window-close'}  onClick={this.deleteHandler}></i>      
+              </div>
             </div>
+
             <hr/>
             <div className="flex-footer">
             <ul className="card-title-details">
@@ -67,9 +79,13 @@ class ProtectedListItem extends React.Component {
                                         key={applicant.applicantInfo._id}  
                                         id={applicant.applicantInfo._id}
                                        >
-                                          {applicant.applicantInfo.fullname} - {applicant.state}
-                                          <button id="accept" onClick={this.clickHandler}>Accept</button>
-                                          <button id="reject" onClick={this.clickHandler}>Reject</button>
+                                          {applicant.applicantInfo.fullname} - <span>PENDING</span>
+                                          <span  id="accept" onClick={this.clickHandler} className="list-icon confirm">
+                                            <i className={'fa fa-check'}></i>      
+                                          </span>
+                                          <span id="reject" onClick={this.clickHandler} className="list-icon danger">
+                                            <i className={'fa fa-times'}></i>      
+                                          </span>
                                       </li>)
                                   )}
               </ul>

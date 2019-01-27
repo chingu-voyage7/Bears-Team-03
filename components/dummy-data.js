@@ -3,8 +3,8 @@ const Project = require('./project/projectModel');
 
 exports.prepopulate = async (req, res) => {
 
-/*     await User.deleteMany({fullname: {$in: ["jhon", "debbie","frank"]}});
-    await Project.deleteMany({}); */
+    await User.deleteMany({fullname: {$in: ["jhon", "debbie","frank"]}});
+    await Project.deleteMany({});
 
 	try {
         const mockData = await User.findOne({fullname: "frank"});
@@ -78,9 +78,7 @@ exports.prepopulate = async (req, res) => {
             startDate: "2019-01-20T00:00:00.000Z",
             endDate: "2019-02-20T00:00:00.000Z",
             ownerId: jhon._id,
-            applicants: [],
-            accepted: [{applicantInfo: frank._id, state: 'accept'}],
-            rejected: []
+            applicants: [{applicantInfo: frank._id, state: 'accept'}]
         });
 
         const HelpThePoors = await Project.create({
@@ -97,9 +95,7 @@ exports.prepopulate = async (req, res) => {
             startDate: "2019-01-03T00:00:00.000Z",
             endDate: "2019-01-03T00:00:00.000Z",
             ownerId: debbie._id,
-            applicants: [],
-            accepted: [{applicantInfo: frank._id, state: 'accept'}],
-            rejected: [{applicantInfo: jhon._id, state: 'reject'}]
+            applicants: [{applicantInfo: frank._id, state: 'accept'},{applicantInfo: jhon._id, state: 'reject'}]
         });
 
         const SitIn = await Project.create({
@@ -117,7 +113,7 @@ exports.prepopulate = async (req, res) => {
             startDate: "2019-02-01T00:00:00.000Z",
             endDate: "2019-03-30T00:00:00.000Z",
             ownerId: jhon._id,
-            applicants: [{applicantInfo: frank._id, state: 'pending'}, {applicantInfo: jhon._id, state: 'pending'}]
+            applicants: [{applicantInfo: frank._id, state: 'pending'}, {applicantInfo: debbie._id, state: 'pending'}]
         });
 
 		return res.status(200).json({message: "Db Populated"});

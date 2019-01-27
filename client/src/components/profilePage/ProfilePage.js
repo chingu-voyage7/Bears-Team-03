@@ -101,7 +101,7 @@ class ProfilePage extends React.Component {
                           </Col>
                           <Col md="6">
                             <h6>Global goals</h6>
-                            {this.state.volunteerField.map((field, index) => {
+                            {this.state.volunteerField &&this.state.volunteerField.map((field, index) => {
                               return (<Badge key={index} color="dark">{field}</Badge>);
                             })}
                           </Col>

@@ -11,7 +11,7 @@ export default class ProjectPage extends React.Component {
     super(props);
     this.state = {
       name: '',
-      ownerId: 'myCompany', // The first option of ownerId select
+      ownerId: '',
       dueDate: '',
       startDate: '',
       endDate: '',
@@ -30,7 +30,7 @@ export default class ProjectPage extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     if (this.props.location.state && this.props.location.state.prj) {
       const {prj} = this.props.location.state;
 
@@ -78,6 +78,7 @@ export default class ProjectPage extends React.Component {
     // eslint-disable-next-line no-console
     const projectData = {...this.state};
     delete projectData.projectTimespan;
+    delete projectData.user;
     
     this.state.id ?
     this.props.edit(projectData, this.props.history) :
@@ -124,7 +125,7 @@ export default class ProjectPage extends React.Component {
     const {
       name, ownerId, dueDate, from, to, description, workFields, address, country, email, phone,workDays, startDate, endDate, projectTimespan, applicationRequirements
     } = this.state;
-    
+    const { currentUser } = this.props.auth;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
         <h2>CREATE A NEW PROJECT</h2>
@@ -152,11 +153,10 @@ export default class ProjectPage extends React.Component {
                     type="select"
                     name="ownerId"
                     id="ownerId"
-                    value={ownerId}
+                    defaultValue={ownerId}
                     onChange={this.handleChange}
                   >
-                    <option>myCompany</option>
-                    <option>myOtherCompany</option>
+                    <option id={currentUser._id}>{currentUser.fullname}</option>
                   </Input>
                   {validationErrors && validationErrors.customer &&
           <FormText color="danger">{validationErrors.customer.map((err, i) => <div key={i}>{err}</div>)}</FormText>}

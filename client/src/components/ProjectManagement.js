@@ -16,7 +16,7 @@ class ProjectManagement extends Component {
 
     componentDidMount() {
         this.fetchProjects();
-    }
+    };
 
     componentDidUpdate(prevProps) {
         if(this.props.deleteStatus !== prevProps.deleteStatus) {

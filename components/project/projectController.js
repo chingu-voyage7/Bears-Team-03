@@ -148,7 +148,7 @@ exports.projectSetApplicantState = async (req, res) => {
                 path: 'applicants.applicantInfo',
                 select: 'fullname _id'})
               .execPopulate();
-    console.log('test', projectToUpdate);
+              
     return res.json({response: projectToUpdate});
   } catch (error) {
     console.log('testerr', error);
