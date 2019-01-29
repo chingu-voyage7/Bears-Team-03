@@ -36,7 +36,8 @@ class RegistrationPage extends React.Component {
         phone: '',
         volunteerField: [],
         days: [],
-        hours: [],
+        from: '',
+        to: '',
       },
       validate: {
         email: '',
@@ -111,7 +112,24 @@ class RegistrationPage extends React.Component {
     event.preventDefault();
     if (this.state.adult && this.state.terms) {
       try {
-        await this.props.register(this.state.user);
+        const { fullname, email, password, gender, streetAddress,
+          city, stateOrProvince, zipCode, country, phone,
+          volunteerField, days, from, to } = this.state.user;
+        await this.props.register({
+          fullname,
+          email,
+          password,
+          gender,
+          streetAddress,
+          city,
+          stateOrProvince,
+          zipCode,
+          country,
+          phone,
+          volunteerField,
+          days,
+          hours: [from, to]
+        });
         if (!this.props.regStatus.isPending && Object.keys(this.props.regStatus.newUser).length !== 0) {
           this.props.history.push('/login');
         }
@@ -348,11 +366,11 @@ class RegistrationPage extends React.Component {
           <Row form>
             <Col md={6}>
               <FormGroup>
-                <Label for="hours">Start Time:</Label>
+                <Label for="from">Available from:</Label>
                 <Input
                   type="time"
-                  name="hours"
-                  value={user.hours}
+                  name="from"
+                  value={user.from}
                   onChange={this.handleChange}
                 />
                 {validationErrors && validationErrors.hours &&
@@ -362,11 +380,11 @@ class RegistrationPage extends React.Component {
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for="hours">End Time:</Label>
+                <Label for="to">Available until:</Label>
                 <Input
                   type="time"
-                  name="hours"
-                  value={user.hours}
+                  name="to"
+                  value={user.to}
                   onChange={this.handleChange}
                 />
                 {validationErrors && validationErrors.hours &&
