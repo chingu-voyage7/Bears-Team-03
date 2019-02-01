@@ -64,7 +64,7 @@ exports.projectGetByName = (req, res) => {
 };
 
 exports.projectGetByOwner = (req, res) => {
-  Project.find({ ownerId: req.userData.id })
+  Project.find({ ownerId: req.userData.fullname })
     .populate('applicants.applicantInfo', '_id fullname email phone')
     .then(projects => res.status(200).json(projects))
     .catch(err => res.status(500).json({ fail: err }));

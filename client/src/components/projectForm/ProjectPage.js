@@ -11,7 +11,7 @@ export default class ProjectPage extends React.Component {
     super(props);
     this.state = {
       name: '',
-      ownerId: '',
+      ownerId: this.props.auth.currentUser.fullname,
       dueDate: '',
       startDate: '',
       endDate: '',
