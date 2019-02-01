@@ -54,15 +54,11 @@ const userSchema = new mongoose.Schema({
   volunteerField: {
     type: [String],
   },
-  /* timeAvailability: {
-    type: [timespanSchema],
-    required: true,
-  }, */
+
   timeAvailability: {
     type: String,
     required: true,
   },
- // addressData: [addressSchema],
  address: {
   type: String,
 },
@@ -88,7 +84,7 @@ It requires:
  - password to encrypt
  - salt as unique and secret string used inside the encryption algorithm
   - iterations as number of cycle executed by the encryption algorithm
-  - keylength as the length ( in byte ) of the returned key
+  - key length as the length ( in byte ) of the returned key
   - digest as the selected HMAC
  */
 

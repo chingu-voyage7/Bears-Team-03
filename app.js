@@ -20,11 +20,6 @@ app.use(authRoutes);
 // Priority serve any static files.
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// // Main route for testing purpose
-// app.get('/', (req, res) => {
-//   res.status(200).json({ message: 'Get our from my main route!' });
-// });
-
 // All remaining requests return the React app, so it can handle routing.
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
