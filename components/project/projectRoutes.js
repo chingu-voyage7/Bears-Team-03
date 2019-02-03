@@ -8,6 +8,7 @@ const {
   projectCreateOne,
   projectGetAll,
   projectGetByName,
+  projectGetByOwner,
   projectUpdateById,
   projectDeleteById,
   projectSetApplicantState,
@@ -16,6 +17,7 @@ const {
 
 router.get('/get-all', projectGetAll);
 router.get('/get-by-name', projectGetByName);
+router.get('/get-by-owner', authMW, projectGetByOwner);
 router.post('/create-one', validator, authMW, projectCreateOne);
 router.patch('/update-by-id', validator, authMW, projectUpdateById);
 router.patch('/applicant/subscription', authMW, projectToggleSubscription);

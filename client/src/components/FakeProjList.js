@@ -20,7 +20,6 @@ class FakeProjList extends React.Component {
     }
     
     clickHandler = async (e) => {
-
         let projectId = e.target.closest('div').id;
         let applicantId = e.target.closest('li').id;
         let status = e.target.id;

@@ -12,10 +12,10 @@ import FakeList from './FakeProjList';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import ConnectedSearch from '../containers/ConnectedSearch';
+import ConnectedProjects from '../containers/ConnectedProjects';
 import Page404 from './Page404';
 import ErrorBoundary from './ErrorBoundary';
 import ProfilePage from './profilePage/ProfilePage';
-
 import './App.css';
 
 class App extends React.Component {
@@ -37,14 +37,15 @@ class App extends React.Component {
             <Navigation logout={logoutUser} auth={auth} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/login" render={props => <Login {...props} login={loginUser} resetErr={resetLoginError} auth={auth} />} />
+              <Route path="/login" render={props => <Login {...props} login={loginUser} fetchUser={fetchUser} resetErr={resetLoginError} auth={auth} />} />
               <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} regStatus={regStatus} resetErr={resetRegistrationError} />} />
               <ProtectedRoute path="/profile" component={(props) => (<ProfilePage {...props} resetErr={resetProjectError} fetchUser={fetchUser} auth={auth} />)} auth={auth} />
               <Route path="/search" render={props => <ConnectedSearch {...props} />} />
               <Route path="/details-project" render={props => <ProjectDetails {...props} prjStatus={prjStatus} auth={auth} toggleSubscription={toggleSubscription} />} />
               <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} setApplicantStatus={setApplicantStatus} />)} auth={auth} />
-              <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} publish={createProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
-              <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} edit={editProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
+              <ProtectedRoute path="/user-projects" component={(props) => (<ConnectedProjects {...props} setApplicantStatus={setApplicantStatus} />)} auth={auth} />
+              <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} auth={auth} publish={createProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
+              <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} auth={auth} edit={editProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
               <Route component={Page404} />
             </Switch>
           </>
