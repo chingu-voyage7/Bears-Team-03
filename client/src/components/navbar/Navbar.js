@@ -56,6 +56,9 @@ class Navigation extends Component {
                     <NavLink tag={Link} to="/profile">My profile</NavLink>
                   </NavItem>
                   <NavItem>
+                    <NavLink tag={Link} to="/user-projects">My Projects</NavLink>
+                  </NavItem>
+                  <NavItem>
                     <NavLink onClick={this.handleLogout}>Logout</NavLink>
                   </NavItem>
                 </>

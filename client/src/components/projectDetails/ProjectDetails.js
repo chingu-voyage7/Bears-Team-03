@@ -59,6 +59,7 @@ class ProjectDetails extends React.Component {
   }
 
   render() {
+    const {isLoggedIn}  = this.props.auth;
     const {applicationRequirements, applicants, email, ownerId, phoneContact, projectDescription, projectLocationAddress, projectLocationCountry, projectName, workDays, workFields, workingHours, startDate, endDate, dueDate} = this.state.prj;
     return (
       <>
@@ -77,7 +78,11 @@ class ProjectDetails extends React.Component {
           <CardText>{applicationRequirements}</CardText>
         </CardBody>
         <CardFooter>
-          <Button block  onClick={this.handleApplication} >Apply for the role!</Button>
+          <Button 
+            block
+            disabled={!isLoggedIn}
+            onClick={this.handleApplication} 
+            >Apply for the role!</Button>
         </CardFooter>
       </Card>
       <Card>
@@ -87,11 +92,9 @@ class ProjectDetails extends React.Component {
           <ListGroupItem>
               <ListGroupItemHeading>Dates</ListGroupItemHeading>
               <ListGroupItemText>
-              <div>
           <span>Project Start: </span> {startDate ? startDate : '/'}
           <br/>
           <span>Project Ends: </span> {endDate ? endDate : '/'}
-        </div>
               </ListGroupItemText>
             </ListGroupItem>
           <ListGroup>
@@ -115,8 +118,8 @@ class ProjectDetails extends React.Component {
           <CardBody>
             <CardSubtitle>WORKPLACE</CardSubtitle>
             <CardText>
-              <p>{projectLocationAddress}</p>
-              <p>{projectLocationCountry}</p>
+              <span>{projectLocationAddress}</span>
+              <span>{projectLocationCountry}</span>
             </CardText>
           </CardBody>
         </Card>
