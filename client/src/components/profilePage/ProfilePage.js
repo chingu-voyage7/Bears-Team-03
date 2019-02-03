@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, CardBody, ListGroup, Nav, NavItem, NavLink, TabContent, TabPane, Table, Badge } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, ListGroup, Nav, NavItem, NavLink, TabContent, TabPane, Table, Badge, Button } from 'reactstrap';
 
 import ProfileListItem from '../ProfileListItem';
 
@@ -105,6 +105,24 @@ class ProfilePage extends React.Component {
                               return (<Badge key={index} color="dark">{field}</Badge>);
                             })}
                           </Col>
+                          <Col md="6">
+                            <Button
+                              className="text-uppercase"
+                              color="success"
+                              size="l"
+                              onClick={() => { this.props.history.push('/prlist') }}
+                            >
+                              <i className="fa fa-check" aria-hidden="true"></i> Accept applicants
+                            </Button>
+                          </Col>
+                          <Button
+                            className="text-uppercase"
+                            color="success"
+                            size="l"
+                            onClick={() => { this.props.history.push('/user-projects') }}
+                          >
+                            <i class="fa fa-edit" aria-hidden="true"></i> Edit my projects
+                            </Button>
                           <Col md="12">
                             <h5 className="mt-2 mb-3"><span className="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
                             <Table striped hover>

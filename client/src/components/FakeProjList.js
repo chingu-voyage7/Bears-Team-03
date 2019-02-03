@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Button } from 'reactstrap';
 class FakeProjList extends React.Component {
     
     constructor(props) {
@@ -37,10 +37,10 @@ class FakeProjList extends React.Component {
                             <h4>{project.projectName}</h4>
                             <ul onClick={this.clickHandler}>
                                 {project.applicants.map(applicant => 
-                                    (<li key={applicant.applicantInfo._id}  id={applicant.applicantInfo._id}>
+                                            (<li key={applicant.applicantInfo._id} id={applicant.applicantInfo._id}>
                                         {applicant.applicantInfo.fullname} - {applicant.state}
-                                        <button id="accept">Accept</button>
-                                        <button id="reject">Reject</button>
+                                                <Button color="success" id="accept">Accept</Button>
+                                                <Button color="danger" id="reject">Reject</Button>
                                     </li>)
                                 )}
                             </ul>

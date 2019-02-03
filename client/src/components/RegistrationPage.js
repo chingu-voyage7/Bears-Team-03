@@ -419,6 +419,10 @@ class RegistrationPage extends React.Component {
             <Label for="terms" check>I agree to the Terms of Service *required</Label>
             <FormFeedback>You need to accept our Terms of Service to use our service.</FormFeedback>
           </FormGroup>
+          <Button
+          color="primary"
+          block type="button"
+          disabled={!adult || !terms}
           >
             Register
           </Button>

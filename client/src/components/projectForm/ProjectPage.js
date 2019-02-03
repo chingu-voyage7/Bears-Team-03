@@ -451,7 +451,7 @@ export default class ProjectPage extends React.Component {
               </Col>
             </Row>
             <Button
-              color="secondary"
+              color="primary"
               type="submit"
               block
             >
