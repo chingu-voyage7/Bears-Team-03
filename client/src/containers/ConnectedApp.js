@@ -42,7 +42,6 @@ const mapDispatchToProps = dispatch => ({
   resetRegistrationError: () => dispatch(resetRegistrationErrorAction()),
   toggleSubscription: prjId => dispatch(toggleSubscriptionAction(prjId)),
   fetchUser: () => dispatch(fetchUserAction()),
-  setApplicantStatus: data => dispatch(setStatusAction(data)),
   editUser: (userData) => dispatch(editUserAction(userData)),
 });
 
