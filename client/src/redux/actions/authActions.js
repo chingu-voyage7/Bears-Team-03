@@ -41,11 +41,11 @@ export const verifyAction = token => (dispatch) => {
     .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
 };
 /*
- logout - synchronous action creator
- As action creator this function return an action, which can
- be considered as an object with a property named 'type' that
- identifies it
-  */
+logout - synchronous action creator
+As action creator this function return an action, which can
+be considered as an object with a property named 'type' that
+identifies it
+*/
 export const logoutAction = () => {
   localStorage.removeItem('accessToken');
   return { type: LOGOUT };
