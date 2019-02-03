@@ -27,6 +27,7 @@ exports.userCreateOne = (req, res) => {
           timeAvailability: req.body.hours,
           phone: req.body.phone,
           volunteerField: req.body.volunteerField,
+          gravatar: req.body.gravatar,
         });
         newUser
           .save()

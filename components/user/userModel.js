@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  gravatar: {
+    type: String,
+    unique: true,
+  },
   passwordHash: {
     type: String,
     required: true,
@@ -62,22 +66,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
- // addressData: [addressSchema],
- address: {
-  type: String,
-},
- city: {
-  type: String,
-},
- country: {
-  type: String,
-},
- stateOrProvince: {
-  type: String,
-},
- zipCode: {
-  type: String,
-},
+  // addressData: [addressSchema],
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  stateOrProvince: {
+    type: String,
+  },
+  zipCode: {
+    type: String,
+  },
 });
 
 /*

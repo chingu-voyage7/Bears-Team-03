@@ -37,6 +37,7 @@ class RegistrationPage extends React.Component {
         volunteerField: [],
         days: [],
         hours: [],
+        gravatar: '',
       },
       validate: {
         email: '',
@@ -192,6 +193,25 @@ class RegistrationPage extends React.Component {
             <FormText>At least 6 characters long</FormText>
             {validationErrors && validationErrors.password &&
               <FormText color="danger">{validationErrors.password.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
+          </FormGroup>
+          <FormGroup>
+            <Label>Profile picture (gravatar email)</Label>
+            <Input
+              type="email"
+              name="gravatar"
+              id="gravatar"
+              placeholder="myemail@email.com"
+              value={user.gravatar}
+              onChange={(e) => {
+                this.handleChange(e);
+              }}
+            />
+            <FormFeedback valid>That's a tasty looking email you've got there.</FormFeedback>
+            <FormFeedback>
+              Uh oh! Looks like there is an issue with your email. Please input a correct email.
+            </FormFeedback>
+            {validationErrors && validationErrors.gravatar &&
+              <FormText color="danger">{validationErrors.gravatar.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
           </FormGroup>
           <FormGroup>
             <Label for="gender">Gender:</Label>

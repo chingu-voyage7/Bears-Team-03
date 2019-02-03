@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, CardBody, ListGroup, Nav, NavItem, NavLink, TabContent, TabPane, Table, Badge } from 'reactstrap';
+import Gravatar from 'react-gravatar';
 
 import ProfileListItem from '../ProfileListItem';
 
@@ -16,7 +17,8 @@ class ProfilePage extends React.Component {
     city: '',
     country: '',
     stateOrProvince: '',
-    timeAvailability: ''
+    timeAvailability: '',
+    gravatar: '',
   }
 
   toggle = (tab) => {
@@ -31,9 +33,9 @@ class ProfilePage extends React.Component {
     if (!this.props.auth.currentUser) {
       this.props.fetchUser();
     } else {
-      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability } = this.props.auth.currentUser;
+      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar } = this.props.auth.currentUser;
       this.setState({
-        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability
+        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar
       });
     }
   }
@@ -47,7 +49,9 @@ class ProfilePage extends React.Component {
               <Card>
                 <CardBody className="bg-primary text-center rounded-top">
                   <div className="user-box">
-                    <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile image" />
+                    {this.state.gravatar ?
+                      <Gravatar email={this.state.gravatar} size={150} /> :
+                      <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile image" />}
                   </div>
                   <h5 className="mb-1 text-white">{this.state.fullname}</h5>
                   <h6 className="text-light">Volunteer</h6>

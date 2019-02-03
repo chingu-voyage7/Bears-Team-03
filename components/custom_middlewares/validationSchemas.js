@@ -58,7 +58,10 @@ exports.registerSchema = Joi.object({
                           Joi.string().valid('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' )
                         ),
   //hours: Joi.array().min(1).items(Joi.string().regex(/[:\d]+/) )
-  hours:Joi.string().regex(/[:\d]+/)
+  gravatar: Joi.string()
+    .trim()
+    .email()
+    .allow(''),
 });
 
 exports.createProjectSchema = Joi.object({
