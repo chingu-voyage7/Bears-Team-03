@@ -43,7 +43,7 @@ class Login extends Component {
     const {validationErrors} = this.props.auth.error;
     return (
       <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
-        <h2>LOG IN</h2>
+        <h2>LOGIN</h2>
         <FormGroup>
           <Label>Email</Label>
           <Input
