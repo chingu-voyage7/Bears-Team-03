@@ -5,7 +5,7 @@ import {
   Nav, NavItem, NavLink,
 } from 'reactstrap';
 import { NavLink as RRNavLink, Link, withRouter } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 
 import './navbar.css';
 
@@ -80,11 +80,9 @@ class Navigation extends Component {
   }
 }
 
-// Navigation.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.element,
-//     PropTypes.array,
-//   ]).isRequired,
-// };
+Navigation.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
 
 export default withRouter(Navigation);

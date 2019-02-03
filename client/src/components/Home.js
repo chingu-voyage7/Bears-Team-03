@@ -41,12 +41,6 @@ class Home extends React.Component {
             </div>
           </Container>
         </header>
-        {/* <Jumbotron className="jumbo d-flex flex-column justify-content-around text-center" fluid>
-          <h1 className="display-4 col-lg-6 offset-lg-3">Make the world a better place one project at a time</h1>
-          <p className="lead">
-            <Button color="primary" size="lg">Volunteer Now</Button>
-          </p>
-        </Jumbotron> */}
         <section id="services">
           <Container>
             <Row>

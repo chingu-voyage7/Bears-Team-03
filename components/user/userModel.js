@@ -29,21 +29,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
- address: {
-  type: String,
-},
- city: {
-  type: String,
-},
- country: {
-  type: String,
-},
- stateOrProvince: {
-  type: String,
-},
- zipCode: {
-  type: String,
-},
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  stateOrProvince: {
+    type: String,
+  },
+  zipCode: {
+    type: String,
+  },
 });
 
 /*
@@ -54,7 +54,7 @@ It requires:
  - password to encrypt
  - salt as unique and secret string used inside the encryption algorithm
   - iterations as number of cycle executed by the encryption algorithm
-  - keylength as the length ( in byte ) of the returned key
+  - key length as the length ( in byte ) of the returned key
   - digest as the selected HMAC
  */
 
