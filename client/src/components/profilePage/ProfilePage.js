@@ -114,7 +114,7 @@ class ProfilePage extends React.Component {
                   <div className="user-box">
                     {this.state.gravatar ?
                       <Gravatar email={this.state.gravatar} size={150} /> :
-                      <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile image" />}
+                      <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile" />}
                   </div>
                   <h5 className="mb-1 text-white">{this.state.fullname}</h5>
                   <h6 className="text-light">Volunteer</h6>
