@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, CardBody, ListGroup, Nav, NavItem, NavLink, Button, TabContent, TabPane, Table, Badge, Form, FormGroup, Label, Input, FormFeedback, FormText, } from 'reactstrap';
+import Gravatar from 'react-gravatar';
+
 
 import ProfileListItem from '../ProfileListItem';
 import Error from '../ErrorNotification';
@@ -18,6 +20,7 @@ class ProfilePage extends React.Component {
     country: '',
     stateOrProvince: '',
     timeAvailability: '',
+    gravatar: '',
     user: {
       fullname: '',
       email: '',
@@ -83,9 +86,9 @@ class ProfilePage extends React.Component {
     if (!this.props.auth.currentUser) {
       this.props.fetchUser();
     } else {
-      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability } = this.props.auth.currentUser;
+      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar } = this.props.auth.currentUser;
       this.setState({
-        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, user: {
+        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar, user: {
           fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability
         }
       });
@@ -109,7 +112,9 @@ class ProfilePage extends React.Component {
               <Card>
                 <CardBody className="bg-primary text-center rounded-top">
                   <div className="user-box">
-                    <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile" />
+                    {this.state.gravatar ?
+                      <Gravatar email={this.state.gravatar} size={150} /> :
+                      <img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="User profile" />}
                   </div>
                   <h5 className="mb-1 text-white">{this.state.fullname}</h5>
                   <h6 className="text-light">Volunteer</h6>
@@ -163,7 +168,7 @@ class ProfilePage extends React.Component {
                           </Col>
                           <Col md="6">
                             <h6>Global goals</h6>
-                            {this.state.volunteerField &&this.state.volunteerField.map((field, index) => {
+                            {this.state.volunteerField && this.state.volunteerField.map((field, index) => {
                               return (<Badge key={index} color="dark">{field}</Badge>);
                             })}
                           </Col>

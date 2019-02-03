@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  gravatar: {
+    type: String,
+    unique: true,
+  },
   passwordHash: {
     type: String,
     required: true,
