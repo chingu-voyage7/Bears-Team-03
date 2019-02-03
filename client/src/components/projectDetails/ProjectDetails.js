@@ -3,7 +3,7 @@ import {
   Card, Button, CardTitle, CardText, CardGroup,
   CardSubtitle, CardBody, CardFooter,
   ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText,
-  Badge
+  Badge, Container
 } from 'reactstrap';
 
 import './projectDetails.css';
@@ -64,7 +64,7 @@ class ProjectDetails extends React.Component {
     const {isLoggedIn}  = this.props.auth;
     const {applicationRequirements, applicants, email, ownerId, phoneContact, projectDescription, projectLocationAddress, projectLocationCountry, projectName, workDays, workFields, workingHours, startDate, endDate, dueDate} = this.state.prj;
     return (
-      <>
+      <Container className="title-page">
     <CardGroup>
       <Card>
         <CardBody>
@@ -156,7 +156,7 @@ class ProjectDetails extends React.Component {
           </CardBody>
       </Card>
     </CardGroup>
-    </>    
+      </Container>
     );
   }
 }

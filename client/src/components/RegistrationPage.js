@@ -151,7 +151,7 @@ class RegistrationPage extends React.Component {
     const { user, validate, adult, terms, submitted } = this.state;
     const { validationErrors } = this.props.regStatus.error;
     return (
-      <Container className="RegistrationPage">
+      <Container className="title-page">
         <h2>REGISTER</h2>
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup>
@@ -420,9 +420,9 @@ class RegistrationPage extends React.Component {
             <FormFeedback>You need to accept our Terms of Service to use our service.</FormFeedback>
           </FormGroup>
           <Button
-          color="primary"
-          block type="button"
-          disabled={!adult || !terms}
+            color="primary"
+            block type="button"
+            disabled={!adult || !terms}
           >
             Register
           </Button>

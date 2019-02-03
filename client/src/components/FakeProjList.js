@@ -28,7 +28,7 @@ class FakeProjList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="title-page">
                 <ul>
                     {
                         this.state.projects.map(project => 

@@ -40,7 +40,7 @@ class ProfilePage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="title-page">
         <Row>
           <Col lg="4">
             <div className="profile-card shadow">

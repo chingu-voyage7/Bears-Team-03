@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, FormText, Label, Input, Col
+  Button, FormGroup, FormText, Label, Input, Container
 } from 'reactstrap';
 import Error from './ErrorNotification';
 
@@ -42,7 +42,7 @@ class Login extends Component {
     const {email, password } = this.state;
     const {validationErrors} = this.props.auth.error;
     return (
-      <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
+      <Container className="title-page">
         <h2>LOGIN</h2>
         <FormGroup>
           <Label>Email</Label>
@@ -72,7 +72,7 @@ class Login extends Component {
         {this.props.auth.error.message && 
         <Error message={this.props.auth.error.message} />
         }
-      </Col>
+      </Container>
     );
   }
 }

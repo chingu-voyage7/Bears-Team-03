@@ -127,7 +127,7 @@ export default class ProjectPage extends React.Component {
     } = this.state;
     const { currentUser } = this.props.auth;
     return (
-      <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
+      <Container className="title-page">
         <h2>{this.state.id ? 'EDIT' : 'CREATE'} PROJECT</h2>
         <Container className="form-frame">
           <Form onSubmit={this.handleSubmit}>
@@ -462,7 +462,7 @@ export default class ProjectPage extends React.Component {
         <Error message={this.props.prjStatus.error.message} />
         }
         </Container>
-      </Col>
+      </Container>
     );
   }
 }

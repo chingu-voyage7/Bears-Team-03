@@ -51,8 +51,8 @@ class ProjectManagement extends Component {
     let visibleProjects = prjs.filter(prj => pattern.test(prj.projectName));
 
     return (
-        <Container fluid>
-            <Row style={{marginTop: "2rem"}}>
+            <Container fluid className="title-page">
+                <Row style={{ marginTop: "2rem" }}>
                 <Col>
                     <Input 
                             type="text"

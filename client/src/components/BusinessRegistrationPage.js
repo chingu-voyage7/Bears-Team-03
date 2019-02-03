@@ -21,8 +21,8 @@ class BusinessRegistrationPage extends Component {
 
   render() {
     return (
-          <Container className="BusinessRegistrationPage">
-              <h2>Business Registration</h2>
+      <Container className="title-page">
+        <h2>BUSINESS REGISTRATION</h2>
               <Form className="form">
                   {/* COMPANY NAME */}
                   <FormGroup>
