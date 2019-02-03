@@ -42,7 +42,7 @@ class Navigation extends Component {
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/search">
-                <i class="fa fa-search" aria-hidden="true"></i> Search
+                <i className="fa fa-search" aria-hidden="true"></i> Search
               </NavLink>
             </NavItem>
             {
@@ -50,12 +50,12 @@ class Navigation extends Component {
                 <>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      <i class="fa fa-user" aria-hidden="true"></i> Profile
+                      <i className="fa fa-user" aria-hidden="true"></i> Profile
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>
                         <NavLink tag={Link} to="/profile">
-                          <i class="fa fa-user" aria-hidden="true"></i> Profile
+                          <i className="fa fa-user" aria-hidden="true"></i> Profile
                         </NavLink>
                       </DropdownItem>
                       <DropdownItem>

@@ -101,7 +101,7 @@ class ProfilePage extends React.Component {
                           </Col>
                           <Col md="6">
                             <h6>Global goals</h6>
-                            {this.state.volunteerField &&this.state.volunteerField.map((field, index) => {
+                            {this.state.volunteerField && this.state.volunteerField.map((field, index) => {
                               return (<Badge key={index} color="dark">{field}</Badge>);
                             })}
                           </Col>
@@ -121,7 +121,7 @@ class ProfilePage extends React.Component {
                             size="l"
                             onClick={() => { this.props.history.push('/user-projects') }}
                           >
-                            <i class="fa fa-edit" aria-hidden="true"></i> Edit my projects
+                            <i className="fa fa-edit" aria-hidden="true"></i> Edit my projects
                             </Button>
                           <Col md="12">
                             <h5 className="mt-2 mb-3"><span className="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
