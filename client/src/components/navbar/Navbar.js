@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Button, Collapse,
   Navbar, NavbarToggler, NavbarBrand,
-  Nav, NavItem, NavLink,
+  Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import { NavLink as RRNavLink, Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -41,25 +41,45 @@ class Navigation extends Component {
               <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/search">Search</NavLink>
+              <NavLink tag={Link} to="/search">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </NavLink>
             </NavItem>
             {
               isLoggedIn ? (
                 <>
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                      <i class="fa fa-user" aria-hidden="true"></i> Profile
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem>
+                        <NavLink tag={Link} to="/profile">
+                          <i class="fa fa-user" aria-hidden="true"></i> Profile
+                        </NavLink>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <NavLink tag={Link} to="/prlist">
+                          <i className="fa fa-check" aria-hidden="true"></i> Accept applicants
+                        </NavLink>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <NavLink tag={Link} to="/user-projects">
+                          <i className="fa fa-tasks" aria-hidden="true"></i> Edit projects
+                        </NavLink>
+                      </DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem>
+                        <NavLink onClick={this.handleLogout}>
+                          Logout
+                        </NavLink>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                   <NavItem>
-                    <Button color="primary" tag={Link} to="/prlist">List Prjs</Button>
-                  </NavItem>
-                  <NavItem>
-                    <Button color="primary" tag={Link} to="/create-project">Create project</Button>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} to="/profile">My profile</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} to="/user-projects">My Projects</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink onClick={this.handleLogout}>Logout</NavLink>
+                    <Button color="primary" tag={Link} to="/create-project">
+                      Create project
+                    </Button>
                   </NavItem>
                 </>
               ) : (
