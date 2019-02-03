@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription, fetchUser, setApplicantStatus } = this.props;
+    const { registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription, fetchUser, setApplicantStatus, editUser } = this.props;
     return (
       <ErrorBoundary>
         <Router>
@@ -39,7 +39,7 @@ class App extends React.Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" render={props => <Login {...props} login={loginUser} fetchUser={fetchUser} resetErr={resetLoginError} auth={auth} />} />
               <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} regStatus={regStatus} resetErr={resetRegistrationError} />} />
-              <ProtectedRoute path="/profile" component={(props) => (<ProfilePage {...props} resetErr={resetProjectError} fetchUser={fetchUser} auth={auth} />)} auth={auth} />
+              <ProtectedRoute path="/profile" component={(props) => (<ProfilePage {...props} resetErr={resetProjectError} fetchUser={fetchUser} editUser={editUser} regStatus={regStatus} auth={auth} />)} auth={auth} />
               <Route path="/search" render={props => <ConnectedSearch {...props} />} />
               <Route path="/details-project" render={props => <ProjectDetails {...props} prjStatus={prjStatus} auth={auth} toggleSubscription={toggleSubscription} />} />
               <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} setApplicantStatus={setApplicantStatus} />)} auth={auth} />
