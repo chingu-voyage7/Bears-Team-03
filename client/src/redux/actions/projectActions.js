@@ -14,6 +14,26 @@ export const fetchProjectsAction = () => (dispatch) => {
     .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
 };
 
+export const fetchOwnProjectsAction = () => (dispatch) => {
+  dispatch({ type: fetchProjects.REQUEST });
+
+  const fetchOptions = {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
+  };
+
+  return fetch('/project/get-by-owner', fetchOptions)
+    .then(res => res.json())
+    .then((projects) => {
+      if (projects.fail) {
+        dispatch({ type: fetchProjects.FAILURE, payload: projects.fail });
+      } else {
+        dispatch({ type: fetchProjects.SUCCESS, payload: projects });
+      }
+    })
+    .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+};
+
 export const createProjectAction = (projectData, history) => (dispatch) => {
     dispatch({ type: createProject.REQUEST });
     const fetchOptions = {

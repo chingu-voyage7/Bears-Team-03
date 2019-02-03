@@ -1,35 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 
-const timespanSchema = new mongoose.Schema({
-  days: {
-    type: [String],
-    required: true,
-  },
-  hours: {
-    type: [String],
-    required: true,
-  },
-});
-
-const addressSchema = new mongoose.Schema({
-  streetAddress: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  stateOrProvince: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  zipCode: {
-    type: Number,
-  },
-});
-
 const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
@@ -58,15 +29,10 @@ const userSchema = new mongoose.Schema({
   volunteerField: {
     type: [String],
   },
-  /* timeAvailability: {
-    type: [timespanSchema],
-    required: true,
-  }, */
   timeAvailability: {
     type: String,
     required: true,
   },
-  // addressData: [addressSchema],
   address: {
     type: String,
   },
@@ -92,7 +58,7 @@ It requires:
  - password to encrypt
  - salt as unique and secret string used inside the encryption algorithm
   - iterations as number of cycle executed by the encryption algorithm
-  - keylength as the length ( in byte ) of the returned key
+  - key length as the length ( in byte ) of the returned key
   - digest as the selected HMAC
  */
 

@@ -17,13 +17,11 @@ exports.userCreateOne = (req, res) => {
           passwordHash: req.body.password,
           adult: req.body.adult,
           gender: req.body.gender,
-          //addressData: req.body.addressData,
           address: req.body.address,
           city: req.body.city,
           country: req.body.country,
           stateOrProvince: req.body.stateOrProvince,
           zipCode: req.body.zipCode,
-          // timeAvailability: req.body.timeAvailability,
           timeAvailability: req.body.hours,
           phone: req.body.phone,
           volunteerField: req.body.volunteerField,
@@ -45,7 +43,7 @@ exports.userGetAll = (req, res) => {
 };
 
 exports.userGetByID = (req, res) => {
-  User.findOne({ _id: req.userData.id })
+  User.findOne({ _id: req.userData.id }).select("-passwordHash")
     .then((currentUser) => {
       if (currentUser) {
         res.status(200).send({ currentUser });

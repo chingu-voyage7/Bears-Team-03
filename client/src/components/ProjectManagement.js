@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 
 import { Container, Row, Col, Input } from 'reactstrap';
 
-import ListItem from './projectListItem/ListItem';
+import ProtectedListItem from './protectedListItem/ProtectedListItem';
 
-class Search extends Component {
+class ProjectManagement extends Component {
 
   constructor(props) {
     super(props);
@@ -16,13 +16,21 @@ class Search extends Component {
 
     componentDidMount() {
         this.fetchProjects();
+    };
+
+    componentDidUpdate(prevProps) {
+        if(this.props.deleteStatus !== prevProps.deleteStatus) {
+            this.fetchProjects();   // should be enough to slice the state^^
+        }
     }
 
     fetchProjects = () => {
         this.props.fetchProjects()
-        .then(() => this.setState({
+        .then(() => {
+            this.setState({
             prjs: this.props.projects.projects
-        }))
+        })
+    })
         .catch(err => console.log(err));
     }
 
@@ -32,11 +40,12 @@ class Search extends Component {
         });
     }
 
-    detailsProject = (prj) => {
-        this.props.history.push('/details-project', { prj });
-    }
+    editProject = (prj) => {
+        this.props.history.push('/edit-project', { prj });
+      }
 
   render() {
+    const { deleteProject, setApplicantStatus} = this.props;
     const { prjFilter, prjs} = this.state;
     let pattern = new RegExp(prjFilter, 'i');
     let visibleProjects = prjs.filter(prj => pattern.test(prj.projectName));
@@ -55,10 +64,14 @@ class Search extends Component {
                         />
                 <hr/>
                 <ul>
-                    {visibleProjects.map(prj => <ListItem 
+                    {visibleProjects.map(prj => <ProtectedListItem 
                     key={prj._id} 
                     prj={prj} 
-                    detailsPrj={this.detailsProject}/>
+                    editPrj={this.editProject} 
+                    deletePrj={deleteProject}
+                    setApplicantStatus={setApplicantStatus}
+                    />
+                    
                     )}
                 </ul>
                 </Col>
@@ -68,4 +81,4 @@ class Search extends Component {
   }
 }
 
-export default Search
+export default ProjectManagement
