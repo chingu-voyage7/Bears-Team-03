@@ -23,7 +23,7 @@ export const registerUserAction = registerData => (dispatch) => {
 
   const fetchOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(registerData),
   };
   return fetch('/user/register', fetchOptions)
@@ -40,6 +40,8 @@ export const registerUserAction = registerData => (dispatch) => {
 };
 
 export const resetRegistrationErrorAction = () => {
+  return { type: registerUser.RESET_ERR }
+};
 
 export const editUserAction = (userData) => (dispatch) => {
   dispatch({ type: registerUser.REQUEST });
