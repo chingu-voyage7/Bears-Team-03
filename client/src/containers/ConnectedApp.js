@@ -4,7 +4,7 @@ fact that a new component is returned from the  'connect'
 function
 */
 import { connect } from 'react-redux';
-import { fetchUsersAction, registerUserAction, resetRegistrationErrorAction } from '../redux/actions/userActions';
+import { fetchUsersAction, registerUserAction, resetRegistrationErrorAction, editUserAction } from '../redux/actions/userActions';
 import { loginAction, verifyAction, logoutAction, resetLoginErrorAction, fetchUserAction } from '../redux/actions/authActions';
 
 import { fetchProjectsAction, createProjectAction, editProjectAction, deleteProjectAction, resetProjectErrorAction, toggleSubscriptionAction } from '../redux/actions/projectActions';
@@ -42,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
   resetRegistrationError: () => dispatch(resetRegistrationErrorAction()),
   toggleSubscription: prjId => dispatch(toggleSubscriptionAction(prjId)),
   fetchUser: () => dispatch(fetchUserAction()),
+  editUser: (userData) => dispatch(editUserAction(userData)),
 });
 
 /*

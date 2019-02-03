@@ -23,7 +23,7 @@ export const registerUserAction = registerData => (dispatch) => {
 
   const fetchOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(registerData),
   };
   return fetch('/user/register', fetchOptions)
@@ -40,4 +40,25 @@ export const registerUserAction = registerData => (dispatch) => {
 };
 
 export const resetRegistrationErrorAction = () => {
-  return {type: registerUser.RESET_ERR}};
+  return { type: registerUser.RESET_ERR }
+};
+
+export const editUserAction = (userData) => (dispatch) => {
+  dispatch({ type: registerUser.REQUEST });
+  const fetchOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.accessToken },
+    body: JSON.stringify(userData),
+  };
+
+  return fetch('/user/update-by-id', fetchOptions)
+    .then(res => res.json())
+    .then((user) => {
+      if (user.fail) {
+        dispatch({ type: registerUser.FAILURE, payload: user.fail });
+      } else {
+        dispatch({ type: registerUser.SUCCESS, payload: user });
+      }
+    })
+    .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+};
