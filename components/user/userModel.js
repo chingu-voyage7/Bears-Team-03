@@ -1,35 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 
-const timespanSchema = new mongoose.Schema({
-  days: {
-    type: [String],
-    required: true,
-  },
-  hours: {
-    type: [String],
-    required: true,
-  },
-});
-
-const addressSchema = new mongoose.Schema({
-  streetAddress: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  stateOrProvince: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  zipCode: {
-    type: Number,
-  },
-});
-
 const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
@@ -54,26 +25,25 @@ const userSchema = new mongoose.Schema({
   volunteerField: {
     type: [String],
   },
-
   timeAvailability: {
     type: String,
     required: true,
   },
- address: {
-  type: String,
-},
- city: {
-  type: String,
-},
- country: {
-  type: String,
-},
- stateOrProvince: {
-  type: String,
-},
- zipCode: {
-  type: String,
-},
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  stateOrProvince: {
+    type: String,
+  },
+  zipCode: {
+    type: String,
+  },
 });
 
 /*

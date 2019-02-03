@@ -42,7 +42,7 @@ exports.userGetAll = (req, res) => {
 };
 
 exports.userGetByID = (req, res) => {
-  User.findOne({ _id: req.userData.id })
+  User.findOne({ _id: req.userData.id }).select("-passwordHash")
     .then((currentUser) => {
       if (currentUser) {
         res.status(200).send({ currentUser });

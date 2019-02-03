@@ -1,0 +1,68 @@
+.card-item {
+    /* max-width: 800px; */
+    margin: 1rem auto;
+}
+
+.card-title {
+    font:  400 1.5rem Arial, Helvetica, sans-serif;
+}
+
+.card-title-details {
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+
+.list-icon {
+    margin-left:1rem;
+}
+
+.list-icon.confirm{
+    font-size: 1.2rem;
+    padding-right: 1rem;
+    color: #34ea35;
+}
+
+.list-icon.info{
+    font-size: 1.2rem;
+    padding-right: 1rem;
+    color: #7189FF;
+}
+
+.list-icon.danger{
+    font-size: 1.2rem;
+    padding-right: 1rem;
+    color: #ce3938;
+  }
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-footer {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-footer ul {
+    list-style-type: none;
+}
+
+.flex-footer > :nth-child(1) {
+    color: #551;
+    padding: 1px;
+    text-align: center;
+    flex: 1 1 100%;
+}
+.flex-footer > :nth-child(2) {
+   border:  #151;
+   color: #151;
+    padding: 1px;
+    flex: 1 1 50%;
+}
+.flex-footer > :nth-child(3) {
+    border: #511;
+    color: #511;
+    padding: 1px;
+    flex: 1 1 50%;
+}

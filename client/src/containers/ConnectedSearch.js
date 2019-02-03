@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { fetchProjectsAction, deleteProjectAction } from '../redux/actions/projectActions';
 
 import Search from '../components/Search';
-
 /*
 This method is used to make the reducers' state available to the component - Named by convention
 */
