@@ -22,7 +22,8 @@ exports.userCreateOne = (req, res) => {
           country: req.body.country,
           stateOrProvince: req.body.stateOrProvince,
           zipCode: req.body.zipCode,
-          timeAvailability: req.body.hours,
+          hours: req.body.hours,
+          days: req.body.days,
           phone: req.body.phone,
           volunteerField: req.body.volunteerField,
           gravatar: req.body.gravatar,
@@ -43,7 +44,7 @@ exports.userGetAll = (req, res) => {
 };
 
 exports.userGetByID = (req, res) => {
-  User.findOne({ _id: req.userData.id }).select("-passwordHash")
+  User.findOne({ _id: req.userData.id }).select("-passwordHash -salt")
     .then((currentUser) => {
       if (currentUser) {
         res.status(200).send({ currentUser });

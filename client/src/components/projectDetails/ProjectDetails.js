@@ -33,10 +33,14 @@ class ProjectDetails extends React.Component {
   }
 
   formatDate = (ISODate) => {
-    let newDate = new Date(ISODate);
-    return `${newDate.getFullYear()} / ${newDate.getMonth() +1} / ${newDate.getDate()}`
+    if (ISODate) {
+      let newDate = new Date(ISODate);
+      return `${newDate.getFullYear()} / ${newDate.getMonth() +1} / ${newDate.getDate()}`
+    }
+    return null;    
   }
 
+  
   handleApplication = () => {
     this.props.toggleSubscription(this.state.prj._id)
       .then(() => {
@@ -62,7 +66,15 @@ class ProjectDetails extends React.Component {
 
   render() {
     const {isLoggedIn}  = this.props.auth;
+    let currentUser = this.props.auth.currentUser || 
+      {};
+
     const {applicationRequirements, applicants, email, ownerId, phoneContact, projectDescription, projectLocationAddress, projectLocationCountry, projectName, workDays, workFields, workingHours, startDate, endDate, dueDate} = this.state.prj;
+
+    let isApplying = applicants.find(guy => 
+      guy.applicantInfo._id === currentUser._id 
+    );
+
     return (
       <Container className="title-page">
     <CardGroup>
@@ -82,9 +94,15 @@ class ProjectDetails extends React.Component {
           <Button 
                 color="primary"
             block
-            disabled={!isLoggedIn}
+            disabled={!isLoggedIn || currentUser.fullname === ownerId}
             onClick={this.handleApplication} 
-            >Apply for the role!</Button>
+            > 
+            {
+              isApplying ? 
+              'Cancel application' : 
+              'Apply for the role!'
+            }
+            </Button>
         </CardFooter>
       </Card>
       <Card>
@@ -94,9 +112,9 @@ class ProjectDetails extends React.Component {
           <ListGroupItem>
               <ListGroupItemHeading>Dates</ListGroupItemHeading>
               <ListGroupItemText>
-          <span>Project Start: </span> {startDate ? startDate : '/'}
+          <span>Project Start: </span> {startDate ? startDate : '-'}
           <br/>
-          <span>Project Ends: </span> {endDate ? endDate : '/'}
+          <span>Project Ends: </span> {endDate ? endDate : '-'}
               </ListGroupItemText>
             </ListGroupItem>
           <ListGroup>
@@ -151,7 +169,7 @@ class ProjectDetails extends React.Component {
           <CardBody>
             <CardSubtitle>Announce due date</CardSubtitle>
             <CardText>
-              {dueDate ? dueDate : '/'}
+              {dueDate ? dueDate : '-'}
             </CardText>
           </CardBody>
       </Card>

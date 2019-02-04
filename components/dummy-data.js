@@ -4,6 +4,7 @@ const Project = require('./project/projectModel');
 exports.prepopulate = async (req, res) => {
 
     await User.deleteMany({fullname: {$in: ["jhon", "debbie","frank"]}});
+   // await User.deleteMany({});
     await Project.deleteMany({});
 
 	try {
@@ -22,10 +23,10 @@ exports.prepopulate = async (req, res) => {
             country: 'NY',
             stateOrProvince: 'Chile',
             zipCode: 'af352',
-            timeAvailability: ['08:00', '12:00'],
+            hours: ['08:00', '12:00'],
             volunteerField: ['2','5', '10'],
             phone: '123123123123',
-            days: ['mon', 'ven']
+            days: ['thu', 'sat']
 
         });
 
@@ -39,10 +40,10 @@ exports.prepopulate = async (req, res) => {
             country: 'NY',
             stateOrProvince: 'Chile',
             zipCode: 'af352',
-            timeAvailability: ['08:00', '12:00'],
+            hours: ['08:00', '12:00'],
             volunteerField: ['2','5', '10'],
             phone: '123123123123',
-            days: ['mon', 'ven']
+            days: ['mon', 'wed']
 
         });
 
@@ -56,10 +57,10 @@ exports.prepopulate = async (req, res) => {
             country: 'NY',
             stateOrProvince: 'Chile',
             zipCode: 'af352',
-            timeAvailability: ['08:00', '12:00'],
+            hours: ['08:00', '12:00'],
             volunteerField: ['2','5', '10'],
             phone: '123123123123',
-            days: ['mon', 'ven']
+            days: ['mon', 'fri']
 
         });
 
@@ -77,7 +78,7 @@ exports.prepopulate = async (req, res) => {
             dueDate: "2019-01-31",
             startDate: "2019-01-20T00:00:00.000Z",
             endDate: "2019-02-20T00:00:00.000Z",
-            ownerId: jhon._id,
+            ownerId: jhon.fullname,
             applicants: [{applicantInfo: frank._id, state: 'accept'}]
         });
 
@@ -94,7 +95,7 @@ exports.prepopulate = async (req, res) => {
             dueDate: "2019-02-20",
             startDate: "2019-01-03T00:00:00.000Z",
             endDate: "2019-01-03T00:00:00.000Z",
-            ownerId: debbie._id,
+            ownerId: debbie.fullname,
             applicants: [{applicantInfo: frank._id, state: 'accept'},{applicantInfo: jhon._id, state: 'reject'}]
         });
 
@@ -112,7 +113,7 @@ exports.prepopulate = async (req, res) => {
             dueDate: "2019-01-14",
             startDate: "2019-02-01T00:00:00.000Z",
             endDate: "2019-03-30T00:00:00.000Z",
-            ownerId: jhon._id,
+            ownerId: jhon.fullname,
             applicants: [{applicantInfo: frank._id, state: 'pending'}, {applicantInfo: debbie._id, state: 'pending'}]
         });
 

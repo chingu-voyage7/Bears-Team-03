@@ -86,10 +86,12 @@ class ProfilePage extends React.Component {
     if (!this.props.auth.currentUser) {
       this.props.fetchUser();
     } else {
-      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar } = this.props.auth.currentUser;
+      const { fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, gravatar } = this.props.auth.currentUser;
+      const hours = this.props.auth.currentUser.hours.split(',');
+      const days = this.props.auth.currentUser.days.split(',');
       this.setState({
-        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability, gravatar, user: {
-          fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, timeAvailability
+        fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, hours, days, gravatar, user: {
+          fullname, email, phone, volunteerField, zipCode, city, country, stateOrProvince, hours, days
         }
       });
     }
@@ -391,13 +393,13 @@ class ProfilePage extends React.Component {
                                 this.handleMultipleChange(e);
                               }}
                             >
-                              <option value="monday">Monday</option>
-                              <option value="tuesday">Tuesday</option>
-                              <option value="wednesday">Wednesday</option>
-                              <option value="thursday">Thursday</option>
-                              <option value="friday">Friday</option>
-                              <option value="saturday">Saturday</option>
-                              <option value="sunday">Sunday</option>
+                              <option value="mon">Monday</option>
+                              <option value="tue">Tuesday</option>
+                              <option value="wed">Wednesday</option>
+                              <option value="thu">Thursday</option>
+                              <option value="fri">Friday</option>
+                              <option value="sat">Saturday</option>
+                              <option value="sun">Sunday</option>
                             </Input>
                             <FormFeedback>Please pick at least one day.</FormFeedback>
                             {validationErrors && validationErrors.days &&
@@ -410,7 +412,7 @@ class ProfilePage extends React.Component {
                                 <Input
                                   type="time"
                                   name="hours"
-                                  value={user.hours}
+                                  value={user.hours[0]}
                                   onChange={(e) => { this.handleChange(e); }}
                                 />
                                 {validationErrors && validationErrors.hours &&
@@ -424,7 +426,7 @@ class ProfilePage extends React.Component {
                                 <Input
                                   type="time"
                                   name="hours"
-                                  value={user.hours}
+                                  value={user.hours[1]}
                                   onChange={(e) => { this.handleChange(e); }}
                                 />
                                 {validationErrors && validationErrors.hours &&

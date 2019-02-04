@@ -29,7 +29,11 @@ const userSchema = new mongoose.Schema({
   volunteerField: {
     type: [String],
   },
-  timeAvailability: {
+  hours: {
+    type: String,
+    required: true,
+  },
+  days: {
     type: String,
     required: true,
   },

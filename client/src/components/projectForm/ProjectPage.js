@@ -33,9 +33,8 @@ export default class ProjectPage extends React.Component {
   componentDidMount = async () => {
     if (this.props.location.state && this.props.location.state.prj) {
       const {prj} = this.props.location.state;
-
       let prjTimeSpan = [];
-      let startDate, endDate;
+      let startDate, endDate, dueDate;
       if (prj.startDate) {
         prjTimeSpan.push('start');
         startDate = prj.startDate.split('T')[0]
@@ -44,11 +43,14 @@ export default class ProjectPage extends React.Component {
         prjTimeSpan.push('end');
         endDate = prj.endDate.split('T')[0]
       }
+      if (prj.dueDate) {
+        dueDate = prj.dueDate.split('T')[0]
+      }
       
       this.setState({
         name: prj.projectName || '',
         ownerId: prj.ownerId || '',
-        dueDate: prj.dueDate || '',
+        dueDate: dueDate || '',
         projectTimespan: prjTimeSpan || '',
         startDate: startDate || '',
         endDate: endDate || '',

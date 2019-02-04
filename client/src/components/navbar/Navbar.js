@@ -53,23 +53,18 @@ class Navigation extends Component {
                       <i className="fa fa-user" aria-hidden="true"></i> Profile
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>
+                      <DropdownItem tag="div">
                         <NavLink tag={Link} to="/profile">
                           <i className="fa fa-user" aria-hidden="true"></i> Profile
                         </NavLink>
                       </DropdownItem>
-                      <DropdownItem>
-                        <NavLink tag={Link} to="/prlist">
-                          <i className="fa fa-check" aria-hidden="true"></i> Accept applicants
-                        </NavLink>
-                      </DropdownItem>
-                      <DropdownItem>
+                      <DropdownItem tag="div">
                         <NavLink tag={Link} to="/user-projects">
-                          <i className="fa fa-tasks" aria-hidden="true"></i> Edit projects
+                          <i className="fa fa-tasks" aria-hidden="true"></i> Manage projects
                         </NavLink>
                       </DropdownItem>
                       <DropdownItem divider />
-                      <DropdownItem>
+                      <DropdownItem tag="div">
                         <NavLink onClick={this.handleLogout}>
                           Logout
                         </NavLink>
