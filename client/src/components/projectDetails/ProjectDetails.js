@@ -1,8 +1,10 @@
 import React from 'react'
-import { Card, Button, CardTitle, CardText, CardGroup,
+import {
+  Card, Button, CardTitle, CardText, CardGroup,
   CardSubtitle, CardBody, CardFooter,
   ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText,
-  Badge} from 'reactstrap';
+  Badge, Container
+} from 'reactstrap';
 
 import './projectDetails.css';
 
@@ -62,14 +64,13 @@ class ProjectDetails extends React.Component {
     const {isLoggedIn}  = this.props.auth;
     const {applicationRequirements, applicants, email, ownerId, phoneContact, projectDescription, projectLocationAddress, projectLocationCountry, projectName, workDays, workFields, workingHours, startDate, endDate, dueDate} = this.state.prj;
     return (
-      <>
+      <Container className="title-page">
     <CardGroup>
       <Card>
         <CardBody>
           <CardSubtitle>PROJECT SPECS</CardSubtitle>
           <div className="tag-stripe">
-          { workFields && workFields.map((el) => <Badge key={el}>{el}</Badge>)}
-            
+                {workFields && workFields.map((el) => <Badge key={el} className={`tag ${el}`}>{el}</Badge>)}
           </div>
           <CardTitle>{projectName}</CardTitle>
           <CardText>{projectDescription}</CardText>
@@ -79,6 +80,7 @@ class ProjectDetails extends React.Component {
         </CardBody>
         <CardFooter>
           <Button 
+                color="primary"
             block
             disabled={!isLoggedIn}
             onClick={this.handleApplication} 
@@ -154,7 +156,7 @@ class ProjectDetails extends React.Component {
           </CardBody>
       </Card>
     </CardGroup>
-    </>    
+      </Container>
     );
   }
 }

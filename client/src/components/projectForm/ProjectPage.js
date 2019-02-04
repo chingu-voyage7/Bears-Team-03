@@ -127,8 +127,8 @@ export default class ProjectPage extends React.Component {
     } = this.state;
     const { currentUser } = this.props.auth;
     return (
-      <Col xl={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }}>
-        <h2>CREATE A NEW PROJECT</h2>
+      <Container className="title-page">
+        <h2>{this.state.id ? 'EDIT' : 'CREATE'} PROJECT</h2>
         <Container className="form-frame">
           <Form onSubmit={this.handleSubmit}>
             <Row form>
@@ -451,18 +451,18 @@ export default class ProjectPage extends React.Component {
               </Col>
             </Row>
             <Button
-              color="secondary"
+              color="primary"
               type="submit"
               block
             >
-              {this.state.id ? 'Edit the announce' : 'Publish the announce'}
+              {this.state.id ? 'Edit project' : 'Create project'}
             </Button>
           </Form>
           {this.props.prjStatus.error.message && 
         <Error message={this.props.prjStatus.error.message} />
         }
         </Container>
-      </Col>
+      </Container>
     );
   }
 }

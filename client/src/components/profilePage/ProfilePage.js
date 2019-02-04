@@ -105,7 +105,7 @@ class ProfilePage extends React.Component {
     const { user } = this.state;
     const { validationErrors } = this.props.regStatus.error;
     return (
-      <Container>
+      <Container className="title-page">
         <Row>
           <Col lg="4">
             <div className="profile-card shadow">
@@ -172,6 +172,24 @@ class ProfilePage extends React.Component {
                               return (<Badge key={index} color="dark">{field}</Badge>);
                             })}
                           </Col>
+                          <Col md="6">
+                            <Button
+                              className="text-uppercase"
+                              color="success"
+                              size="l"
+                              onClick={() => { this.props.history.push('/prlist') }}
+                            >
+                              <i className="fa fa-check" aria-hidden="true"></i> Accept applicants
+                            </Button>
+                          </Col>
+                          <Button
+                            className="text-uppercase"
+                            color="success"
+                            size="l"
+                            onClick={() => { this.props.history.push('/user-projects') }}
+                          >
+                            <i className="fa fa-edit" aria-hidden="true"></i> Edit my projects
+                            </Button>
                           <Col md="12">
                             <h5 className="mt-2 mb-3"><span className="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
                             <Table striped hover>
@@ -209,7 +227,7 @@ class ProfilePage extends React.Component {
                             <FormFeedback valid>That's a tasty looking email you've got there.</FormFeedback>
                             <FormFeedback>
                               Uh oh! Looks like there is an issue with your email. Please input a correct email.
-            </FormFeedback>
+                            </FormFeedback>
                             {validationErrors && validationErrors.email &&
                               <FormText color="danger">{validationErrors.email.map((err, i) => <div key={i}>{err}</div>)}</FormText>}
                           </FormGroup>

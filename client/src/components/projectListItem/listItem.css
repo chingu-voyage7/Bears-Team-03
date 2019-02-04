@@ -14,12 +14,6 @@
     margin-left:1rem;
 }
 
-.list-icon.info{
-    font-size: 1.2rem;
-    padding-right: 1rem;
-    color: #7189FF;
-}
-
 .flex-container {
     display: flex;
     justify-content: space-between

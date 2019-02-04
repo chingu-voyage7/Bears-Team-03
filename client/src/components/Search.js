@@ -42,8 +42,8 @@ class Search extends Component {
     let visibleProjects = prjs.filter(prj => pattern.test(prj.projectName));
 
     return (
-        <Container fluid>
-            <Row style={{marginTop: "2rem"}}>
+            <Container className="title-page" fluid>
+                <Row style={{ marginTop: "2rem" }}>
                 <Col>
                     <Input 
                             type="text"

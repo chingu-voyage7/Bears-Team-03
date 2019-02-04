@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardText, CardBody, CardFooter } from 'reactstrap';
+import { Card, CardText, CardBody, CardFooter, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import './listItem.css';
@@ -14,10 +14,9 @@ const ListItem = ({ prj, detailsPrj }) => (
             {`${prj.projectLocationAddress} - ${prj.projectLocationCountry} - `}
           </span>
         </div>
-        <div className="list-icon info">
-          <span> Details </span>
-          <i className='fa fa-info' onClick={() => detailsPrj(prj)}></i>
-        </div>
+        <Button color="primary" onClick={() => detailsPrj(prj)}>
+          <i className='fa fa-info' aria-hidden="true"></i> Details
+        </Button>
       </div>
       <hr />
       <CardText>{prj.projectDescription}</CardText>
@@ -29,7 +28,7 @@ const ListItem = ({ prj, detailsPrj }) => (
       </div>
       <time>{prj.dueDate}</time>
     </CardFooter>
-  </Card>
+  </Card >
 )
 
 ListItem.propTypes = {
