@@ -8,7 +8,6 @@ import ProjectPage from './projectForm/ProjectPage';
 import ProjectDetails from './projectDetails/ProjectDetails';
 import Login from './Login';
 import Navigation from './navbar/Navbar';
-import FakeList from './FakeProjList';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import ConnectedSearch from '../containers/ConnectedSearch';
@@ -21,15 +20,20 @@ import './App.css';
 class App extends React.Component {
 
 
-  componentDidMount() {
+  async componentDidMount() {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      this.props.verifyUser(token);
+      try {
+        await this.props.verifyUser(token);
+        await this.props.fetchUser();
+      } catch (err ) {
+        console.log(err);
+      }      
     }
   }
 
   render() {
-    const { registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription, fetchUser, setApplicantStatus, editUser } = this.props;
+    const { registerUser, loginUser, logoutUser, auth, createProject, editProject, regStatus, prjStatus, resetProjectError, resetLoginError, resetRegistrationError, toggleSubscription, fetchUser, setApplicantStatus, editUser, setNotification } = this.props;
     return (
       <ErrorBoundary>
         <Router>
@@ -40,9 +44,8 @@ class App extends React.Component {
               <Route path="/login" render={props => <Login {...props} login={loginUser} fetchUser={fetchUser} resetErr={resetLoginError} auth={auth} />} />
               <Route path="/register" render={props => <RegistrationPage {...props} register={registerUser} regStatus={regStatus} resetErr={resetRegistrationError} />} />
               <ProtectedRoute path="/profile" component={(props) => (<ProfilePage {...props} resetErr={resetProjectError} fetchUser={fetchUser} editUser={editUser} regStatus={regStatus} auth={auth} />)} auth={auth} />
-              <Route path="/search" render={props => <ConnectedSearch {...props} />} />
+              <Route path="/search" render={props => <ConnectedSearch setNotification={setNotification} {...props} auth={auth} />} />
               <Route path="/details-project" render={props => <ProjectDetails {...props} prjStatus={prjStatus} auth={auth} toggleSubscription={toggleSubscription} />} />
-              <ProtectedRoute path="/prlist" component={(props) => (<FakeList {...props} setApplicantStatus={setApplicantStatus} />)} auth={auth} />
               <ProtectedRoute path="/user-projects" component={(props) => (<ConnectedProjects {...props} setApplicantStatus={setApplicantStatus} />)} auth={auth} />
               <ProtectedRoute path="/create-project" component={(props) => (<ProjectPage {...props} auth={auth} publish={createProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />
               <ProtectedRoute path="/edit-project" component={(props) => (<ProjectPage {...props} auth={auth} edit={editProject} prjStatus={prjStatus} resetErr={resetProjectError} />)} auth={auth} />

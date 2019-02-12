@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
   dueDate: {
-    type: String
+    type: Date
   },
   projectName: {
     type: String,
@@ -59,6 +59,10 @@ const projectSchema = new mongoose.Schema({
       state: {
         type: String,
         default: 'pending'
+      },
+      notified: {
+        type: Boolean,
+        default: false
       }
     }],
     default: []
@@ -103,6 +107,24 @@ projectSchema.methods.setApplicantState = async function setApplicantState(appli
   return {doc:this, 
           applicantId,
           state};
+}
+
+projectSchema.methods.setNotification = async function setNotification(userId) {
+  let subscriberIndex = this.applicants.findIndex(applicant => applicant.applicantInfo.toString() == userId);
+  
+  if (subscriberIndex === -1){
+    throw new Error('Applicant not found');
+  } else {
+    this.applicants[subscriberIndex].notified = true;
+  };
+
+  try {
+    await this.save();
+  } catch(error) {
+    throw new Error('Something went wrong during notification set');
+  }
+  return this;
+  
 }
 
 module.exports = mongoose.model('Project', projectSchema);

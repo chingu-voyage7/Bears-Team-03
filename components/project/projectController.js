@@ -23,6 +23,7 @@ exports.projectCreateOne = (req, res) => {
           workDays: req.body.workDays,
           startDate: req.body.startDate,
           endDate: req.body.endDate,
+          dueDate: req.body.dueDate,
           ownerId: req.body.ownerId
         });
         
@@ -150,6 +151,17 @@ exports.projectSetApplicantState = async (req, res) => {
               .execPopulate();
               
     return res.json({response: projectToUpdate});
+  } catch (error) {
+    console.log('testerr', error);
+    res.status(500).json({fail:error});
+  }
+};
+
+exports.projectSetNotifiedSubscription = async (req, res) => {
+  try {
+    let projectToUpdate = await Project.findById(req.body.prjId);
+    await projectToUpdate.setNotification(req.userData.id);              
+    return res.json(projectToUpdate);
   } catch (error) {
     console.log('testerr', error);
     res.status(500).json({fail:error});

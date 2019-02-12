@@ -134,5 +134,26 @@ export const createProjectAction = (projectData, history) => (dispatch) => {
       .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
   }
 
+  export const setNotificationAction = prjId => dispatch => {
+    dispatch({ type: createProject.REQUEST });
+    const fetchOptions = {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json', 'Authorization': localStorage.accessToken},
+      body: JSON.stringify({prjId})
+    };
+
+    return fetch(`/project/applicant/set-notification`, fetchOptions)
+      .then(res => res.json())
+      .then((project) => {
+        if (project.fail) {
+          dispatch({ type: createProject.FAILURE, payload: project.fail });
+        } else {
+          dispatch({ type: createProject.SUCCESS, payload: project });
+        }
+      })
+      .catch(err => dispatch({ type: GENERAL_FAILURE, payload: err }));
+  }
+
+
   export const resetProjectErrorAction = () => {
     return {type: createProject.RESET_ERR}};

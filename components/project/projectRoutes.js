@@ -13,6 +13,7 @@ const {
   projectDeleteById,
   projectSetApplicantState,
   projectToggleSubscription,
+  projectSetNotifiedSubscription
 } = require('./projectController');
 
 router.get('/get-all', projectGetAll);
@@ -22,5 +23,6 @@ router.post('/create-one', validator, authMW, projectCreateOne);
 router.patch('/update-by-id', validator, authMW, projectUpdateById);
 router.patch('/applicant/subscription', authMW, projectToggleSubscription);
 router.patch('/applicant/set-status', authMW, projectSetApplicantState);
+router.patch('/applicant/set-notification', authMW, projectSetNotifiedSubscription);
 router.delete('/delete-by-id', authMW, projectDeleteById);
 module.exports = router;

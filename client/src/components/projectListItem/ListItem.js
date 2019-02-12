@@ -26,7 +26,7 @@ const ListItem = ({ prj, detailsPrj }) => (
       <div className="flex-container">
         {prj.workFields.map((tag, i) => <div key={i} className={`tag ${tag}`}>{tag}</div>)}
       </div>
-      <time>{prj.dueDate}</time>
+      <time>{prj.dueDate && prj.dueDate.split('T')[0]}</time>
     </CardFooter>
   </Card >
 )

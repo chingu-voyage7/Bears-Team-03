@@ -27,7 +27,7 @@ class RegistrationPage extends React.Component {
         fullname: '',
         email: '',
         password: '',
-        gender: '',
+        gender: 'male',
         streetAddress: '',
         city: '',
         stateOrProvince: '',
@@ -441,7 +441,8 @@ class RegistrationPage extends React.Component {
           </FormGroup>
           <Button
             color="primary"
-            block type="button"
+            block 
+            type="submit"
             disabled={!adult || !terms}
           >
             Register
