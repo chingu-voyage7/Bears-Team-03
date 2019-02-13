@@ -5,6 +5,7 @@ import Gravatar from 'react-gravatar';
 
 import ProfileListItem from '../ProfileListItem';
 import Error from '../ErrorNotification';
+import { GLOBALGOALS } from '../../constants';
 
 import './profilePage.css';
 
@@ -171,7 +172,7 @@ class ProfilePage extends React.Component {
                           <Col md="6">
                             <h6>Global goals</h6>
                             {this.state.volunteerField && this.state.volunteerField.map((field, index) => {
-                              return (<Badge key={index} color="dark">{field}</Badge>);
+                              return (<Badge key={index} color="dark">{GLOBALGOALS[field]}</Badge>);
                             })}
                           </Col>
                           <Col md="6">
